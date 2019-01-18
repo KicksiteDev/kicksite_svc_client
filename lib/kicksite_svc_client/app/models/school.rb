@@ -10,10 +10,7 @@ class School < KicksiteSvcBasicAuth
   def merchant_account=(merchant_account)
     put(
       :merchant_account,
-      type: merchant_account.type,
-      pin: merchant_account.pin,
-      key: merchant_account.key,
-      accept_check: merchant_account.accept_check
+      merchant_account.to_hash
     )
   end
 end

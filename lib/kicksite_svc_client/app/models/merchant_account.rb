@@ -10,6 +10,12 @@ class MerchantAccount
     end
   end
 
+  def to_hash
+    hash = {}
+    instance_variables.each { |var| hash[var.to_s.delete('@')] = instance_variable_get(var) }
+    hash
+  end
+
   private
 
   def define_instance_variable(key, value)
