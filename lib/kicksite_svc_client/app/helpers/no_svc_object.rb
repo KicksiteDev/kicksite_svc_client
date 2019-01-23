@@ -1,3 +1,5 @@
+# An object that acts sort of similar to an ActiveResource object
+# but without all the extras ActiveResource gives that doesn't exist for this.
 class NoSvcObject
   def initialize(payload)
     payload.each do |key, value|

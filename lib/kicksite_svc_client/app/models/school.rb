@@ -3,9 +3,9 @@ require_relative '../helpers/no_svc_object'
 
 # REST resources specific to Schools
 class School < KicksiteSvcBasicAuth
-  class Logo < NoSvcObject; end 
+  class Logo < NoSvcObject; end
 
-  def logo(format: 'json')
+  def logo
     payload = get(:logo)
     School::Logo.new(payload) if payload.present?
   end
