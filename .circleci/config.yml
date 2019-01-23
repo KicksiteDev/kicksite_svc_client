@@ -6,6 +6,7 @@ jobs:
       - image: circleci/ruby:2.5
         environment:
           RAILS_ENV: test
+          KICKSITE_SVC_URL: https://api.classic.kicksite-staging.net
 
     steps:
       - checkout

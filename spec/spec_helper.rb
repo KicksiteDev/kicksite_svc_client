@@ -14,6 +14,7 @@ SimpleCov.start do
 end
 
 require 'bundler/setup'
+require 'byebug'
 require 'kicksite_svc_client'
 
 RSpec.configure do |config|
