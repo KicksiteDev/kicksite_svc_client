@@ -21,7 +21,7 @@ Or install it yourself as:
 ## Usage
 
 ```
-export KICKSITE_SVC_URL=http://api.kicksite.test:5000
+export KICKSITE_SVC_URL=http://api.classic.kicksite.test:5000
 export ADMIN_USER_NAME=admin
 export ADMIN_PASSWORD=password
 ```
