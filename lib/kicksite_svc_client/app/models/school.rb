@@ -9,6 +9,14 @@ class School < KicksiteSvcBasicAuth
   GROWTH_STATISTIC_TYPE = 'growth'.freeze
   STUDENTS_STATISTIC_GROUP = 'students'.freeze
 
+  def initialize(attributes = {}, persisted = false)
+    attributes['subscription_plan_status_date'] = to_datetime(attributes['subscription_plan_status_date']) if attributes['subscription_plan_status_date'].present?
+    attributes['subscription_plan_selected_at'] = to_datetime(attributes['subscription_plan_selected_at']) if attributes['subscription_plan_selected_at'].present?
+    attributes['subscription_plan_overage_email_sent_at'] = to_datetime(attributes['subscription_plan_overage_email_sent_at']) if attributes['subscription_plan_overage_email_sent_at'].present?
+
+    super(attributes, persisted)
+  end
+
   def logo
     payload = get(:logo)
     School::Logo.new(payload) if payload.present?
