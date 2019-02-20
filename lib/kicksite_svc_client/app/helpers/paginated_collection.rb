@@ -16,12 +16,14 @@ class PaginatedCollection < ActiveResource::Collection
   def setup_paginatable_array
     @paginatable_array ||= begin
       headers = KicksiteSvcBase.connection.http_response.headers rescue {}
+      page = headers[:page].try(:first).try(:to_i)
+      per_page = headers[:per_page].try(:first).try(:to_i)
+      total_count = headers[:total].try(:first).try(:to_i)
 
-      byebug
       options = {
-        offset: headers[:page].try(:first).try(:to_i),
-        limit: headers[:per_page].try(:first).try(:to_i),
-        total_count: headers[:total].try(:first).try(:to_i)
+        offset: (page.present? && per_page.present?) ? ((page - 1) * per_page) : nil,
+        limit: per_page,
+        total_count: total_count
       }
 
       Kaminari::PaginatableArray.new(elements, options)

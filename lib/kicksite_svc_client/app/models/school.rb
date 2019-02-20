@@ -21,4 +21,12 @@ class School < KicksiteSvcBasicAuth
       merchant_account.to_hash
     )
   end
+
+  # Students at this particular school.
+  #
+  # @param options [Hash] Options such as custom params
+  # @return [PaginatedCollection] Collection of students associated with school
+  def students(options = {})
+    Schools::Student.find(:all, options.deep_merge({ params: { school_id: self.id } }))
+  end
 end

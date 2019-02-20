@@ -6,5 +6,18 @@ module Schools
   class Student < KicksiteSvcBearerAuth
     self.prefix = '/v1/schools/:school_id/'
     self.collection_parser = PaginatedCollection
+
+    NEW_FILTER = 'new'.freeze
+    ACTIVE_FILTER = 'active'.freeze
+    LOST_FILTER = 'lost'.freeze
+    FROZEN_FILTER = 'frozen'.freeze
+    ABSENT_FILTER = 'absent'.freeze
+
+    # School student is associated with.
+    #
+    # @return [School] School student is associated with
+    def school
+      School.find(prefix_options[:school_id])
+    end
   end
 end
