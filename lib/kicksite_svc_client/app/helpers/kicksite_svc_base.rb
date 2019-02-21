@@ -5,9 +5,15 @@ require 'activeresource-response'
 class KicksiteSvcBase < ActiveResource::Base
   self.site = "#{ENV['KICKSITE_SVC_URL']}/v1"
 
+  BASE_DATETIME_KEYS = %w[
+    updated_at
+    created_at
+  ].freeze
+
   def initialize(attributes = {}, persisted = false)
-    attributes['updated_at'] = to_datetime(attributes['updated_at'])
-    attributes['created_at'] = to_datetime(attributes['created_at'])
+    BASE_DATETIME_KEYS.each do |key|
+      attributes[key] = to_datetime(attributes[key])
+    end
 
     super(attributes, persisted)
   end

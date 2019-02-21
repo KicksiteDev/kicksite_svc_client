@@ -6,13 +6,19 @@ class School < KicksiteSvcBasicAuth
   class Logo < NoSvcObject; end
   class Statistic < NoSvcObject; end
 
+  SCHOOL_DATETIME_KEYS = %w[
+    subscription_plan_status_date
+    subscription_plan_selected_at
+    subscription_plan_overage_email_sent_at
+  ].freeze
+
   GROWTH_STATISTIC_TYPE = 'growth'.freeze
   STUDENTS_STATISTIC_GROUP = 'students'.freeze
 
   def initialize(attributes = {}, persisted = false)
-    attributes['subscription_plan_status_date'] = to_datetime(attributes['subscription_plan_status_date'])
-    attributes['subscription_plan_selected_at'] = to_datetime(attributes['subscription_plan_selected_at'])
-    attributes['subscription_plan_overage_email_sent_at'] = to_datetime(attributes['subscription_plan_overage_email_sent_at'])
+    SCHOOL_DATETIME_KEYS.each do |key|
+      attributes[key] = to_datetime(attributes[key])
+    end
 
     super(attributes, persisted)
   end

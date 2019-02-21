@@ -7,6 +7,11 @@ module Schools
     self.prefix = '/v1/schools/:school_id/'
     self.collection_parser = PaginatedCollection
 
+    STUDENT_DATETIME_KEYS = %w[
+      inactivated_on
+      converted_to_student_on
+    ].freeze
+
     NEW_FILTER = 'new'.freeze
     ACTIVE_FILTER = 'active'.freeze
     LOST_FILTER = 'lost'.freeze
@@ -14,8 +19,9 @@ module Schools
     ABSENT_FILTER = 'absent'.freeze
 
     def initialize(attributes = {}, persisted = false)
-      attributes['inactivated_on'] = to_datetime(attributes['inactivated_on'])
-      attributes['converted_to_student_on'] = to_datetime(attributes['converted_to_student_on'])
+      STUDENT_DATETIME_KEYS.each do |key|
+        attributes[key] = to_datetime(attributes[key])
+      end
 
       super(attributes, persisted)
     end
