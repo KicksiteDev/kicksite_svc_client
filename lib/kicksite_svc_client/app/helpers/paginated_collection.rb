@@ -2,18 +2,15 @@ require 'kaminari'
 
 # Implementation of an ActiveResource collection that takes paging at the service into account.
 class PaginatedCollection < ActiveResource::Collection
-  # Our custom array to handle pagination methods
-  attr_accessor :paginatable_array
-
   # The initialize method will receive the ActiveResource parsed result
   # and set @elements.
   def initialize(elements = [])
     @elements = elements
-    setup_paginatable_array
+    paginatable_array
   end
 
   # Retrieve response headers and instantiate a paginatable array
-  def setup_paginatable_array
+  def paginatable_array
     @paginatable_array ||= begin
       begin
         headers = KicksiteSvcBase.connection.http_response.headers
@@ -21,17 +18,7 @@ class PaginatedCollection < ActiveResource::Collection
         headers = {}
       end
 
-      page = headers[:page].try(:first).try(:to_i)
-      per_page = headers[:per_page].try(:first).try(:to_i)
-      total_count = headers[:total].try(:first).try(:to_i)
-
-      options = {
-        offset: page.present? && per_page.present? ? ((page - 1) * per_page) : nil,
-        limit: per_page,
-        total_count: total_count
-      }
-
-      Kaminari::PaginatableArray.new(elements, options)
+      Kaminari::PaginatableArray.new(elements, options_from_headers(headers))
     end
   end
 
@@ -50,5 +37,21 @@ class PaginatedCollection < ActiveResource::Collection
     else
       super
     end
+  end
+
+  # Convert service response headers to Kaminari expected options.
+  #
+  # @param headers [Hash] Service response headers
+  # @return [Hash] Options Kaminari knows how to deal with
+  def options_from_headers(headers)
+    page = headers[:page].try(:first).try(:to_i)
+    per_page = headers[:per_page].try(:first).try(:to_i)
+    total_count = headers[:total].try(:first).try(:to_i)
+
+    {
+      offset: page.present? && per_page.present? ? ((page - 1) * per_page) : nil,
+      limit: per_page,
+      total_count: total_count
+    }
   end
 end
