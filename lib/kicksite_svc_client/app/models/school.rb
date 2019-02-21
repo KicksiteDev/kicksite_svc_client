@@ -10,9 +10,9 @@ class School < KicksiteSvcBasicAuth
   STUDENTS_STATISTIC_GROUP = 'students'.freeze
 
   def initialize(attributes = {}, persisted = false)
-    attributes['subscription_plan_status_date'] = to_datetime(attributes['subscription_plan_status_date']) if attributes['subscription_plan_status_date'].present?
-    attributes['subscription_plan_selected_at'] = to_datetime(attributes['subscription_plan_selected_at']) if attributes['subscription_plan_selected_at'].present?
-    attributes['subscription_plan_overage_email_sent_at'] = to_datetime(attributes['subscription_plan_overage_email_sent_at']) if attributes['subscription_plan_overage_email_sent_at'].present?
+    attributes['subscription_plan_status_date'] = to_datetime(attributes['subscription_plan_status_date'])
+    attributes['subscription_plan_selected_at'] = to_datetime(attributes['subscription_plan_selected_at'])
+    attributes['subscription_plan_overage_email_sent_at'] = to_datetime(attributes['subscription_plan_overage_email_sent_at'])
 
     super(attributes, persisted)
   end
@@ -39,11 +39,11 @@ class School < KicksiteSvcBasicAuth
   # @param options [Hash] Options such as custom params
   # @return [PaginatedCollection] Collection of students associated with school
   def students(options = {})
-    Schools::Student.find(:all, options.deep_merge({ params: { school_id: self.id } }))
+    Schools::Student.find(:all, options.deep_merge(params: { school_id: id }))
   end
 
   def statistic(group, type, options = {})
-    payload = KicksiteSvcBearerAuth.get("schools/#{self.id}/stats/#{type}/#{group}", options)
+    payload = KicksiteSvcBearerAuth.get("schools/#{id}/stats/#{type}/#{group}", options)
     School::Statistic.new(payload) if payload.present?
   end
 end

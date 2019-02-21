@@ -14,8 +14,8 @@ module Schools
     ABSENT_FILTER = 'absent'.freeze
 
     def initialize(attributes = {}, persisted = false)
-      attributes['inactivated_on'] = to_datetime(attributes['inactivated_on']) if attributes['inactivated_on'].present?
-      attributes['converted_to_student_on'] = to_datetime(attributes['converted_to_student_on']) if attributes['converted_to_student_on'].present?
+      attributes['inactivated_on'] = to_datetime(attributes['inactivated_on'])
+      attributes['converted_to_student_on'] = to_datetime(attributes['converted_to_student_on'])
 
       super(attributes, persisted)
     end
