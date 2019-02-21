@@ -1,7 +1,7 @@
 require 'kaminari'
 
+# Implementation of an ActiveResource collection that takes paging at the service into account.
 class PaginatedCollection < ActiveResource::Collection
-
   # Our custom array to handle pagination methods
   attr_accessor :paginatable_array
 
@@ -15,19 +15,28 @@ class PaginatedCollection < ActiveResource::Collection
   # Retrieve response headers and instantiate a paginatable array
   def setup_paginatable_array
     @paginatable_array ||= begin
-      headers = KicksiteSvcBase.connection.http_response.headers rescue {}
+      begin
+        headers = KicksiteSvcBase.connection.http_response.headers
+      rescue StandardError
+        headers = {}
+      end
+
       page = headers[:page].try(:first).try(:to_i)
       per_page = headers[:per_page].try(:first).try(:to_i)
       total_count = headers[:total].try(:first).try(:to_i)
 
       options = {
-        offset: (page.present? && per_page.present?) ? ((page - 1) * per_page) : nil,
+        offset: page.present? && per_page.present? ? ((page - 1) * per_page) : nil,
         limit: per_page,
         total_count: total_count
       }
 
       Kaminari::PaginatableArray.new(elements, options)
     end
+  end
+
+  def respond_to_missing?(method_name, include_private = false)
+    paginatable_array.respond_to?(method_name, include_private) || super
   end
 
   private

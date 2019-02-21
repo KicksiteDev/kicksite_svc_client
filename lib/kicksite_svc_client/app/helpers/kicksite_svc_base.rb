@@ -15,6 +15,6 @@ class KicksiteSvcBase < ActiveResource::Base
   protected
 
   def to_datetime(datetime_string)
-    DateTime.strptime(datetime_string, '%Y-%m-%dT%H:%M:%S.%LZ')
+    Time.parse(datetime_string)
   end
 end
