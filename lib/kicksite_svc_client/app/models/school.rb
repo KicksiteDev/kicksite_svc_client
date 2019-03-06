@@ -52,4 +52,8 @@ class School < KicksiteSvcBasicAuth
     payload = KicksiteSvcBearerAuth.get("schools/#{id}/stats/#{type}/#{group}", options)
     School::Statistic.new(payload) if payload.present?
   end
+
+  def prospects(options = {})
+    Schools::Prospect.find(:all, options.deep_merge(params: { school_id: id }))
+  end
 end
