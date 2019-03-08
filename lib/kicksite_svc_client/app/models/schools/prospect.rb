@@ -34,5 +34,31 @@ module Schools
     def school
       School.find(prefix_options[:school_id])
     end
+
+    # Appointments associated with prospect.
+    #
+    # @param options [Hash] Options such as custom params
+    # @return [PaginatedCollection] Collection of appointments associated with prospect
+    def appointments(options = {})
+      Schools::Prospects::Appointment.find(:all,
+        options.deep_merge(params: {
+                             school_id: prefix_options[:school_id],
+                             prospect_id: id
+                           })
+      )
+    end
+
+    # Tasks associated with prospect.
+    #
+    # @param options [Hash] Options such as custom params
+    # @return [PaginatedCollection] Collection of tasks associated with prospect
+    def tasks(options = {})
+      Schools::Prospects::Task.find(:all,
+        options.deep_merge(params: {
+                             school_id: prefix_options[:school_id],
+                             prospect_id: id
+                           })
+      )
+    end
   end
 end
