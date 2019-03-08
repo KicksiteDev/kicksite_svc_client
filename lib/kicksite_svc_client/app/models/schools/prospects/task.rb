@@ -9,8 +9,7 @@ module Schools
       self.collection_parser = PaginatedCollection
 
       TASK_DATETIME_KEYS = %w[
-        start_at
-        end_at
+        due_at
       ].freeze
 
       PAST_FILTER = 'past'.freeze
