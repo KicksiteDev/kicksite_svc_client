@@ -18,6 +18,8 @@ module Schools
     TRIAL_STATE = 'trial'.freeze
     ARCHIVED_STATE = 'archived'.freeze
 
+    ACTIVE_FILTER = 'active'.freeze
+
     CREATED_AT_SORT_BY = 'created_at'.freeze
 
     def initialize(attributes = {}, persisted = false)
