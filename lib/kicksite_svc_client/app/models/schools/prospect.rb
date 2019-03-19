@@ -7,6 +7,8 @@ module Schools
     self.prefix = '/v1/schools/:school_id/'
     self.collection_parser = PaginatedCollection
 
+    class Source < NoSvcObject; end
+
     PROSPECT_DATETIME_KEYS = %w[
       inactivated_on
       converted_to_prospect_on
@@ -61,6 +63,14 @@ module Schools
                              prospect_id: id
                            })
       )
+    end
+
+    # Method with which prospect entered the system.
+    #
+    # @return [Schools::Prospects::Source] Where source came from
+    def source
+      payload = get(:source)
+      Schools::Prospects::Source.new(payload) if payload.present?
     end
   end
 end
