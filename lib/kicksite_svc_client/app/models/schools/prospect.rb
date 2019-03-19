@@ -67,10 +67,10 @@ module Schools
 
     # Method with which prospect entered the system.
     #
-    # @return [Schools::Prospects::Source] Where source came from
+    # @return [Schools::Prospect::Source] Where source came from
     def source
       payload = get(:source)
-      Schools::Prospects::Source.new(payload) if payload.present?
+      Schools::Prospect::Source.new(payload) if payload.present?
     end
   end
 end
