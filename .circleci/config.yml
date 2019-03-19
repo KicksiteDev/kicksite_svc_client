@@ -11,21 +11,10 @@ jobs:
     steps:
       - checkout
 
-      # Restore bundle cache
-      - restore_cache:
-          keys:
-            - kicksite_svc_client-{{ checksum "Gemfile.lock" }}
-
       # Bundle install dependencies
       - run:
           name: Bundle Install
-          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
-
-      # Store bundle cache
-      - save_cache:
-          key: kicksite_svc_client-{{ checksum "Gemfile.lock" }}
-          paths:
-           - vendor/bundle
+          command: bundle install --path=vendor/bundle --jobs 4 --retry 3
 
       - run:
           name: Run Tests
