@@ -44,9 +44,10 @@ module Schools
     # @param options [Hash] Options such as custom params
     # @return [PaginatedCollection] Collection of appointments associated with prospect
     def appointments(options = {})
-      options.deep_merge(params: { school_id: prefix_options[:school_id] })
-      options.deep_merge(params: { prospect_id: id })
-      Schools::Prospects::Appointment.find(:all, options)
+      opt = options.dup
+      opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+      opt = opt.deep_merge(params: { prospect_id: id })
+      Schools::Prospects::Appointment.find(:all, opt)
     end
 
     # Tasks associated with prospect.
@@ -54,9 +55,10 @@ module Schools
     # @param options [Hash] Options such as custom params
     # @return [PaginatedCollection] Collection of tasks associated with prospect
     def tasks(options = {})
-      options.deep_merge(params: { school_id: prefix_options[:school_id] })
-      options.deep_merge(params: { prospect_id: id })
-      Schools::Prospects::Task.find(:all, options)
+      opt = options.dup
+      opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+      opt = opt.deep_merge(params: { prospect_id: id })
+      Schools::Prospects::Task.find(:all, opt)
     end
 
     # Method with which prospect entered the system.
