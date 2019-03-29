@@ -1,16 +1,11 @@
-require_relative '../../helpers/kicksite_svc_bearer_auth'
 require_relative '../../helpers/paginated_collection'
+require_relative 'person.rb'
 
 module Schools
   # REST resources specific to Students at a given school
-  class Student < KicksiteSvcBearerAuth
+  class Student < Schools::Person
     self.prefix = '/v1/schools/:school_id/'
     self.collection_parser = PaginatedCollection
-
-    STUDENT_DATETIME_KEYS = %w[
-      inactivated_on
-      converted_to_student_on
-    ].freeze
 
     NEW_FILTER = 'new'.freeze
     ACTIVE_FILTER = 'active'.freeze
@@ -18,19 +13,9 @@ module Schools
     FROZEN_FILTER = 'frozen'.freeze
     ABSENT_FILTER = 'absent'.freeze
 
-    def initialize(attributes = {}, persisted = false)
-      STUDENT_DATETIME_KEYS.each do |key|
-        attributes[key] = to_datetime(attributes[key])
-      end
-
-      super(attributes, persisted)
-    end
-
-    # School student is associated with.
-    #
-    # @return [School] School student is associated with
-    def school
-      School.find(prefix_options[:school_id])
+    def photo
+      payload = get("/v1/schools/#{prefix_options[:school_id]}/people/#{id}/photo")
+      Person::Photo.new(payload) if payload.present?
     end
   end
 end

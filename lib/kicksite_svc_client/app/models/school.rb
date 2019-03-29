@@ -63,4 +63,8 @@ class School < KicksiteSvcBasicAuth
   def prospects(options = {})
     Schools::Prospect.find(:all, options.deep_merge(params: { school_id: id }))
   end
+
+  def people(options = {})
+    Schools::Person.find(:all, options.deep_merge(params: { school_id: id }))
+  end
 end

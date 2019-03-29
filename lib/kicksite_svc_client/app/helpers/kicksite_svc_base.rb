@@ -21,6 +21,9 @@ class KicksiteSvcBase < ActiveResource::Base
   protected
 
   def to_datetime(datetime_string)
-    datetime_string.present? ? Time.parse(datetime_string) : datetime_string
+    return datetime_string unless datetime_string.present?
+    return datetime_string unless datetime_string.is_a?(String)
+
+    Time.parse(datetime_string)
   end
 end
