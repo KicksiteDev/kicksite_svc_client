@@ -1,10 +1,12 @@
 require_relative '../helpers/kicksite_svc_basic_auth'
 require_relative '../helpers/no_svc_object'
+require_relative '../helpers/paginated_collection'
 
 # REST resources specific to Schools
 class School < KicksiteSvcBasicAuth
   class Logo < NoSvcObject; end
   class Statistic < NoSvcObject; end
+  class Activity < NoSvcObject; end
 
   SCHOOL_DATETIME_KEYS = %w[
     subscription_plan_status_date
@@ -38,6 +40,11 @@ class School < KicksiteSvcBasicAuth
       :merchant_account,
       merchant_account.to_hash
     )
+  end
+
+  def activity(options = {})
+    payload = KicksiteSvcBearerAuth.get("schools/#{id}/activity", options)
+    PaginatedCollection.new(payload.map { |event| Activity.new(event) })
   end
 
   # Students at this particular school.
