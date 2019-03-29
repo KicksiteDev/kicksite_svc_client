@@ -44,7 +44,7 @@ class School < KicksiteSvcBasicAuth
 
   def activity(options = {})
     payload = KicksiteSvcBearerAuth.get("schools/#{id}/activity", options)
-    PaginatedCollection.new(payload.map { |event| Activity.new(event) })
+    PaginatedCollection.new(payload.map { |event| Schools::Activity.new(event) })
   end
 
   # Students at this particular school.
