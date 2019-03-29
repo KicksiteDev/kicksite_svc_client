@@ -12,9 +12,9 @@ class NoSvcObject
     end
 
     payload.each do |key, value|
-      define_instance_variable(key, value)
+      define_instance_variable(key, value.is_a?(Hash) ? NoSvcObject.new(value) : value)
       define_getter(key)
-      define_setter(key, value)
+      define_setter(key, value.is_a?(Hash) ? NoSvcObject.new(value) : value)
     end
   end
 
@@ -25,6 +25,20 @@ class NoSvcObject
   end
 
   private
+
+  # Allows setting of new methods onto the object. Thanks ActiveResource.
+  def method_missing(method, *args, &block)
+    if method.to_s.end_with?('=') && args.count == 1
+      key = method.to_s.sub('=', '')
+      value = args.first
+
+      define_instance_variable(key, value.is_a?(Hash) ? NoSvcObject.new(value) : value)
+      define_getter(key)
+      define_setter(key, value.is_a?(Hash) ? NoSvcObject.new(value) : value)
+    else
+      super
+    end
+  end
 
   def define_instance_variable(key, value)
     instance_variable_set("@#{key}", value)
