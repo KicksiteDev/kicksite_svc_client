@@ -25,4 +25,10 @@ RSpec.describe Schools::Prospect do
     prospects = school.prospects
     expect(prospects).to_not be_empty
   end
+
+  it 'successfully returns a specific prospect within school' do
+    school = School.find(school_id)
+    prospects = school.prospects
+    Schools::Prospect.find(prospects.first.id, params: { school_id: school_id })
+  end
 end
