@@ -2,7 +2,7 @@ require 'httparty'
 
 RSpec.describe Schools::Event do
   let(:school_id) { 119 }
-  let(:event_id) { 43271 }
+  let(:event_id) { 5202 }
 
   before do
     options = {
