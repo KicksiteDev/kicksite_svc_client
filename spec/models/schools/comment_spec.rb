@@ -16,7 +16,7 @@ RSpec.describe Schools::Comment do
       }
     }
 
-    new_user_session_url = "#{ENV['KICKSITE_SVC_URL']}/v1/users/new/sessions"
+    new_user_session_url = "#{ENV['KICKSITE_AUTH_URL']}/v1/users/new/sessions"
     token = HTTParty.post(new_user_session_url, options)['token']
     KicksiteSvcBearerAuth.connection.bearer_token = token
   end

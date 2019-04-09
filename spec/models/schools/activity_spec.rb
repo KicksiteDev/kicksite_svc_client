@@ -15,15 +15,14 @@ RSpec.describe Schools::Activity do
       }
     }
 
-    new_user_session_url = "#{ENV['KICKSITE_SVC_URL']}/v1/users/new/sessions"
+    new_user_session_url = "#{ENV['KICKSITE_AUTH_URL']}/v1/users/new/sessions"
     token = HTTParty.post(new_user_session_url, options)['token']
     KicksiteSvcBearerAuth.connection.bearer_token = token
   end
 
   it 'successfully returns all activity for school' do
-    skip 'incosistent performance in staging environment'
-    # school = School.find(school_id)
-    # activity = school.activity
-    # expect(activity).to_not be_empty
+    school = School.find(school_id)
+    activity = school.activity
+    expect(activity).to_not be_empty
   end
 end
