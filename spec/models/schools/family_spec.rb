@@ -2,7 +2,7 @@ require 'httparty'
 
 RSpec.describe Schools::Family do
   let(:school_id) { 119 }
-  let(:family_id) { 52701 }
+  let(:family_id) { 52_701 }
 
   before do
     options = {
@@ -22,7 +22,6 @@ RSpec.describe Schools::Family do
   end
 
   it 'successfully returns specific family from within school' do
-    school = School.find(school_id)
     Schools::Family.find(family_id, params: { school_id: school_id })
   end
 end

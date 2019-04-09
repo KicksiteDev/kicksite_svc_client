@@ -2,7 +2,7 @@ require 'httparty'
 
 RSpec.describe Schools::Event do
   let(:school_id) { 119 }
-  let(:event_id) { 5202 }
+  let(:event_id) { 5_202 }
 
   before do
     options = {
@@ -22,7 +22,6 @@ RSpec.describe Schools::Event do
   end
 
   it 'successfully returns specific event from within school' do
-    school = School.find(school_id)
     Schools::Event.find(event_id, params: { school_id: school_id })
   end
 end

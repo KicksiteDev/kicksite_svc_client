@@ -2,7 +2,7 @@ require 'httparty'
 
 RSpec.describe Schools::Invoice do
   let(:school_id) { 119 }
-  let(:invoice_id) { 8043 }
+  let(:invoice_id) { 8_043 }
 
   before do
     options = {
@@ -22,7 +22,6 @@ RSpec.describe Schools::Invoice do
   end
 
   it 'successfully returns specific invoice from within school' do
-    school = School.find(school_id)
     Schools::Invoice.find(invoice_id, params: { school_id: school_id })
   end
 end

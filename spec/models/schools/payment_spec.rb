@@ -2,7 +2,7 @@ require 'httparty'
 
 RSpec.describe Schools::Payment do
   let(:school_id) { 119 }
-  let(:payment_id) { 16996 }
+  let(:payment_id) { 16_996 }
 
   before do
     options = {
@@ -22,7 +22,6 @@ RSpec.describe Schools::Payment do
   end
 
   it 'successfully returns specific payment from within school' do
-    school = School.find(school_id)
     Schools::Payment.find(payment_id, params: { school_id: school_id })
   end
 end

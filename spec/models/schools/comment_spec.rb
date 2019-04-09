@@ -2,7 +2,7 @@ require 'httparty'
 
 RSpec.describe Schools::Comment do
   let(:school_id) { 119 }
-  let(:comment_id) { 25080 }
+  let(:comment_id) { 25_080 }
 
   before do
     options = {
@@ -22,7 +22,6 @@ RSpec.describe Schools::Comment do
   end
 
   it 'successfully returns specific comment from within school' do
-    school = School.find(school_id)
     Schools::Comment.find(comment_id, params: { school_id: school_id })
   end
 end

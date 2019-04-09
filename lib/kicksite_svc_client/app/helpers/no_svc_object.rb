@@ -24,6 +24,10 @@ class NoSvcObject
     hash
   end
 
+  def respond_to_missing?(method_name, include_private = false)
+    (method_name.to_s.end_with?('=') && args.count == 1) || super
+  end
+
   private
 
   # Allows setting of new methods onto the object. Thanks ActiveResource.

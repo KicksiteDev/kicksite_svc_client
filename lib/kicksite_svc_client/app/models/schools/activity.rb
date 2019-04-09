@@ -22,7 +22,7 @@ module Schools
     # @param action [String] default: nil Action that occurred that generated the system event
     # @return [String] Filter format this service expects
     def self.generate_filter(type = nil, action = nil)
-      raise 'At least one of the available arguments is required' if (type.nil? && action.nil?)
+      raise 'At least one of the available arguments is required' if type.nil? && action.nil?
 
       "#{type}:#{action}"
     end

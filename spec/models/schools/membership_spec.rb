@@ -2,7 +2,7 @@ require 'httparty'
 
 RSpec.describe Schools::Membership do
   let(:school_id) { 119 }
-  let(:membership_id) { 10824 }
+  let(:membership_id) { 10_824 }
 
   before do
     options = {
@@ -22,7 +22,6 @@ RSpec.describe Schools::Membership do
   end
 
   it 'successfully returns specific membership from within school' do
-    school = School.find(school_id)
     Schools::Membership.find(membership_id, params: { school_id: school_id })
   end
 end
