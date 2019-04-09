@@ -15,7 +15,7 @@ RSpec.describe Schools::Prospect do
       }
     }
 
-    new_user_session_url = "#{ENV['KICKSITE_SVC_URL']}/v1/users/new/sessions"
+    new_user_session_url = "#{ENV['KICKSITE_AUTH_URL']}/v1/users/new/sessions"
     token = HTTParty.post(new_user_session_url, options)['token']
     KicksiteSvcBearerAuth.connection.bearer_token = token
   end
@@ -24,5 +24,11 @@ RSpec.describe Schools::Prospect do
     school = School.find(school_id)
     prospects = school.prospects
     expect(prospects).to_not be_empty
+  end
+
+  it 'successfully returns a specific prospect within school' do
+    school = School.find(school_id)
+    prospects = school.prospects
+    Schools::Prospect.find(prospects.first.id, params: { school_id: school_id })
   end
 end

@@ -2,3 +2,6 @@
 # URISchemes: http, https
 Metrics/LineLength:
   Max: 115
+
+Metrics/BlockLength:
+  ExcludedMethods: ['resource', 'namespace', 'describe', 'context']

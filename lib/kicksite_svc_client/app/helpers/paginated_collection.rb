@@ -1,4 +1,5 @@
 require 'kaminari'
+require 'activeresource'
 
 # Implementation of an ActiveResource collection that takes paging at the service into account.
 class PaginatedCollection < ActiveResource::Collection
