@@ -17,5 +17,12 @@ module Schools
       payload = KicksiteSvcBearerAuth.get("schools/#{prefix_options[:school_id]}/people/#{id}/photo")
       Person::Photo.new(payload) if payload.present?
     end
+
+    def automations(options = {})
+      opt = options.dup
+      opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+      opt = opt.deep_merge(params: { student_id: id })
+      Schools::Students::Automation.find(:all, opt)
+    end
   end
 end
