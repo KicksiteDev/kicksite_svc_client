@@ -9,6 +9,19 @@ module Schools
     EXPIRING_FILTER = 'expiring'.freeze
     EXPIRED_AND_EXPIRING_FILTER = 'expired_expiring'.freeze
 
+    MEMBERSHIP_DATETIME_KEYS = %w[
+      start_date
+      end_date
+    ].freeze
+
+    def initialize(attributes = {}, persisted = false)
+      MEMBERSHIP_DATETIME_KEYS.each do |key|
+        attributes[key] = to_datetime(attributes[key])
+      end
+
+      super(attributes, persisted)
+    end
+
     # School membership is associated with.
     #
     # @return [School] School membership is associated with
