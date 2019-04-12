@@ -9,6 +9,8 @@ module Schools
     EXPIRING_FILTER = 'expiring'.freeze
     EXPIRED_AND_EXPIRING_FILTER = 'expired_expiring'.freeze
 
+    END_DATE_SORT_BY = 'end_date'.freeze
+
     MEMBERSHIP_DATETIME_KEYS = %w[
       start_date
       end_date
