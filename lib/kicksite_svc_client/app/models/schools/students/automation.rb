@@ -9,6 +9,7 @@ module Schools
       self.collection_parser = PaginatedCollection
 
       ABSENT_STUDENTS_AUTOMATION_TYPE = 'absent_students'.freeze
+      UPCOMING_BIRTHDAYS_AUTOMATION_TYPE = 'upcoming_birthdays'.freeze
     end
   end
 end
