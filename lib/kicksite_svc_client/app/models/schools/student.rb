@@ -12,6 +12,10 @@ module Schools
     LOST_FILTER = 'lost'.freeze
     FROZEN_FILTER = 'frozen'.freeze
     ABSENT_FILTER = 'absent'.freeze
+    HAS_BIRTHDAY_FILTER = 'has_birthday'.freeze
+
+    CREATED_AT_SORT_BY = 'created_at'.freeze
+    BIRTHDATE_SORT_BY = 'birthdate'.freeze
 
     def photo
       payload = KicksiteSvcBearerAuth.get("schools/#{prefix_options[:school_id]}/people/#{id}/photo")

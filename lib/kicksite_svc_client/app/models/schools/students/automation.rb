@@ -8,14 +8,7 @@ module Schools
       self.prefix = '/v1/schools/:school_id/students/:student_id/'
       self.collection_parser = PaginatedCollection
 
-      PAST_FILTER = 'past'.freeze
-      FUTURE_FILTER = 'future'.freeze
-
-      START_AT_SORT_BY = 'start_at'.freeze
-
-      def initialize(attributes = {}, persisted = false)
-        super(attributes, persisted)
-      end
+      ABSENT_STUDENTS_AUTOMATION_TYPE = 'absent_students'.freeze
     end
   end
 end
