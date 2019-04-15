@@ -6,7 +6,6 @@ require_relative '../helpers/paginated_collection'
 class School < KicksiteSvcBasicAuth
   class Logo < NoSvcObject; end
   class Statistic < NoSvcObject; end
-  class Activity < NoSvcObject; end
 
   SCHOOL_DATETIME_KEYS = %w[
     subscription_plan_status_date
@@ -66,5 +65,13 @@ class School < KicksiteSvcBasicAuth
 
   def people(options = {})
     Schools::Person.find(:all, options.deep_merge(params: { school_id: id }))
+  end
+
+  def search(query, options = {})
+    opt = options.dup
+    opt = opt.deep_merge(query: query)
+
+    payload = KicksiteSvcBearerAuth.get("schools/#{id}/search", opt)
+    PaginatedCollection.new(payload.map { |search_result| Schools::SearchResult.new(search_result) })
   end
 end
