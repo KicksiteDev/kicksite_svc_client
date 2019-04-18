@@ -1,9 +1,11 @@
 require_relative '../../helpers/kicksite_svc_bearer_auth'
+require_relative '../../helpers/paginated_collection'
 
 module Schools
   # REST resources specific to Invoices at a given school
   class Invoice < KicksiteSvcBearerAuth
     self.prefix = '/v1/schools/:school_id/'
+    self.collection_parser = PaginatedCollection
 
     INVOICE_DATETIME_KEYS = %w[
       date

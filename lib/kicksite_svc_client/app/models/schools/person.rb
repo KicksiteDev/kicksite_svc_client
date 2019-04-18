@@ -1,5 +1,6 @@
 require_relative '../../helpers/kicksite_svc_bearer_auth'
 require_relative '../../helpers/no_svc_object'
+require_relative '../../helpers/paginated_collection'
 
 module Schools
   # REST resources specific to People at a given school
