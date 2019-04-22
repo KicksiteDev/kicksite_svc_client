@@ -19,6 +19,7 @@ module Schools
     ACTIVE_NOVAULT_FILTER = 'active-novault'.freeze
     ACTIVE_UNPAID_FILTER = 'active-unpaid'.freeze
     INACTIVE_UNPAID_FILTER = 'inactive-unpaid'.freeze
+    PAID_THROUGH_SORT_BY = 'paid_through'.freeze
 
     def initialize(attributes = {}, persisted = false)
       RECURRING_BILLING_DATETIME_KEYS.each do |key|
