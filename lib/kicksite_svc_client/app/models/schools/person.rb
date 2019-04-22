@@ -17,6 +17,7 @@ module Schools
       frozen_on
       unfreeze_on
       birthdate
+      next_birthday
     ].freeze
 
     def initialize(attributes = {}, persisted = false)

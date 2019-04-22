@@ -16,6 +16,7 @@ module Schools
 
     CREATED_AT_SORT_BY = 'created_at'.freeze
     BIRTHDATE_SORT_BY = 'birthdate'.freeze
+    NEXT_BIRTHDAY_SORT_BY = 'next_birthday'.freeze
 
     def photo
       payload = KicksiteSvcBearerAuth.get("schools/#{prefix_options[:school_id]}/people/#{id}/photo")
