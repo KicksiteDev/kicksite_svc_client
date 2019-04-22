@@ -17,6 +17,7 @@ module Schools
     ].freeze
 
     PAST_DUE_FILTER = 'past_due'.freeze
+    DATE_SORT_BY = 'date'.freeze
 
     def initialize(attributes = {}, persisted = false)
       INVOICE_DATETIME_KEYS.each do |key|

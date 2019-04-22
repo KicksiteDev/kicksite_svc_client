@@ -78,4 +78,8 @@ class School < KicksiteSvcBasicAuth
   def invoices(options = {})
     Schools::Invoice.find(:all, options.deep_merge(params: { school_id: id }))
   end
+
+  def recurring_billings(options = {})
+    Schools::RecurringBilling.find(:all, options.deep_merge(params: { school_id: id }))
+  end
 end
