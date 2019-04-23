@@ -1,6 +1,6 @@
 require 'httparty'
 
-RSpec.describe Schools::Invoice do
+RSpec.describe Schools::RecurringBilling do
   let(:school_id) { 119 }
 
   before do
@@ -22,13 +22,7 @@ RSpec.describe Schools::Invoice do
 
   it 'successfully returns all prospects for school' do
     school = School.find(school_id)
-    invoices = school.invoices
-    expect(invoices).to_not be_empty
-  end
-
-  it 'successfully returns specific invoice from within school' do
-    school = School.find(school_id)
-    invoices = school.invoices
-    Schools::Invoice.find(invoices.first.id, params: { school_id: school_id })
+    recurring_billings = school.recurring_billings
+    expect(recurring_billings).to_not be_empty
   end
 end
