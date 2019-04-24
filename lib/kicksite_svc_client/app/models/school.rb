@@ -109,6 +109,10 @@ class School < KicksiteSvcBasicAuth
     Schools::RecurringBilling.find(:all, options.deep_merge(params: { school_id: id }))
   end
 
+  def association_memberships(options = {})
+    Schools::AssociationMembership.find(:all, options.deep_merge(params: { school_id: id }))
+  end
+
   # Memberships at this particular school.
   #
   # @param options [Hash] Options such as custom params
