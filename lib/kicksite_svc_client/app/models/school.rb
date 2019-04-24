@@ -74,4 +74,12 @@ class School < KicksiteSvcBasicAuth
     payload = KicksiteSvcBearerAuth.get("schools/#{id}/search", opt)
     PaginatedCollection.new(payload.map { |search_result| Schools::SearchResult.new(search_result) })
   end
+
+  def invoices(options = {})
+    Schools::Invoice.find(:all, options.deep_merge(params: { school_id: id }))
+  end
+
+  def recurring_billings(options = {})
+    Schools::RecurringBilling.find(:all, options.deep_merge(params: { school_id: id }))
+  end
 end
