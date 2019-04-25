@@ -1,8 +1,9 @@
 RSpec.describe School do
   let(:school_id) { 119 }
+  let(:school_subdomain) { 'trainingcenter' }
 
   it 'successfully returns all schools' do
-    schools = School.all
+    schools = School.all(params: { subdomain: school_subdomain })
     expect(schools).to_not be_empty
   end
 
