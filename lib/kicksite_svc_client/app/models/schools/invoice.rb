@@ -14,6 +14,7 @@ module Schools
       receipt_last_emailed
       invoice_last_emailed
       recurred_at
+      due_date
     ].freeze
 
     PAST_DUE_FILTER = 'past_due'.freeze
