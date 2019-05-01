@@ -6,7 +6,7 @@ class NoSvcObject
     created_at
   ].freeze
 
-  def initialize(payload)
+  def initialize(payload = {})
     BASE_DATETIME_KEYS.each do |key|
       payload[key] = to_datetime(payload[key])
     end
