@@ -1,6 +1,6 @@
 require 'httparty'
 
-RSpec.describe Schools::Student do
+RSpec.describe Schools::Person do
   let(:school_id) { 119 }
 
   before do
@@ -20,21 +20,21 @@ RSpec.describe Schools::Student do
     KicksiteSvcBearerAuth.connection.bearer_token = token
   end
 
-  it 'successfully returns all students for school' do
+  it 'successfully returns all people for school' do
     school = School.find(school_id)
-    students = school.students
-    expect(students).to_not be_empty
+    people = school.people
+    expect(people).to_not be_empty
   end
 
-  it 'successfully returns a specific student within school' do
+  it 'successfully returns a specific person within school' do
     school = School.find(school_id)
-    students = school.students
-    Schools::Student.find(students.first.id, params: { school_id: school_id })
+    people = school.people
+    Schools::Person.find(people.first.id, params: { school_id: school_id })
   end
 
-  it 'successfully returns phone numbers for a specific student' do
+  it 'successfully returns phone numbers for a specific person' do
     school = School.find(school_id)
-    students = school.students
-    students.first.phone_numbers
+    people = school.people
+    people.first.phone_numbers
   end
 end

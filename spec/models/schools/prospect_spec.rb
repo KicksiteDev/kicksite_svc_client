@@ -31,4 +31,10 @@ RSpec.describe Schools::Prospect do
     prospects = school.prospects
     Schools::Prospect.find(prospects.first.id, params: { school_id: school_id })
   end
+
+  it 'successfully returns phone numbers for a specific student' do
+    school = School.find(school_id)
+    prospects = school.prospects
+    prospects.first.phone_numbers
+  end
 end
