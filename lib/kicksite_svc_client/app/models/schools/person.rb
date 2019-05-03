@@ -29,6 +29,16 @@ module Schools
       Person::Photo.new(payload) if payload.present?
     end
 
+    def phone_numbers(options = {})
+      params = { school_id: prefix_options[:school_id], person_id: id }
+      Schools::People::PhoneNumber.find(:all, options.deep_merge(params: params))
+    end
+
+    def email_addresses(options = {})
+      params = { school_id: prefix_options[:school_id], person_id: id }
+      Schools::People::EmailAddress.find(:all, options.deep_merge(params: params))
+    end
+
     # School person is associated with.
     #
     # @return [School] School person is associated with
