@@ -14,6 +14,10 @@ module Schools
       inactivated_on
       converted_to_prospect_on
       converted_to_student_on
+      frozen_on
+      unfreeze_on
+      birthdate
+      next_birthday
     ].freeze
 
     def initialize(attributes = {}, persisted = false)

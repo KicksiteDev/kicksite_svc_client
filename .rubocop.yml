@@ -5,3 +5,6 @@ Metrics/LineLength:
 
 Metrics/BlockLength:
   ExcludedMethods: ['resource', 'namespace', 'describe', 'context']
+
+Style/FrozenStringLiteralComment:
+  Enabled: false

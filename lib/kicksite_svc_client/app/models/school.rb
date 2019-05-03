@@ -24,16 +24,24 @@ class School < KicksiteSvcBasicAuth
     super(attributes, persisted)
   end
 
+  # School's logo details.
+  #
+  # @return [School::Logo] Logo details, including url, if present - nil otherwise
   def logo
     payload = get(:logo)
     School::Logo.new(payload) if payload.present?
   end
 
+  # School's merchant account for billing related tasks
+  #
+  # @return [MerchantAccount] Merchant account details if present - nil otherwise
   def merchant_account
     payload = get(:merchant_account)
     MerchantAccount.new(payload) if payload.present?
   end
 
+  # Update/Add merchant account to school.
+  # Note: This occurs immediately, does not require a save on the parent school instance.
   def merchant_account=(merchant_account)
     put(
       :merchant_account,
@@ -41,6 +49,10 @@ class School < KicksiteSvcBasicAuth
     )
   end
 
+  # Activity history of the system that relates to this school.
+  #
+  # @param options [Hash] Options such as custom params
+  # @return [PaginatedCollection] Collection of activity records associated with school
   def activity(options = {})
     payload = KicksiteSvcBearerAuth.get("schools/#{id}/activity", options)
     PaginatedCollection.new(payload.map { |event| Schools::Activity.new(event) })
@@ -54,15 +66,29 @@ class School < KicksiteSvcBasicAuth
     Schools::Student.find(:all, options.deep_merge(params: { school_id: id }))
   end
 
+  # Custom statistics.
+  #
+  # @param group [String] Group to calculate statistic about
+  # @param type [String] Type of statistic to request
+  # @param options [Hash] Options such as custom params
+  # @return [School::Statistic] Aggregated data
   def statistic(group, type, options = {})
     payload = KicksiteSvcBearerAuth.get("schools/#{id}/stats/#{type}/#{group}", options)
     School::Statistic.new(payload) if payload.present?
   end
 
+  # Prospects at this particular school.
+  #
+  # @param options [Hash] Options such as custom params
+  # @return [PaginatedCollection] Collection of prospects associated with school
   def prospects(options = {})
     Schools::Prospect.find(:all, options.deep_merge(params: { school_id: id }))
   end
 
+  # People at this particular school.
+  #
+  # @param options [Hash] Options such as custom params
+  # @return [PaginatedCollection] Collection of people associated with school
   def people(options = {})
     Schools::Person.find(:all, options.deep_merge(params: { school_id: id }))
   end
@@ -81,5 +107,17 @@ class School < KicksiteSvcBasicAuth
 
   def recurring_billings(options = {})
     Schools::RecurringBilling.find(:all, options.deep_merge(params: { school_id: id }))
+  end
+
+  def association_memberships(options = {})
+    Schools::AssociationMembership.find(:all, options.deep_merge(params: { school_id: id }))
+  end
+
+  # Memberships at this particular school.
+  #
+  # @param options [Hash] Options such as custom params
+  # @return [PaginatedCollection] Collection of memberships associated with school
+  def memberships(options = {})
+    Schools::Membership.find(:all, options.deep_merge(params: { school_id: id }))
   end
 end

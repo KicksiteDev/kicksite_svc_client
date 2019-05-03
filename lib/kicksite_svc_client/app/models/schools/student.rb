@@ -12,10 +12,22 @@ module Schools
     LOST_FILTER = 'lost'.freeze
     FROZEN_FILTER = 'frozen'.freeze
     ABSENT_FILTER = 'absent'.freeze
+    HAS_BIRTHDAY_FILTER = 'has_birthday'.freeze
+
+    CREATED_AT_SORT_BY = 'created_at'.freeze
+    BIRTHDATE_SORT_BY = 'birthdate'.freeze
+    NEXT_BIRTHDAY_SORT_BY = 'next_birthday'.freeze
 
     def photo
       payload = KicksiteSvcBearerAuth.get("schools/#{prefix_options[:school_id]}/people/#{id}/photo")
       Person::Photo.new(payload) if payload.present?
+    end
+
+    def automations(options = {})
+      opt = options.dup
+      opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+      opt = opt.deep_merge(params: { student_id: id })
+      Schools::Students::Automation.find(:all, opt)
     end
   end
 end
