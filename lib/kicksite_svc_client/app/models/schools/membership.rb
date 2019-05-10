@@ -33,5 +33,12 @@ module Schools
     def school
       School.find(prefix_options[:school_id])
     end
+
+    def automations(options = {})
+      opt = options.dup
+      opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+      opt = opt.deep_merge(params: { membership_id: id })
+      Schools::Memberships::Automation.find(:all, opt)
+    end
   end
 end
