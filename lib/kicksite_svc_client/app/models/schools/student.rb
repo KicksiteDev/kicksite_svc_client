@@ -13,6 +13,7 @@ module Schools
     FROZEN_FILTER = 'frozen'.freeze
     ABSENT_FILTER = 'absent'.freeze
     HAS_BIRTHDAY_FILTER = 'has_birthday'.freeze
+    HAS_BIRTHDAY_AND_IS_ACTIVE_FILTER = 'has_birthday_and_is_active'.freeze
 
     CREATED_AT_SORT_BY = 'created_at'.freeze
     BIRTHDATE_SORT_BY = 'birthdate'.freeze
