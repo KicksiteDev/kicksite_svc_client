@@ -138,7 +138,7 @@ class School < KicksiteSvcBasicAuth
   # @param options [Hash] Options such as custom params
   # @return [Array/School::Configuration] Configuration(s) based on type requested
   def configuration(key, options = {})
-    payload = KicksiteSvcBearerAuth.get("schools/#{id}/configuration/#{key.to_s}", options)
+    payload = KicksiteSvcBearerAuth.get("schools/#{id}/configuration/#{key}", options)
     return nil unless payload.present?
     return payload.map { |configuration| School::Configuration.new(configuration) } if payload.is_a?(Array)
 
