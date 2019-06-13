@@ -6,15 +6,29 @@ class NoSvcObject
     created_at
   ].freeze
 
-  def initialize(payload = {})
+  def initialize(payload = {}, persisted = false)
     BASE_DATETIME_KEYS.each do |key|
       payload[key] = to_datetime(payload[key])
     end
 
     payload.each do |key, value|
-      define_instance_variable(key, value.is_a?(Hash) ? NoSvcObject.new(value) : value)
-      define_getter(key)
-      define_setter(key, value.is_a?(Hash) ? NoSvcObject.new(value) : value)
+      if value.is_a?(Hash)
+        define_instance_variable(key, NoSvcObject.new(value))
+      elsif value.is_a?(Array)
+        define_instance_variable(key, value.map { |item| NoSvcObject.new(item) })
+      else
+        define_instance_variable(key, value)
+      end
+
+      define_getter(key, value)
+
+      if value.is_a?(Hash)
+        define_setter(key, NoSvcObject.new(value))
+      elsif value.is_a?(Array)
+        define_setter(key, value.map { |item| NoSvcObject.new(item) })
+      else
+        define_setter(key, value)
+      end
     end
   end
 
@@ -36,9 +50,23 @@ class NoSvcObject
       key = method.to_s.sub('=', '')
       value = args.first
 
-      define_instance_variable(key, value.is_a?(Hash) ? NoSvcObject.new(value) : value)
-      define_getter(key)
-      define_setter(key, value.is_a?(Hash) ? NoSvcObject.new(value) : value)
+      if value.is_a?(Hash)
+        define_instance_variable(key, NoSvcObject.new(value))
+      elsif value.is_a?(Array)
+        define_instance_variable(key, value.map { |item| NoSvcObject.new(item) })
+      else
+        define_instance_variable(key, value)
+      end
+
+      define_getter(key, value)
+
+      if value.is_a?(Hash)
+        define_setter(key, NoSvcObject.new(value))
+      elsif value.is_a?(Array)
+        define_setter(key, value.map { |item| NoSvcObject.new(item) })
+      else
+        define_setter(key, value)
+      end
     else
       super
     end
@@ -48,9 +76,10 @@ class NoSvcObject
     instance_variable_set("@#{key}", value)
   end
 
-  def define_getter(key)
+  def define_getter(key, value)
     define_singleton_method(key) do
       instance_variable_get("@#{key}")
+      # define_singleton_method("#{key}?") { |value| value } if value.present? and [true, false].include?(value)
     end
   end
 
