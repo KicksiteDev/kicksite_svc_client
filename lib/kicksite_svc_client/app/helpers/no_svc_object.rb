@@ -79,7 +79,11 @@ class NoSvcObject
   def define_getter(key, value)
     define_singleton_method(key) do
       instance_variable_get("@#{key}")
-      # define_singleton_method("#{key}?") { |value| value } if value.present? and [true, false].include?(value)
+    end
+    if !value.nil? && [true, false].include?(value)
+      define_singleton_method("#{key}?") do
+        instance_variable_get("@#{key}")
+      end
     end
   end
 
