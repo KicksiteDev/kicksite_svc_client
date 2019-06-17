@@ -6,6 +6,8 @@ require_relative '../helpers/paginated_collection'
 class School < KicksiteSvcBasicAuth
   class Logo < NoSvcObject; end
   class Statistic < NoSvcObject; end
+  class AccountDetails < NoSvcObject; end
+  class Configuration < NoSvcObject; end
 
   SCHOOL_DATETIME_KEYS = %w[
     subscription_plan_status_date
@@ -119,5 +121,27 @@ class School < KicksiteSvcBasicAuth
   # @return [PaginatedCollection] Collection of memberships associated with school
   def memberships(options = {})
     Schools::Membership.find(:all, options.deep_merge(params: { school_id: id }))
+  end
+
+  # Details such as delinquency of the school, etc.
+  #
+  # @param options [Hash] Options such as custom params
+  # @return [School::AccountDetails] Account details for school
+  def account_details(options = {})
+    payload = get(:account_details, options)
+    School::AccountDetails.new(payload) if payload.present?
+  end
+
+  # Any type of configuration at the school level.
+  #
+  # @param key [Symbol] Type of configuration desired
+  # @param options [Hash] Options such as custom params
+  # @return [Array/School::Configuration] Configuration(s) based on type requested
+  def configuration(key, options = {})
+    payload = KicksiteSvcBearerAuth.get("schools/#{id}/configuration/#{key}", options)
+    return nil unless payload.present?
+    return payload.map { |configuration| School::Configuration.new(configuration) } if payload.is_a?(Array)
+
+    School::Configuration.new(payload)
   end
 end

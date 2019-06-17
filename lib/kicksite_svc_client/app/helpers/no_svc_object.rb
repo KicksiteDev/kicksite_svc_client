@@ -6,15 +6,13 @@ class NoSvcObject
     created_at
   ].freeze
 
-  def initialize(payload = {})
+  def initialize(payload = {}, _persisted = false)
     BASE_DATETIME_KEYS.each do |key|
       payload[key] = to_datetime(payload[key])
     end
 
     payload.each do |key, value|
-      define_instance_variable(key, value.is_a?(Hash) ? NoSvcObject.new(value) : value)
-      define_getter(key)
-      define_setter(key, value.is_a?(Hash) ? NoSvcObject.new(value) : value)
+      recursive_define(key, value)
     end
   end
 
@@ -36,20 +34,44 @@ class NoSvcObject
       key = method.to_s.sub('=', '')
       value = args.first
 
-      define_instance_variable(key, value.is_a?(Hash) ? NoSvcObject.new(value) : value)
-      define_getter(key)
-      define_setter(key, value.is_a?(Hash) ? NoSvcObject.new(value) : value)
+      recursive_define(key, value)
     else
       super
     end
   end
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
+
+  def recursive_define(key, value)
+    if value.is_a?(Hash)
+      define_instance_variable(key, NoSvcObject.new(value))
+      define_setter(key, NoSvcObject.new(value))
+    elsif value.is_a?(Array)
+      define_instance_variable(key, value.map { |item| NoSvcObject.new(item) })
+      define_setter(key, value.map { |item| NoSvcObject.new(item) })
+    else
+      define_instance_variable(key, value)
+      define_setter(key, value)
+    end
+
+    define_getter(key, value)
+  end
+
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
+
   def define_instance_variable(key, value)
     instance_variable_set("@#{key}", value)
   end
 
-  def define_getter(key)
+  def define_getter(key, value)
     define_singleton_method(key) do
+      instance_variable_get("@#{key}")
+    end
+    return unless !value.nil? && [true, false].include?(value)
+
+    define_singleton_method("#{key}?") do
       instance_variable_get("@#{key}")
     end
   end
