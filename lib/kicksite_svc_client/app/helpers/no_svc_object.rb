@@ -8,7 +8,7 @@ class NoSvcObject
 
   def initialize(payload = {}, _persisted = false)
     BASE_DATETIME_KEYS.each do |key|
-      payload[key] = to_datetime(payload[key])
+      payload[key] = to_datetime(payload[key]) if payload[key].present?
     end
 
     payload.each do |key, value|
