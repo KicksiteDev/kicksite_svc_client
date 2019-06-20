@@ -48,8 +48,8 @@ class NoSvcObject
       define_instance_variable(key, NoSvcObject.new(value))
       define_setter(key, NoSvcObject.new(value))
     elsif value.is_a?(Array)
-      define_instance_variable(key, value.map { |item| NoSvcObject.new(item) })
-      define_setter(key, value.map { |item| NoSvcObject.new(item) })
+      define_instance_variable(key, value.map { |item| item.is_a?(Hash) ? NoSvcObject.new(item) : item })
+      define_setter(key, value.map { |item| item.is_a?(Hash) ? NoSvcObject.new(item) : item })
     else
       define_instance_variable(key, value)
       define_setter(key, value)
