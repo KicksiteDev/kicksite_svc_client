@@ -1,3 +1,4 @@
+# For those special sorts of collections that can be posted back to the backend all together to update.
 class SaveableObjects
   include Enumerable
 
@@ -15,9 +16,10 @@ class SaveableObjects
 
   def save
     raise 'Invalid Url' if @url.nil?
+
     begin
       save!
-    rescue
+    rescue StandardError
       return false
     end
 
@@ -26,6 +28,7 @@ class SaveableObjects
 
   def save!
     raise 'Invalid Url' if @url.nil?
-    KicksiteSvcBearerAuth.put(@url, nil, @items.map{ |item| item.to_hash }.to_json)
+
+    KicksiteSvcBearerAuth.put(@url, nil, @items.map(&:to_hash).to_json)
   end
 end

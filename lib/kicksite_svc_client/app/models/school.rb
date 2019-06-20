@@ -140,6 +140,7 @@ class School < KicksiteSvcBasicAuth
   def configuration(key, options = {})
     payload = KicksiteSvcBearerAuth.get("schools/#{id}/configuration/#{key}", options)
     return nil unless payload.present?
+
     if payload.is_a?(Array)
       items = payload.map { |configuration| School::Configuration.new(configuration) }
       return SaveableObjects.new(items, "schools/#{id}/configuration/#{key}")
