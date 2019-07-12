@@ -42,6 +42,17 @@ module Schools
       Schools::Prospects::Task.find(:all, opt)
     end
 
+    # Attendances associated with prospect.
+    #
+    # @param options [Hash] Options such as custom params
+    # @return [PaginatedCollection] Collection of attendances associated with prospect
+    def attendances(options = {})
+      opt = options.dup
+      opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+      opt = opt.deep_merge(params: { prospect_id: id })
+      Schools::Prospects::Attendance.find(:all, opt)
+    end
+
     # Method with which prospect entered the system.
     #
     # @return [Schools::Prospect::Source] Where source came from
