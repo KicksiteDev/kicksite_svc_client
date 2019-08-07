@@ -83,8 +83,14 @@ class School < KicksiteSvcBasicAuth
   #
   # @param options [Hash] Options such as custom params
   # @return [PaginatedCollection] Collection of prospects associated with school
+  # OR
+  # @return CSV string of prospects associated with school (used with exporting of Prospect data)
   def prospects(options = {})
-    Schools::Prospect.find(:all, options.deep_merge(params: { school_id: id }))
+    if options[:params].present? && options[:params][:format].present? && options[:params][:format].casecmp?('csv')
+      Csv9000.get("schools/#{id}/prospects", options[:params])
+    else
+      Schools::Prospect.find(:all, options.deep_merge(params: { school_id: id }))
+    end
   end
 
   # People at this particular school.
