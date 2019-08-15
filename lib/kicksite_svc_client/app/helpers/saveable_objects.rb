@@ -29,6 +29,6 @@ class SaveableObjects
   def save!
     raise 'Invalid Url' if @url.nil?
 
-    KicksiteSvcBearerAuth.put(@url, nil, @items.map(&:to_hash).to_json)
+    KicksiteSvcBearerAuth.put(@url, { 'Content-Type': 'application/json' }, @items.map(&:to_hash).to_json)
   end
 end
