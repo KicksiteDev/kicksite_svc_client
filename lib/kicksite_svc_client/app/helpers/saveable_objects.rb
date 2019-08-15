@@ -1,3 +1,5 @@
+require_relative 'kicksite_svc_bearer_auth'
+
 # For those special sorts of collections that can be posted back to the backend all together to update.
 class SaveableObjects
   include Enumerable

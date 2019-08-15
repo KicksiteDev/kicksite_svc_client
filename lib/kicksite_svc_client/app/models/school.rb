@@ -1,4 +1,5 @@
 require_relative '../helpers/kicksite_svc_basic_auth'
+require_relative '../helpers/kicksite_svc_bearer_auth'
 require_relative '../helpers/no_svc_object'
 require_relative '../helpers/paginated_collection'
 

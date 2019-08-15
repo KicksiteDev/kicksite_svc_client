@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+require_relative 'kicksite_svc_bearer_auth'
 
 module ActiveResource
   module Formats
