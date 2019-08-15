@@ -27,7 +27,12 @@ end
 
 # Allows for retrieval of CSV formatted data out of the CRUD api
 class Csv9000 < KicksiteSvcBearerAuth
-  self.format = ActiveResource::Formats::CsvFormat
   self.collection_name = ''
   self.element_name = ''
+
+  class << self
+    def format
+      ActiveResource::Formats::CsvFormat
+    end
+  end
 end
