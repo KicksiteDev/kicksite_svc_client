@@ -14,6 +14,8 @@ module Schools
 
       PAST_FILTER = 'past'.freeze
       FUTURE_FILTER = 'future'.freeze
+      COMPLETE_FILTER = 'complete'.freeze
+      INCOMPLETE_FILTER = 'incomplete'.freeze
 
       DUE_AT_SORT_BY = 'due_at'.freeze
 
