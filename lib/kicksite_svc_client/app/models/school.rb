@@ -133,7 +133,7 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
 
   def invoices(options = {})
     opt = options.dup
-    opt = opt.keys.count == 1 && opt.key?('params') ? opt : { params: opt }
+    opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
     opt = opt.deep_merge(params: { school_id: id })
     Schools::Invoice.find(:all, opt)
   end

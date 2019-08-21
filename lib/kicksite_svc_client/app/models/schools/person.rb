@@ -35,14 +35,14 @@ module Schools
 
     def phone_numbers(options = {})
       opt = options.dup
-      opt = opt.keys.count == 1 && opt.key?('params') ? opt : { params: opt }
+      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
       opt = opt.deep_merge(params: { school_id: prefix_options[:school_id], person_id: id })
       Schools::People::PhoneNumber.find(:all, opt)
     end
 
     def email_addresses(options = {})
       opt = options.dup
-      opt = opt.keys.count == 1 && opt.key?('params') ? opt : { params: opt }
+      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
       opt = opt.deep_merge(params: { school_id: prefix_options[:school_id], person_id: id })
       Schools::People::EmailAddress.find(:all, opt)
     end
