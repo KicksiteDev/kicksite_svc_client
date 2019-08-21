@@ -68,7 +68,7 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
   # @return [PaginatedCollection] Collection of students associated with school
   def students(options = {})
     opt = options.dup
-    opt = opt.keys.count == 1 && opt.keys?('params') ? opt : { params: opt }
+    opt = opt.keys.count == 1 && opt.key?('params') ? opt : { params: opt }
     opt = opt.deep_merge(params: { school_id: id })
     Schools::Student.find(:all, opt)
   end
@@ -90,7 +90,7 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
   # @return [PaginatedCollection] Collection of employees associated with school
   def employees(options = {})
     opt = options.dup
-    opt = opt.keys.count == 1 && opt.keys?('params') ? opt : { params: opt }
+    opt = opt.keys.count == 1 && opt.key?('params') ? opt : { params: opt }
     opt = opt.deep_merge(params: { school_id: id })
     Schools::Employee.find(:all, opt)
   end
@@ -103,7 +103,7 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
   # @return CSV string of prospects associated with school (used with exporting of Prospect data)
   def prospects(options = {}) # rubocop:disable Metrics/AbcSize
     opt = options.dup
-    opt = opt.keys.count == 1 && opt.keys?('params') ? opt : { params: opt }
+    opt = opt.keys.count == 1 && opt.key?('params') ? opt : { params: opt }
     if opt[:params].present? && opt[:params][:format].present? && opt[:params][:format].casecmp?('csv')
       Csv9000.get("schools/#{id}/prospects", opt[:params])
     else
@@ -118,7 +118,7 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
   # @return [PaginatedCollection] Collection of people associated with school
   def people(options = {})
     opt = options.dup
-    opt = opt.keys.count == 1 && opt.keys?('params') ? opt : { params: opt }
+    opt = opt.keys.count == 1 && opt.key?('params') ? opt : { params: opt }
     opt = opt.deep_merge(params: { school_id: id })
     Schools::Person.find(:all, opt)
   end
@@ -133,21 +133,21 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
 
   def invoices(options = {})
     opt = options.dup
-    opt = opt.keys.count == 1 && opt.keys?('params') ? opt : { params: opt }
+    opt = opt.keys.count == 1 && opt.key?('params') ? opt : { params: opt }
     opt = opt.deep_merge(params: { school_id: id })
     Schools::Invoice.find(:all, opt)
   end
 
   def recurring_billings(options = {})
     opt = options.dup
-    opt = opt.keys.count == 1 && opt.keys?('params') ? opt : { params: opt }
+    opt = opt.keys.count == 1 && opt.key?('params') ? opt : { params: opt }
     opt = opt.deep_merge(params: { school_id: id })
     Schools::RecurringBilling.find(:all, opt)
   end
 
   def association_memberships(options = {})
     opt = options.dup
-    opt = opt.keys.count == 1 && opt.keys?('params') ? opt : { params: opt }
+    opt = opt.keys.count == 1 && opt.key?('params') ? opt : { params: opt }
     opt = opt.deep_merge(params: { school_id: id })
     Schools::AssociationMembership.find(:all, opt)
   end
@@ -158,7 +158,7 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
   # @return [PaginatedCollection] Collection of memberships associated with school
   def memberships(options = {})
     opt = options.dup
-    opt = opt.keys.count == 1 && opt.keys?('params') ? opt : { params: opt }
+    opt = opt.keys.count == 1 && opt.key?('params') ? opt : { params: opt }
     opt = opt.deep_merge(params: { school_id: id })
     Schools::Membership.find(:all, opt)
   end
