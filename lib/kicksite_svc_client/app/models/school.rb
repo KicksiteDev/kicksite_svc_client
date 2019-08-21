@@ -5,7 +5,7 @@ require_relative '../helpers/no_svc_object'
 require_relative '../helpers/paginated_collection'
 
 # REST resources specific to Schools
-class School < KicksiteSvcBasicAuth
+class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
   class Logo < NoSvcObject; end
   class Statistic < NoSvcObject; end
   class AccountDetails < NoSvcObject; end
@@ -67,7 +67,10 @@ class School < KicksiteSvcBasicAuth
   # @param options [Hash] Options such as custom params
   # @return [PaginatedCollection] Collection of students associated with school
   def students(options = {})
-    Schools::Student.find(:all, options.deep_merge(params: { school_id: id }))
+    opt = options.dup
+    opt = opt.keys.count == 1 && opt.keys?('params') ? opt : { params: opt }
+    opt = opt.deep_merge(params: { school_id: id })
+    Schools::Student.find(:all, opt)
   end
 
   # Custom statistics.
@@ -81,17 +84,31 @@ class School < KicksiteSvcBasicAuth
     School::Statistic.new(payload) if payload.present?
   end
 
+  # employees at this particular school.
+  #
+  # @param options [Hash] Options such as custom params
+  # @return [PaginatedCollection] Collection of employees associated with school
+  def employees(options = {})
+    opt = options.dup
+    opt = opt.keys.count == 1 && opt.keys?('params') ? opt : { params: opt }
+    opt = opt.deep_merge(params: { school_id: id })
+    Schools::Employee.find(:all, opt)
+  end
+
   # Prospects at this particular school.
   #
   # @param options [Hash] Options such as custom params
   # @return [PaginatedCollection] Collection of prospects associated with school
   # OR
   # @return CSV string of prospects associated with school (used with exporting of Prospect data)
-  def prospects(options = {})
-    if options[:params].present? && options[:params][:format].present? && options[:params][:format].casecmp?('csv')
-      Csv9000.get("schools/#{id}/prospects", options[:params])
+  def prospects(options = {}) # rubocop:disable Metrics/AbcSize
+    opt = options.dup
+    opt = opt.keys.count == 1 && opt.keys?('params') ? opt : { params: opt }
+    if opt[:params].present? && opt[:params][:format].present? && opt[:params][:format].casecmp?('csv')
+      Csv9000.get("schools/#{id}/prospects", opt[:params])
     else
-      Schools::Prospect.find(:all, options.deep_merge(params: { school_id: id }))
+      opt = opt.deep_merge(params: { school_id: id })
+      Schools::Prospect.find(:all, opt)
     end
   end
 
@@ -100,7 +117,10 @@ class School < KicksiteSvcBasicAuth
   # @param options [Hash] Options such as custom params
   # @return [PaginatedCollection] Collection of people associated with school
   def people(options = {})
-    Schools::Person.find(:all, options.deep_merge(params: { school_id: id }))
+    opt = options.dup
+    opt = opt.keys.count == 1 && opt.keys?('params') ? opt : { params: opt }
+    opt = opt.deep_merge(params: { school_id: id })
+    Schools::Person.find(:all, opt)
   end
 
   def search(query, options = {})
@@ -112,15 +132,24 @@ class School < KicksiteSvcBasicAuth
   end
 
   def invoices(options = {})
-    Schools::Invoice.find(:all, options.deep_merge(params: { school_id: id }))
+    opt = options.dup
+    opt = opt.keys.count == 1 && opt.keys?('params') ? opt : { params: opt }
+    opt = opt.deep_merge(params: { school_id: id })
+    Schools::Invoice.find(:all, opt)
   end
 
   def recurring_billings(options = {})
-    Schools::RecurringBilling.find(:all, options.deep_merge(params: { school_id: id }))
+    opt = options.dup
+    opt = opt.keys.count == 1 && opt.keys?('params') ? opt : { params: opt }
+    opt = opt.deep_merge(params: { school_id: id })
+    Schools::RecurringBilling.find(:all, opt)
   end
 
   def association_memberships(options = {})
-    Schools::AssociationMembership.find(:all, options.deep_merge(params: { school_id: id }))
+    opt = options.dup
+    opt = opt.keys.count == 1 && opt.keys?('params') ? opt : { params: opt }
+    opt = opt.deep_merge(params: { school_id: id })
+    Schools::AssociationMembership.find(:all, opt)
   end
 
   # Memberships at this particular school.
@@ -128,7 +157,10 @@ class School < KicksiteSvcBasicAuth
   # @param options [Hash] Options such as custom params
   # @return [PaginatedCollection] Collection of memberships associated with school
   def memberships(options = {})
-    Schools::Membership.find(:all, options.deep_merge(params: { school_id: id }))
+    opt = options.dup
+    opt = opt.keys.count == 1 && opt.keys?('params') ? opt : { params: opt }
+    opt = opt.deep_merge(params: { school_id: id })
+    Schools::Membership.find(:all, opt)
   end
 
   # Details such as delinquency of the school, etc.

@@ -34,13 +34,17 @@ module Schools
     end
 
     def phone_numbers(options = {})
-      params = { school_id: prefix_options[:school_id], person_id: id }
-      Schools::People::PhoneNumber.find(:all, options.deep_merge(params: params))
+      opt = options.dup
+      opt = opt.keys.count == 1 && opt.keys?('params') ? opt : { params: opt }
+      opt = opt.deep_merge(params: { school_id: prefix_options[:school_id], person_id: id })
+      Schools::People::PhoneNumber.find(:all, opt)
     end
 
     def email_addresses(options = {})
-      params = { school_id: prefix_options[:school_id], person_id: id }
-      Schools::People::EmailAddress.find(:all, options.deep_merge(params: params))
+      opt = options.dup
+      opt = opt.keys.count == 1 && opt.keys?('params') ? opt : { params: opt }
+      opt = opt.deep_merge(params: { school_id: prefix_options[:school_id], person_id: id })
+      Schools::People::EmailAddress.find(:all, opt)
     end
 
     # School person is associated with.
