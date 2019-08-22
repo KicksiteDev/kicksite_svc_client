@@ -7,8 +7,10 @@ class NoSvcObject
   ].freeze
 
   def initialize(payload = {}, _persisted = false)
-    BASE_DATETIME_KEYS.each do |key|
-      payload[key] = to_datetime(payload[key]) if payload[key].present?
+    if persisted
+      BASE_DATETIME_KEYS.each do |key|
+        payload[key] = to_datetime(payload[key]) if payload[key].present?
+      end
     end
 
     payload.each do |key, value|

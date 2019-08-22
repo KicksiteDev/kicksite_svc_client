@@ -19,8 +19,10 @@ module Schools
       START_AT_SORT_BY = 'start_at'.freeze
 
       def initialize(attributes = {}, persisted = false)
-        APPOINTMENT_DATETIME_KEYS.each do |key|
-          attributes[key] = to_datetime(attributes[key])
+        if persisted
+          APPOINTMENT_DATETIME_KEYS.each do |key|
+            attributes[key] = to_datetime(attributes[key])
+          end
         end
 
         super(attributes, persisted)

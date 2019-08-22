@@ -21,8 +21,10 @@ module Schools
     ].freeze
 
     def initialize(attributes = {}, persisted = false)
-      PERSON_DATETIME_KEYS.each do |key|
-        attributes[key] = to_datetime(attributes[key])
+      if persisted
+        PERSON_DATETIME_KEYS.each do |key|
+          attributes[key] = to_datetime(attributes[key])
+        end
       end
 
       super(attributes, persisted)

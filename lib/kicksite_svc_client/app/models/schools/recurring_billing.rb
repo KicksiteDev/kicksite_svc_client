@@ -22,8 +22,10 @@ module Schools
     PAID_THROUGH_SORT_BY = 'paid_through'.freeze
 
     def initialize(attributes = {}, persisted = false)
-      RECURRING_BILLING_DATETIME_KEYS.each do |key|
-        attributes[key] = to_datetime(attributes[key])
+      if persisted
+        RECURRING_BILLING_DATETIME_KEYS.each do |key|
+          attributes[key] = to_datetime(attributes[key])
+        end
       end
 
       super(attributes, persisted)
