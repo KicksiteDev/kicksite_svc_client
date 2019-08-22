@@ -97,13 +97,17 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
     Schools::Employee.find(:all, opt)
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/PerceivedComplexity
+
   # Prospects at this particular school.
   #
   # @param options [Hash] Options such as custom params
   # @return [PaginatedCollection] Collection of prospects associated with school
   # OR
   # @return CSV string of prospects associated with school (used with exporting of Prospect data)
-  def prospects(options = {}) # rubocop:disable Metrics/AbcSize
+  def prospects(options = {})
     opt = options.dup
     opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
     if opt[:params].present? && opt[:params][:format].present? && opt[:params][:format].casecmp?('csv')
@@ -113,6 +117,10 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
       Schools::Prospect.find(:all, opt)
     end
   end
+
+  # rubocop:enable Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/PerceivedComplexity
 
   # People at this particular school.
   #
