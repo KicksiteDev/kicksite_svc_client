@@ -35,7 +35,7 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
   # @return [School::Logo] Logo details, including url, if present - nil otherwise
   def logo
     payload = get(:logo)
-    School::Logo.new(payload) if payload.present?
+    School::Logo.new(payload, true) if payload.present?
   end
 
   # School's merchant account for billing related tasks
@@ -43,7 +43,7 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
   # @return [MerchantAccount] Merchant account details if present - nil otherwise
   def merchant_account
     payload = get(:merchant_account)
-    MerchantAccount.new(payload) if payload.present?
+    MerchantAccount.new(payload, true) if payload.present?
   end
 
   # Update/Add merchant account to school.
@@ -61,7 +61,7 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
   # @return [PaginatedCollection] Collection of activity records associated with school
   def activity(options = {})
     payload = KicksiteSvcBearerAuth.get("schools/#{id}/activity", options)
-    PaginatedCollection.new(payload.map { |event| Schools::Activity.new(event) })
+    PaginatedCollection.new(payload.map { |event| Schools::Activity.new(event, true) })
   end
 
   # Students at this particular school.
@@ -83,7 +83,7 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
   # @return [School::Statistic] Aggregated data
   def statistic(group, type, options = {})
     payload = KicksiteSvcBearerAuth.get("schools/#{id}/stats/#{type}/#{group}", options)
-    School::Statistic.new(payload) if payload.present?
+    School::Statistic.new(payload, true) if payload.present?
   end
 
   # employees at this particular school.
@@ -130,7 +130,7 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
     opt = opt.deep_merge(query: query)
 
     payload = KicksiteSvcBearerAuth.get("schools/#{id}/search", opt)
-    PaginatedCollection.new(payload.map { |search_result| Schools::SearchResult.new(search_result) })
+    PaginatedCollection.new(payload.map { |search_result| Schools::SearchResult.new(search_result, true) })
   end
 
   def invoices(options = {})
@@ -171,7 +171,7 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
   # @return [School::AccountDetails] Account details for school
   def account_details(options = {})
     payload = get(:account_details, options)
-    School::AccountDetails.new(payload) if payload.present?
+    School::AccountDetails.new(payload, true) if payload.present?
   end
 
   # Any type of configuration at the school level.
@@ -184,10 +184,10 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
     return nil unless payload.present?
 
     if payload.is_a?(Array)
-      items = payload.map { |configuration| School::Configuration.new(configuration) }
+      items = payload.map { |configuration| School::Configuration.new(configuration, true) }
       return SaveableObjects.new(items, "schools/#{id}/configuration/#{key}")
     end
 
-    School::Configuration.new(payload)
+    School::Configuration.new(payload, true)
   end
 end

@@ -58,12 +58,12 @@ module Schools
     # @return [Schools::Prospect::Source] Where source came from
     def source
       payload = get(:source)
-      Schools::Prospect::Source.new(payload) if payload.present?
+      Schools::Prospect::Source.new(payload, true) if payload.present?
     end
 
     def photo
       payload = KicksiteSvcBearerAuth.get("schools/#{prefix_options[:school_id]}/people/#{id}/photo")
-      Person::Photo.new(payload) if payload.present?
+      Person::Photo.new(payload, true) if payload.present?
     end
   end
 end

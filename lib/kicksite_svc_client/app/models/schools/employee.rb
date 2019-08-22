@@ -13,7 +13,7 @@ module Schools
 
     def photo
       payload = KicksiteSvcBearerAuth.get("schools/#{prefix_options[:school_id]}/people/#{id}/photo")
-      Person::Photo.new(payload) if payload.present?
+      Person::Photo.new(payload, true) if payload.present?
     end
   end
 end

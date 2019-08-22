@@ -32,7 +32,7 @@ module Schools
 
     def photo
       payload = get(:photo)
-      Person::Photo.new(payload) if payload.present?
+      Person::Photo.new(payload, true) if payload.present?
     end
 
     def phone_numbers(options = {})
