@@ -20,8 +20,10 @@ module Schools
       DUE_AT_SORT_BY = 'due_at'.freeze
 
       def initialize(attributes = {}, persisted = false)
-        TASK_DATETIME_KEYS.each do |key|
-          attributes[key] = to_datetime(attributes[key])
+        if persisted
+          TASK_DATETIME_KEYS.each do |key|
+            attributes[key] = to_datetime(attributes[key])
+          end
         end
 
         super(attributes, persisted)

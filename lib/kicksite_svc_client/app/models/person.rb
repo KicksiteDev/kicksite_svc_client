@@ -7,6 +7,6 @@ class Person < KicksiteSvcBasicAuth
 
   def photo
     payload = get(:photo)
-    Person::Photo.new(payload) if payload.present?
+    Person::Photo.new(payload, true) if payload.present?
   end
 end

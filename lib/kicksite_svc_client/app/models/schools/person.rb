@@ -21,8 +21,10 @@ module Schools
     ].freeze
 
     def initialize(attributes = {}, persisted = false)
-      PERSON_DATETIME_KEYS.each do |key|
-        attributes[key] = to_datetime(attributes[key])
+      if persisted
+        PERSON_DATETIME_KEYS.each do |key|
+          attributes[key] = to_datetime(attributes[key])
+        end
       end
 
       super(attributes, persisted)
@@ -30,17 +32,21 @@ module Schools
 
     def photo
       payload = get(:photo)
-      Person::Photo.new(payload) if payload.present?
+      Person::Photo.new(payload, true) if payload.present?
     end
 
     def phone_numbers(options = {})
-      params = { school_id: prefix_options[:school_id], person_id: id }
-      Schools::People::PhoneNumber.find(:all, options.deep_merge(params: params))
+      opt = options.dup
+      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = opt.deep_merge(params: { school_id: prefix_options[:school_id], person_id: id })
+      Schools::People::PhoneNumber.find(:all, opt)
     end
 
     def email_addresses(options = {})
-      params = { school_id: prefix_options[:school_id], person_id: id }
-      Schools::People::EmailAddress.find(:all, options.deep_merge(params: params))
+      opt = options.dup
+      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = opt.deep_merge(params: { school_id: prefix_options[:school_id], person_id: id })
+      Schools::People::EmailAddress.find(:all, opt)
     end
 
     # School person is associated with.

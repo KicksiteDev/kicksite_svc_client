@@ -21,8 +21,10 @@ module Schools
     DATE_SORT_BY = 'date'.freeze
 
     def initialize(attributes = {}, persisted = false)
-      INVOICE_DATETIME_KEYS.each do |key|
-        attributes[key] = to_datetime(attributes[key])
+      if persisted
+        INVOICE_DATETIME_KEYS.each do |key|
+          attributes[key] = to_datetime(attributes[key])
+        end
       end
 
       super(attributes, persisted)
