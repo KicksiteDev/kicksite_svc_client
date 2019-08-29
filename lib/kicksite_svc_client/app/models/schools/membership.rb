@@ -26,18 +26,19 @@ module Schools
       super(attributes, persisted)
     end
 
-    # School membership is associated with.
-    #
-    # @return [School] School membership is associated with
-    def school
-      School.find(prefix_options[:school_id])
+    def automations(options = {})
+      return attributes['automations'] if options == {} && attributes.key?('automations')
+
+      automations!(options)
     end
 
-    def automations(options = {})
+    def automations!(options = {})
       opt = options.dup
       opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
       opt = opt.deep_merge(params: { membership_id: id })
-      Schools::Memberships::Automation.find(:all, opt)
+      attributes['automations'] = Schools::Memberships::Automation.find(:all, opt)
+
+      attributes['automations']
     end
   end
 end

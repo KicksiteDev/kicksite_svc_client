@@ -9,10 +9,18 @@ module Schools
     # @param options [Hash] Options such as custom params
     # @return [PaginatedCollection] Collection of profit items associated with bizbuilder form
     def profit_items(options = {})
+      return attributes['profit_items'] if options == {} && attributes.key?('profit_items')
+
+      profit_items!(options)
+    end
+
+    def profit_items!(options = {})
       opt = options.dup
       opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
       opt = opt.deep_merge(params: { bizbuilder_form_id: id })
-      Schools::BizbuilderForms::ProfitItem.find(:all, opt)
+      attributes['profit_items'] = Schools::BizbuilderForms::ProfitItem.find(:all, opt)
+
+      attributes['profit_items']
     end
   end
 end

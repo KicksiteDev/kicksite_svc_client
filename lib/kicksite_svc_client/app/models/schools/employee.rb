@@ -8,9 +8,15 @@ module Schools
 
     CREATED_AT_SORT_BY = 'created_at'.freeze
 
-    def photo
+    def photo!
       payload = KicksiteSvcBearerAuth.get("schools/#{prefix_options[:school_id]}/people/#{id}/photo")
-      Person::Photo.new(payload, true) if payload.present?
+      attributes['photo'] = if payload.present?
+                              Person::Photo.new(payload, true)
+                            else
+                              nil
+                            end
+
+      attributes['photo']
     end
   end
 end
