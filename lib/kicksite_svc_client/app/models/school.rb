@@ -51,11 +51,7 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
 
   def merchant_account!
     payload = get(:merchant_account)
-    attributes['merchant_account'] = if payload.present?
-                                       MerchantAccount.new(payload, true)
-                                     else
-                                       nil
-                                     end
+    attributes['merchant_account'] = payload.present? ? MerchantAccount.new(payload, true) : nil
 
     attributes['merchant_account']
   end
@@ -255,11 +251,7 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
 
   def account_details!(options = {})
     payload = get(:account_details, options)
-    attributes['account_details'] = if payload.present?
-                                      School::AccountDetails.new(payload, true)
-                                    else
-                                      nil
-                                    end
+    attributes['account_details'] = payload.present? ? School::AccountDetails.new(payload, true) : nil
 
     attributes['account_details']
   end

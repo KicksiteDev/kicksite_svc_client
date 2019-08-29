@@ -110,22 +110,14 @@ module Schools
 
     def source!
       payload = get(:source)
-      attributes['source'] = if payload.present?
-                               Schools::Prospect::Source.new(payload, true)
-                             else
-                               nil
-                             end
+      attributes['source'] = payload.present? ? Schools::Prospect::Source.new(payload, true) : nil
 
       attributes['source']
     end
 
     def photo!
       payload = KicksiteSvcBearerAuth.get("schools/#{prefix_options[:school_id]}/people/#{id}/photo")
-      attributes['photo'] = if payload.present?
-                              Person::Photo.new(payload, true)
-                            else
-                              nil
-                            end
+      attributes['photo'] = payload.present? ? Person::Photo.new(payload, true) : nil
 
       attributes['photo']
     end

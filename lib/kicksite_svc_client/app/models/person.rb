@@ -10,11 +10,7 @@ class Person < KicksiteSvcBasicAuth
 
   def photo!
     payload = get(:photo)
-    attributes['photo'] = if payload.present?
-                            Person::Photo.new(payload, true)
-                          else
-                            nil
-                          end
+    attributes['photo'] = payload.present? ? Person::Photo.new(payload, true) : nil
 
     attributes['photo']
   end
