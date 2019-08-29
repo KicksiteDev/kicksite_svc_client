@@ -1,5 +1,3 @@
-require_relative 'kicksite_svc_bearer_auth'
-
 module ActiveResource
   module Formats
     # defines a CSV Format that can be used with ActiveResource

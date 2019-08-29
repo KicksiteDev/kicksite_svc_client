@@ -1,6 +1,3 @@
-require_relative '../../../helpers/kicksite_svc_bearer_auth'
-require_relative '../../../helpers/paginated_collection'
-
 module Schools
   module Invoices
     # REST resources specific to Line Items associated with given invoice

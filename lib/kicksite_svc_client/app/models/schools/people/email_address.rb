@@ -1,5 +1,3 @@
-require_relative '../../../helpers/kicksite_svc_bearer_auth'
-
 module Schools
   module People
     # REST resources specific to email addresses associated with given person

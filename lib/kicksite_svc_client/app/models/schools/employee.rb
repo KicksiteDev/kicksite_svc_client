@@ -1,6 +1,3 @@
-require_relative '../../helpers/paginated_collection'
-require_relative 'person.rb'
-
 module Schools
   # REST resources specific to employees at a given school
   class Employee < Schools::Person

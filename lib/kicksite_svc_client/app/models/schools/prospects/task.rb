@@ -1,6 +1,3 @@
-require_relative '../../../helpers/kicksite_svc_bearer_auth'
-require_relative '../../../helpers/paginated_collection'
-
 module Schools
   module Prospects
     # REST resources specific to Tasks associated with given prospect
