@@ -1,5 +1,3 @@
-require_relative '../../helpers/no_svc_object'
-
 module Schools
   # REST resources specific to activity at a given school
   class Activity < NoSvcObject

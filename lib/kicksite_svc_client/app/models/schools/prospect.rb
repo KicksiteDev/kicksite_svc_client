@@ -1,7 +1,3 @@
-require_relative '../../helpers/paginated_collection'
-require_relative '../../helpers/no_svc_object'
-require_relative 'person.rb'
-
 module Schools
   # REST resources specific to Prospects at a given school
   class Prospect < Schools::Person
@@ -32,10 +28,18 @@ module Schools
     # @param options [Hash] Options such as custom params
     # @return [PaginatedCollection] Collection of appointments associated with prospect
     def appointments(options = {})
+      return attributes['appointments'] if options == {} && attributes.key?('appointments')
+
+      appointments!(options)
+    end
+
+    def appointments!(options = {})
       opt = options.dup
       opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
       opt = opt.deep_merge(params: { prospect_id: id })
-      Schools::Prospects::Appointment.find(:all, opt)
+      attributes['appointments'] = Schools::Prospects::Appointment.find(:all, opt)
+
+      attributes['appointments']
     end
 
     # Tasks associated with prospect.
@@ -43,10 +47,37 @@ module Schools
     # @param options [Hash] Options such as custom params
     # @return [PaginatedCollection] Collection of tasks associated with prospect
     def tasks(options = {})
+      return attributes['tasks'] if options == {} && attributes.key?('tasks')
+
+      tasks!(options)
+    end
+
+    def tasks!(options = {})
       opt = options.dup
       opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
       opt = opt.deep_merge(params: { prospect_id: id })
-      Schools::Prospects::Task.find(:all, opt)
+      attributes['tasks'] = Schools::Prospects::Task.find(:all, opt)
+
+      attributes['tasks']
+    end
+
+    # Memberships associated with prospect.
+    #
+    # @param options [Hash] Options such as custom params
+    # @return [PaginatedCollection] Collection of memberships associated with prospect
+    def memberships(options = {})
+      return attributes['memberships'] if options == {} && attributes.key?('memberships')
+
+      memberships!(options)
+    end
+
+    def memberships!(options = {})
+      opt = options.dup
+      opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+      opt = opt.deep_merge(params: { prospect_id: id })
+      attributes['memberships'] = Schools::Prospects::Membership.find(:all, opt)
+
+      attributes['memberships']
     end
 
     # Attendances associated with prospect.
@@ -54,23 +85,41 @@ module Schools
     # @param options [Hash] Options such as custom params
     # @return [PaginatedCollection] Collection of attendances associated with prospect
     def attendances(options = {})
+      return attributes['attendances'] if options == {} && attributes.key?('attendances')
+
+      attendances!(options)
+    end
+
+    def attendances!(options = {})
       opt = options.dup
       opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
       opt = opt.deep_merge(params: { prospect_id: id })
-      Schools::Prospects::Attendance.find(:all, opt)
+      attributes['attendances'] = Schools::Prospects::Attendance.find(:all, opt)
+
+      attributes['attendances']
     end
 
     # Method with which prospect entered the system.
     #
     # @return [Schools::Prospect::Source] Where source came from
     def source
-      payload = get(:source)
-      Schools::Prospect::Source.new(payload, true) if payload.present?
+      return attributes['source'] if attributes.key?('source')
+
+      source!
     end
 
-    def photo
+    def source!
+      payload = get(:source)
+      attributes['source'] = payload.present? ? Schools::Prospect::Source.new(payload, true) : nil
+
+      attributes['source']
+    end
+
+    def photo!
       payload = KicksiteSvcBearerAuth.get("schools/#{prefix_options[:school_id]}/people/#{id}/photo")
-      Person::Photo.new(payload, true) if payload.present?
+      attributes['photo'] = payload.present? ? Person::Photo.new(payload, true) : nil
+
+      attributes['photo']
     end
   end
 end

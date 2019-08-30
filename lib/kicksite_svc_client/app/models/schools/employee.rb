@@ -1,6 +1,3 @@
-require_relative '../../helpers/paginated_collection'
-require_relative 'person.rb'
-
 module Schools
   # REST resources specific to employees at a given school
   class Employee < Schools::Person
@@ -11,9 +8,11 @@ module Schools
 
     CREATED_AT_SORT_BY = 'created_at'.freeze
 
-    def photo
+    def photo!
       payload = KicksiteSvcBearerAuth.get("schools/#{prefix_options[:school_id]}/people/#{id}/photo")
-      Person::Photo.new(payload, true) if payload.present?
+      attributes['photo'] = payload.present? ? Person::Photo.new(payload, true) : nil
+
+      attributes['photo']
     end
   end
 end

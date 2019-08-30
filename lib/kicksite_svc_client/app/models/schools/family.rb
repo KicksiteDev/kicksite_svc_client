@@ -1,6 +1,3 @@
-require_relative '../../helpers/kicksite_svc_bearer_auth'
-require_relative '../../helpers/paginated_collection'
-
 module Schools
   # REST resources specific to Families at a given school
   class Family < KicksiteSvcBearerAuth
@@ -8,10 +5,18 @@ module Schools
     self.collection_parser = PaginatedCollection
 
     def automations(options = {})
+      return attributes['automations'] if options == {} && attributes.key?('automations')
+
+      automations!(options)
+    end
+
+    def automations!(options = {})
       opt = options.dup
       opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
       opt = opt.deep_merge(params: { family_id: id })
-      Schools::Families::Automation.find(:all, opt)
+      attributes['automations'] = Schools::Families::Automation.find(:all, opt)
+
+      attributes['automations']
     end
   end
 end

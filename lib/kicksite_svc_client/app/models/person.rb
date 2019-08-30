@@ -1,12 +1,17 @@
-require_relative '../helpers/kicksite_svc_basic_auth'
-require_relative '../helpers/no_svc_object'
-
 # REST resources specific to People
 class Person < KicksiteSvcBasicAuth
   class Photo < NoSvcObject; end
 
   def photo
+    return attributes['photo'] if attributes.key?('photo')
+
+    photo!
+  end
+
+  def photo!
     payload = get(:photo)
-    Person::Photo.new(payload, true) if payload.present?
+    attributes['photo'] = payload.present? ? Person::Photo.new(payload, true) : nil
+
+    attributes['photo']
   end
 end

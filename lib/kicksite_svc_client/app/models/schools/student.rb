@@ -1,6 +1,3 @@
-require_relative '../../helpers/paginated_collection'
-require_relative 'person.rb'
-
 module Schools
   # REST resources specific to Students at a given school
   class Student < Schools::Person
@@ -19,16 +16,26 @@ module Schools
     BIRTHDATE_SORT_BY = 'birthdate'.freeze
     NEXT_BIRTHDAY_SORT_BY = 'next_birthday'.freeze
 
-    def photo
+    def photo!
       payload = KicksiteSvcBearerAuth.get("schools/#{prefix_options[:school_id]}/people/#{id}/photo")
-      Person::Photo.new(payload, true) if payload.present?
+      attributes['photo'] = payload.present? ? Person::Photo.new(payload, true) : nil
+
+      attributes['photo']
     end
 
     def automations(options = {})
+      return attributes['automations'] if options == {} && attributes.key?('automations')
+
+      automations!(options)
+    end
+
+    def automations!(options = {})
       opt = options.dup
       opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
       opt = opt.deep_merge(params: { student_id: id })
-      Schools::Students::Automation.find(:all, opt)
+      attributes['automations'] = Schools::Students::Automation.find(:all, opt)
+
+      attributes['automations']
     end
   end
 end

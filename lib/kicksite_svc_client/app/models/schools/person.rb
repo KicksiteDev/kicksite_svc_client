@@ -1,7 +1,3 @@
-require_relative '../../helpers/kicksite_svc_bearer_auth'
-require_relative '../../helpers/no_svc_object'
-require_relative '../../helpers/paginated_collection'
-
 module Schools
   # REST resources specific to People at a given school
   class Person < KicksiteSvcBearerAuth
@@ -31,29 +27,46 @@ module Schools
     end
 
     def photo
+      return attributes['photo'] if attributes.key?('photo')
+
+      photo!
+    end
+
+    def photo!
       payload = get(:photo)
-      Person::Photo.new(payload, true) if payload.present?
+      attributes['photo'] = payload.present? ? Person::Photo.new(payload, true) : nil
+
+      attributes['photo']
     end
 
     def phone_numbers(options = {})
+      return attributes['phone_numbers'] if options == {} && attributes.key?('phone_numbers')
+
+      phone_numbers!(options)
+    end
+
+    def phone_numbers!(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
       opt = opt.deep_merge(params: { school_id: prefix_options[:school_id], person_id: id })
-      Schools::People::PhoneNumber.find(:all, opt)
+      attributes['phone_numbers'] = Schools::People::PhoneNumber.find(:all, opt)
+
+      attributes['phone_numbers']
     end
 
     def email_addresses(options = {})
+      return attributes['email_addresses'] if options == {} && attributes.key?('email_addresses')
+
+      email_addresses!(options)
+    end
+
+    def email_addresses!(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
       opt = opt.deep_merge(params: { school_id: prefix_options[:school_id], person_id: id })
-      Schools::People::EmailAddress.find(:all, opt)
-    end
+      attributes['email_addresses'] = Schools::People::EmailAddress.find(:all, opt)
 
-    # School person is associated with.
-    #
-    # @return [School] School person is associated with
-    def school
-      School.find(prefix_options[:school_id])
+      attributes['email_addresses']
     end
   end
 end

@@ -1,6 +1,3 @@
-require_relative '../../helpers/kicksite_svc_bearer_auth'
-require_relative '../../helpers/paginated_collection'
-
 module Schools
   # REST resources specific to Invoices at a given school
   class Invoice < KicksiteSvcBearerAuth
@@ -31,10 +28,18 @@ module Schools
     end
 
     def line_items(options = {})
+      return attributes['line_items'] if options == {} && attributes.key?('line_items')
+
+      line_items!(options)
+    end
+
+    def line_items!(options = {})
       opt = options.dup
       opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
       opt = opt.deep_merge(params: { invoice_id: id })
-      Schools::Invoices::LineItem.find(:all, opt)
+      attributes['line_items'] = Schools::Invoices::LineItem.find(:all, opt)
+
+      attributes['line_items']
     end
   end
 end
