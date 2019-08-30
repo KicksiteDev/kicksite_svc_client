@@ -18,6 +18,7 @@ Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/schools/prospects/
   .each { |file| require file }
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/schools/students/**/*.rb"]
   .each { |file| require file }
+require 'kicksite_svc_client/app/models/schools/membership.rb'
 require 'kicksite_svc_client/app/models/schools/person.rb'
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/schools/**/*.rb"].each { |file| require file }
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/**/*.rb"].each { |file| require file }
