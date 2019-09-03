@@ -35,7 +35,7 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
 
   def logo!
     payload = get(:logo)
-    attributes['logo'] = School::Logo.new(payload, true)
+    attributes['logo'] = payload.present? ? School::Logo.new(payload, true) : nil
 
     attributes['logo']
   end
