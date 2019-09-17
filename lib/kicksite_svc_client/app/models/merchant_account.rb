@@ -1,6 +1,7 @@
 # Represents a School's MerchantAccount
 class MerchantAccount < NoSvcObject
   USA_EPAY_TYPE = 'UsaEpayMA'.freeze
+  BASYS_TYPE = 'BasysMA'.freeze
 
   def save
     begin
