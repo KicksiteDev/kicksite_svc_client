@@ -296,4 +296,8 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
 
     School::Configuration.new(payload, true)
   end
+
+  def address
+    KicksiteSvcBearerAuth.get("schools/#{id}/address")
+  end
 end
