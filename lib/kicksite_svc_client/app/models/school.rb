@@ -4,6 +4,7 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
   class Statistic < NoSvcObject; end
   class AccountDetails < NoSvcObject; end
   class Configuration < NoSvcObject; end
+  class Address < NoSvcObject; end
 
   SCHOOL_DATETIME_KEYS = %w[
     subscription_plan_status_date
@@ -298,6 +299,15 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
   end
 
   def address
-    KicksiteSvcBearerAuth.get("schools/#{id}/address")
+    return attributes['address'] if attributes.key?('address')
+
+    address!
+  end
+
+  def address!
+    payload = KicksiteSvcBearerAuth.get("schools/#{id}/address")
+    attributes['address'] = payload.present? ? School::Address.new(payload, true) : nil
+
+    attributes['address']
   end
 end
