@@ -5,6 +5,8 @@ module Schools
       self.prefix = '/v1/schools/:school_id/prospects/:prospect_id/'
       self.collection_parser = PaginatedCollection
 
+      class Aggregation < NoSvcObject; end
+
       TASK_DATETIME_KEYS = %w[
         due_at
       ].freeze
@@ -24,6 +26,14 @@ module Schools
         end
 
         super(attributes, persisted)
+      end
+
+      def self.aggregation(type, options = {})
+        opt = options.dup
+        opt = opt.deep_merge(subject_type: 'Prospect')
+
+        payload = KicksiteSvcBearerAuth.get("schools/#{opt[:school_id]}/task/aggregations/#{type}", opt)
+        payload.map { |item| Schools::Prospects::Task::Aggregation.new(item, true) }
       end
     end
   end

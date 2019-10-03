@@ -121,5 +121,19 @@ module Schools
 
       attributes['photo']
     end
+
+    def self.tasks(options = {})
+      opt = options.dup
+      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+
+      Schools::Task.find(:all, opt)
+    end
+
+    def self.appointments(options = {})
+      opt = options.dup
+      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+
+      Schools::Appointment.find(:all, opt)
+    end
   end
 end
