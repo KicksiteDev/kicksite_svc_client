@@ -125,6 +125,7 @@ module Schools
     def self.tasks(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = opt.deep_merge(params: { subject_type: 'Prospect' })
 
       Schools::Task.find(:all, opt)
     end
@@ -132,6 +133,7 @@ module Schools
     def self.appointments(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = opt.deep_merge(params: { subject_type: 'Prospect' })
 
       Schools::Appointment.find(:all, opt)
     end
