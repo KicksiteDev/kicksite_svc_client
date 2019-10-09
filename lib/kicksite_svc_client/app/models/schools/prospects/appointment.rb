@@ -5,6 +5,8 @@ module Schools
       self.prefix = '/v1/schools/:school_id/prospects/:prospect_id/'
       self.collection_parser = PaginatedCollection
 
+      class Aggregation < NoSvcObject; end
+
       APPOINTMENT_DATETIME_KEYS = %w[
         start_at
         end_at
@@ -25,6 +27,14 @@ module Schools
         end
 
         super(attributes, persisted)
+      end
+
+      def self.aggregation(type, options = {})
+        opt = options.dup
+        opt = opt.deep_merge(subject_type: 'Prospect')
+
+        payload = KicksiteSvcBearerAuth.get("schools/#{opt[:school_id]}/appointment/aggregations/#{type}", opt)
+        payload.map { |item| Schools::Prospects::Appointment::Aggregation.new(item, true) }
       end
     end
   end
