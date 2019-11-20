@@ -10,6 +10,10 @@ module Schools
       def submit(payload)
         post(:submissions, payload: payload)
       end
+
+      def submissions
+        get(:submissions)
+      end
     end
   end
 end
