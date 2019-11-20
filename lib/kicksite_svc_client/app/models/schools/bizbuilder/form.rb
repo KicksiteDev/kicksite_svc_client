@@ -6,6 +6,10 @@ module Schools
 
       ARCHIVED_FILTER = 'archived'.freeze
       ACTIVE_FILTER = 'active'.freeze
+
+      def submit(payload)
+        post(:submissions, payload: payload)
+      end
     end
   end
 end
