@@ -7,6 +7,8 @@ class NoSvcObject
   ].freeze
 
   def initialize(payload = {}, persisted = false)
+    @persisted = persisted
+    
     if persisted
       BASE_DATETIME_KEYS.each do |key|
         payload[key] = to_datetime(payload[key]) if payload[key].present?
