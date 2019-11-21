@@ -1,9 +1,11 @@
 module Schools
   module Bizbuilder
+    # A lead capture form thing
     class Form < KicksiteSvcBearerAuth
       self.prefix = '/v1/schools/:school_id/bizbuilder/'
       self.collection_parser = PaginatedCollection
 
+      # One of the field options for a lead capture form
       class FieldOption < NoSvcObject
         def save
           save!
@@ -17,7 +19,11 @@ module Schools
           raise "Invalid context: #{context_type}" unless context_type == 'School'
 
           url = "schools/#{context_id}/bizbuilder/forms/fields"
-          @persisted ? KicksiteSvcBearerAuth.put(url, nil, self.to_hash.to_json) : KicksiteSvcBearerAuth.post(url, nil, self.to_hash.to_json)
+          if @persisted
+            KicksiteSvcBearerAuth.put(url, nil, to_hash.to_json)
+          else
+            KicksiteSvcBearerAuth.post(url, nil, to_hash.to_json)
+          end
         end
       end
 

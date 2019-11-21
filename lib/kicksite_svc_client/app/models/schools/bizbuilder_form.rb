@@ -5,7 +5,7 @@ module Schools
     self.collection_parser = PaginatedCollection
 
     def find(*arguments)
-      warn "[DEPRECATION] `BizbuilderForm` is deprecated. New structure coming soon."
+      warn '[DEPRECATION] `BizbuilderForm.profit_items!` is deprecated. New structure coming soon.'
 
       super(arguments)
     end
@@ -21,7 +21,7 @@ module Schools
     end
 
     def profit_items!(options = {})
-      warn "[DEPRECATION] `BizbuilderForm.profit_items!` is deprecated. New structure coming soon."
+      warn '[DEPRECATION] `BizbuilderForm.profit_items!` is deprecated. New structure coming soon.'
 
       opt = options.dup
       opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
