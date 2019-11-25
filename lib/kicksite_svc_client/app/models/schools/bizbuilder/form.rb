@@ -19,11 +19,7 @@ module Schools
           raise "Invalid context: #{context_type}" unless context_type == 'School'
 
           url = "schools/#{context_id}/bizbuilder/forms/fields"
-          if @persisted
-            KicksiteSvcBearerAuth.put(url, nil, to_hash.to_json)
-          else
-            KicksiteSvcBearerAuth.post(url, nil, to_hash.to_json)
-          end
+          KicksiteSvcBearerAuth.post(url, nil, to_hash.to_json)
         end
       end
 
