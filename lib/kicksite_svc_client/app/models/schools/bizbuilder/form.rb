@@ -36,7 +36,7 @@ module Schools
         post(:submissions, payload: payload)
       end
 
-      def submissions(options)
+      def submissions(options = {})
         payload = get(:submissions, options)
         PaginatedCollection.new(payload.map do |submission|
           Schools::Bizbuilder::Form::Submission.new(submission, true)
