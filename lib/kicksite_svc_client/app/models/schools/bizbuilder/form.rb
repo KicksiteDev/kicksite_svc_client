@@ -27,6 +27,8 @@ module Schools
         end
       end
 
+      class Submission < NoSvcObject; end
+
       ARCHIVED_FILTER = 'archived'.freeze
       ACTIVE_FILTER = 'active'.freeze
 
@@ -34,8 +36,11 @@ module Schools
         post(:submissions, payload: payload)
       end
 
-      def submissions
-        get(:submissions)
+      def submissions(options)
+        payload = get(:submissions, options)
+        PaginatedCollection.new(payload.map do |submission|
+          Schools::Bizbuilder::Form::Submission.new(submission, true)
+        end)
       end
 
       def self.field_options(options)
