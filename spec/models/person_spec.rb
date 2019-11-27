@@ -1,5 +1,5 @@
 RSpec.describe Person do
-  let(:person_id) { 2 }
+  let(:person_id) { 10678 }
 
   it 'successfully returns a person' do
     person = Person.find(person_id)
