@@ -1,5 +1,5 @@
-RSpec.describe School do
-  let(:person_id) { 1 }
+RSpec.describe Person do
+  let(:person_id) { 2 }
 
   it 'successfully returns a person' do
     person = Person.find(person_id)
