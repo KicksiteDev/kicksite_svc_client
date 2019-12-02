@@ -5,7 +5,7 @@ module Schools
     self.collection_parser = PaginatedCollection
 
     def find(*arguments)
-      warn '[DEPRECATION] `BizbuilderForm.profit_items!` is deprecated. New structure coming soon.'
+      warn '[DEPRECATION] `BizbuilderForm.find` is deprecated. New structure coming soon.'
 
       super(arguments)
     end
