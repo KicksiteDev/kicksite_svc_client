@@ -4,6 +4,12 @@ module Schools
     self.prefix = '/v1/schools/:school_id/'
     self.collection_parser = PaginatedCollection
 
+    def find(*arguments)
+      warn '[DEPRECATION] `BizbuilderForm.find` is deprecated. New structure coming soon.'
+
+      super(arguments)
+    end
+
     # Profit items associated with bizbuilder.
     #
     # @param options [Hash] Options such as custom params
@@ -15,6 +21,8 @@ module Schools
     end
 
     def profit_items!(options = {})
+      warn '[DEPRECATION] `BizbuilderForm.profit_items!` is deprecated. New structure coming soon.'
+
       opt = options.dup
       opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
       opt = opt.deep_merge(params: { bizbuilder_form_id: id })
