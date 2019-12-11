@@ -5,6 +5,10 @@ module Schools
       self.prefix = '/v1/schools/:school_id/bizbuilder/'
       self.collection_parser = PaginatedCollection
 
+      NAME_SORT_BY        = 'name'.freeze
+      CREATED_AT_SORT_BY  = 'created_at'.freeze
+      SUBMISSIONS_SORT_BY = 'submissions'.freeze
+
       # One of the field options for a lead capture form
       class FieldOption < NoSvcObject
         def save
