@@ -27,6 +27,7 @@ module Schools
 
       ARCHIVED_FILTER = 'archived'.freeze
       ACTIVE_FILTER = 'active'.freeze
+      CREATED_AT_SORT_BY = 'created_at'.freeze
 
       def submit(payload)
         post(:submissions, payload: payload)
