@@ -323,6 +323,10 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
     lead_capture_forms!(options)
   end
 
+  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/PerceivedComplexity
+
   def lead_capture_forms!(options = {})
     opt = options.dup
     opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
@@ -335,4 +339,8 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
       attributes['lead_capture_forms']
     end
   end
+
+  # rubocop:enable Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/PerceivedComplexity
 end
