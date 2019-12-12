@@ -310,4 +310,29 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
 
     attributes['address']
   end
+
+  # Lead capture forms at this particular school.
+  #
+  # @param options [Hash] Options such as custom params
+  # @return [PaginatedCollection] Collection of lead capture forms owned by school
+  # OR
+  # @return CSV string of lead capture form descriptions
+  def lead_capture_forms(options = {})
+    return attributes['lead_capture_forms'] if options == {} && attributes.key?('lead_capture_forms')
+
+    lead_capture_forms!(options)
+  end
+
+  def lead_capture_forms!(options = {})
+    opt = options.dup
+    opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+    if opt[:params].present? && opt[:params][:format].present? && opt[:params][:format].casecmp?('csv')
+      Csv9000.get("schools/#{id}/bizbuilder/forms", opt[:params])
+    else
+      opt = opt.deep_merge(params: { school_id: id })
+      attributes['lead_capture_forms'] = Schools::Bizbuilder::Form.find(:all, opt)
+
+      attributes['lead_capture_forms']
+    end
+  end
 end
