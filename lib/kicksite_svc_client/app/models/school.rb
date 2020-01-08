@@ -358,4 +358,19 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
 
   #   attributes['message_flows'] = payload
   # end
+
+  def message_flows(options = {})
+    return attributes['message_flows'] if options == {} && attributes.key?('message_flows')
+
+    message_flows!(options)
+  end
+
+  def message_flows!(options = {})
+    opt = options.dup
+    opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+    opt = opt.deep_merge(params: { school_id: id })
+    attributes['message_flows'] = Schools::MessageFlow.find(:all, opt)
+
+    attributes['message_flows']
+  end
 end
