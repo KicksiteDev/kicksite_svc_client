@@ -344,21 +344,6 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/PerceivedComplexity
 
-  # def message_flows(options = {})
-  #   return attributes['message_flows'] if options == {} && attributes.key?('message_flows')
-
-  #   message_flows!(options)
-  # end
-
-  # def message_flows!(options = {})
-  #   opt = options.dup
-  #   opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
-
-  #   payload = KicksiteSvcBearerAuth.get("schools/#{id}/message_flows", options)
-
-  #   attributes['message_flows'] = payload
-  # end
-
   def message_flows(options = {})
     return attributes['message_flows'] if options == {} && attributes.key?('message_flows')
 

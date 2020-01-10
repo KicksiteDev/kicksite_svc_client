@@ -10,9 +10,9 @@ module Schools
     ACTIVE_STATUS = 'active'.freeze
     ARCHIVED_STATUS = 'archived'.freeze
 
-    CREATED_AT_TRIGGER   = 'created_at'.freeze
-    CONVERTED_ON_TRIGGER   = 'converted_on'.freeze
-    ATTENDANCES_TRIGGER   = 'attendances'.freeze
-    BIRTHDAY_TRIGGER   = 'birthday'.freeze
+    CREATED_AT_TRIGGER = 'created_at'.freeze
+    CONVERTED_ON_TRIGGER = 'converted_on'.freeze
+    ATTENDANCES_TRIGGER = 'attendances'.freeze
+    BIRTHDAY_TRIGGER = 'birthday'.freeze
   end
 end
