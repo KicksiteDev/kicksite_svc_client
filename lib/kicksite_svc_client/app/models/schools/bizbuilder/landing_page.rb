@@ -4,19 +4,6 @@ module Schools
     class LandingPage < KicksiteSvcBearerAuth
       self.prefix = '/v1/schools/:school_id/bizbuilder/'
       self.collection_parser = PaginatedCollection
-
-      class Submission < NoSvcObject; end
-
-      def submit(payload)
-        post(:submissions, payload: payload)
-      end
-
-      def submissions(options = {})
-        payload = get(:submissions, options)
-        PaginatedCollection.new(payload.map do |submission|
-          Schools::Bizbuilder::LandingPage::Submission.new(submission, true)
-        end)
-      end
     end
   end
 end
