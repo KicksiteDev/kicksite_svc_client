@@ -38,4 +38,14 @@ module Schools
       attributes['automations']
     end
   end
+
+  def memberships(options = {})
+    opt = options.dup
+    opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+    opt = opt.deep_merge(params: { student_id: id })
+    opt = opt.deep_merge(params: { type: prefix_options[:type] })
+
+    attributes['memberships'] = Schools::Students::Membership.find(:all, opt)
+    attributes['memberships']
+  end
 end
