@@ -25,20 +25,5 @@ module Schools
 
       super(attributes, persisted)
     end
-
-    def automations(options = {})
-      return attributes['automations'] if options == {} && attributes.key?('automations')
-
-      automations!(options)
-    end
-
-    def automations!(options = {})
-      opt = options.dup
-      opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
-      opt = opt.deep_merge(params: { membership_id: id })
-      attributes['automations'] = Schools::Memberships::Automation.find(:all, opt)
-
-      attributes['automations']
-    end
   end
 end
