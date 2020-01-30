@@ -1,6 +1,6 @@
 require 'httparty'
 
-RSpec.describe Schools::AssociationMembership do
+RSpec.describe Schools::Students::Membership do
   let(:school_id) { 119 }
 
   before do
@@ -20,9 +20,8 @@ RSpec.describe Schools::AssociationMembership do
     KicksiteSvcBearerAuth.connection.bearer_token = token
   end
 
-  it 'successfully returns all association memberships for school' do
-    school = School.find(school_id)
-    association_memberships = school.association_memberships
-    expect(association_memberships).to_not be_empty
+  it 'successfully returns all memberships for school' do
+    memberships = Schools::Student.memberships(school_id: school_id)
+    expect(memberships).to_not be_empty
   end
 end
