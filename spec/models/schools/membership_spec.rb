@@ -25,10 +25,4 @@ RSpec.describe Schools::Membership do
     memberships = school.memberships
     expect(memberships).to_not be_empty
   end
-
-  it 'successfully returns specific membership from within school' do
-    school = School.find(school_id)
-    memberships = school.memberships
-    Schools::Membership.find(memberships.first.id, params: { school_id: school_id })
-  end
 end

@@ -202,25 +202,6 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
     attributes['recurring_billings']
   end
 
-  # Association memberships at this particular school if they are part of an association.
-  #
-  # @param options [Hash] Options such as custom params
-  # @return [PaginatedCollection] Collection of association memberships associated with school
-  def association_memberships(options = {})
-    return attributes['association_memberships'] if options == {} && attributes.key?('association_memberships')
-
-    association_memberships!(options)
-  end
-
-  def association_memberships!(options = {})
-    opt = options.dup
-    opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
-    opt = opt.deep_merge(params: { school_id: id })
-    attributes['association_memberships'] = Schools::AssociationMembership.find(:all, opt)
-
-    attributes['association_memberships']
-  end
-
   # Memberships at this particular school.
   #
   # @param options [Hash] Options such as custom params

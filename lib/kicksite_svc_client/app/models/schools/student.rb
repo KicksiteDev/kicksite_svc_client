@@ -37,5 +37,11 @@ module Schools
 
       attributes['automations']
     end
+
+    def self.memberships(options = {})
+      opt = options.dup
+      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      Schools::Students::Membership.find(:all, opt)
+    end
   end
 end
