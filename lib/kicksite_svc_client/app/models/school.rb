@@ -221,6 +221,25 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
     attributes['memberships']
   end
 
+  # Agreement options at this particular school.
+  #
+  # @param options [Hash] Options such as custom params
+  # @return [PaginatedCollection] Collection of agreements associated with school
+  def agreements(options = {})
+    return attributes['agreements'] if options == {} && attributes.key?('agreements')
+
+    agreements!(options)
+  end
+
+  def agreements!(options = {})
+    opt = options.dup
+    opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+    opt = opt.deep_merge(params: { school_id: id })
+    attributes['agreements'] = Schools::Agreement.find(:all, opt)
+
+    attributes['agreements']
+  end
+
   # Details such as delinquency of the school, etc.
   #
   # @param options [Hash] Options such as custom params
