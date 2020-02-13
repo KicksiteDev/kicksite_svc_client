@@ -7,6 +7,10 @@ module Schools
 
       class Submission < NoSvcObject; end
 
+      def submit(payload)
+        post(:submissions, payload: payload)
+      end
+
       def submissions(options = {})
         payload = get(:submissions, options)
         PaginatedCollection.new(payload.map do |submission|
