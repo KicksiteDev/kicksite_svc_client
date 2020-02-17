@@ -8,7 +8,7 @@ module Schools
       class Submission < NoSvcObject; end
 
       def submit(payload)
-        post(:submissions, payload: payload)
+        post(:submissions, nil, { payload: payload}.to_json)
       end
 
       def submissions(options = {})
