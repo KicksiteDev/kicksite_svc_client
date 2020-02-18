@@ -22,7 +22,6 @@ RSpec.describe Schools::Bizbuilder::LandingPage do
   end
 
   it 'successfully returns all landing page submissions for a landing page' do
-    pending('waiting for submissions on kicksite-staging')
     landing_page = Schools::Bizbuilder::LandingPage.find(landing_page_id, params: { school_id: school_id })
     landing_page.submissions(school_id: school_id, landing_page_id: landing_page_id)
   end
