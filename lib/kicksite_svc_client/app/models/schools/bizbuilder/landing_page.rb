@@ -5,10 +5,16 @@ module Schools
       self.prefix = '/v1/schools/:school_id/bizbuilder/'
       self.collection_parser = PaginatedCollection
 
+      NAME_SORT_BY        = 'name'.freeze
+      CREATED_AT_SORT_BY  = 'created_at'.freeze
+      SUBMISSIONS_SORT_BY = 'submissions'.freeze
+      ARCHIVED_FILTER     = 'archived'.freeze
+      ACTIVE_FILTER       = 'active'.freeze
+
       class Submission < NoSvcObject; end
 
       def submit(payload)
-        post(:submissions, nil, { payload: payload}.to_json)
+        post(:submissions, nil, { payload: payload }.to_json)
       end
 
       def submissions(options = {})
