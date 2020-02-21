@@ -2,6 +2,19 @@
 class MerchantAccount < NoSvcObject
   USA_EPAY_TYPE = 'UsaEpayMA'.freeze
   BASYS_TYPE = 'BasysMA'.freeze
+  STRIPE_TYPE = 'StripeMA'.freeze
+
+  def usa_epay?
+    type == USA_EPAY_TYPE
+  end
+
+  def basys?
+    type == BASYS_TYPE
+  end
+
+  def stripe?
+    type == STRIPE_TYPE
+  end
 
   def save
     begin
