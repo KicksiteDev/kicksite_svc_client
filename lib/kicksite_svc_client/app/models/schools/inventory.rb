@@ -4,6 +4,6 @@ module Schools
     self.prefix = '/v1/schools/:school_id/'
     self.collection_name = 'inventory'
     self.collection_parser = PaginatedCollection
-    self.collection_name = 'inventory'
+    self.element_name = 'inventory'
   end
 end
