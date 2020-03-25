@@ -221,6 +221,25 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
     attributes['memberships']
   end
 
+  # Inventory at this particular school.
+  #
+  # @param options [Hash] Options such as custom params
+  # @return [PaginatedCollection] Collection of inventory associated with school
+  def inventory(options = {})
+    return attributes['inventory_items'] if options == {} && attributes.key?('inventory')
+
+    inventory!(options)
+  end
+
+  def inventory!(options = {})
+    opt = options.dup
+    opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+    opt = opt.deep_merge(params: { school_id: id })
+    attributes['inventory'] = Schools::Inventory.find(:all, opt)
+
+    attributes['inventory']
+  end
+
   # Agreement options at this particular school.
   #
   # @param options [Hash] Options such as custom params
