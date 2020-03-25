@@ -365,6 +365,9 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
     landing_pages!(options)
   end
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/PerceivedComplexity
   def landing_pages!(options = {})
     opt = options.dup
     opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
@@ -377,4 +380,7 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
       attributes['landing_pages']
     end
   end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/PerceivedComplexity
 end
