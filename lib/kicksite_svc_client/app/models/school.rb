@@ -377,4 +377,29 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
 
     attributes['message_flows']
   end
+
+  def landing_pages(options = {})
+    return attributes['landing_pages'] if options == {} && attributes.key?('landing_pages')
+
+    landing_pages!(options)
+  end
+
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/PerceivedComplexity
+  def landing_pages!(options = {})
+    opt = options.dup
+    opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+    if opt[:params].present? && opt[:params][:format].present? && opt[:params][:format].casecmp?('csv')
+      Csv9000.get("schools/#{id}/bizbuilder/landing_pages", opt[:params])
+    else
+      opt = opt.deep_merge(params: { school_id: id })
+      attributes['landing_pages'] = Schools::Bizbuilder::LandingPage.find(:all, opt)
+
+      attributes['landing_pages']
+    end
+  end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/PerceivedComplexity
 end
