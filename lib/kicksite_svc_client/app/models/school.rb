@@ -5,6 +5,7 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
   class AccountDetails < NoSvcObject; end
   class Configuration < NoSvcObject; end
   class Address < NoSvcObject; end
+  class PhoneNumber < NoSvcObject; end
 
   SCHOOL_DATETIME_KEYS = %w[
     subscription_plan_status_date
@@ -402,4 +403,21 @@ class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable Metrics/CyclomaticComplexity
   # rubocop:enable Metrics/PerceivedComplexity
+
+  # Phone number for school
+  #
+  # @param options [Hash] Options such as custom params
+  # @return [School::PhoneNumber] Phone number for school
+  def phone_number(options = {})
+    return attributes['phone_number'] if options == {} && attributes.key?('phone_number')
+
+    phone_number!(options)
+  end
+
+  def phone_number!(options = {})
+    payload = get(:phone_number, options)
+    attributes['phone_number'] = payload.present? ? School::PhoneNumber.new(payload, false) : nil
+
+    attributes['phone_number']
+  end
 end
