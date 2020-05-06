@@ -38,10 +38,37 @@ module Schools
       attributes['automations']
     end
 
+    # Appointments associated with student.
+    #
+    # @param options [Hash] Options such as custom params
+    # @return [PaginatedCollection] Collection of appointments associated with student
+    def appointments(options = {})
+      return attributes['appointments'] if options == {} && attributes.key?('appointments')
+
+      appointments!(options)
+    end
+
+    def appointments!(options = {})
+      opt = options.dup
+      opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+      opt = opt.deep_merge(params: { student_id: id })
+      attributes['appointments'] = Schools::Students::Appointment.find(:all, opt)
+
+      attributes['appointments']
+    end
+
     def self.memberships(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
       Schools::Students::Membership.find(:all, opt)
+    end
+
+    def self.appointments(options = {})
+      opt = options.dup
+      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = opt.deep_merge(params: { subject_type: 'Student' })
+
+      Schools::Appointment.find(:all, opt)
     end
   end
 end
