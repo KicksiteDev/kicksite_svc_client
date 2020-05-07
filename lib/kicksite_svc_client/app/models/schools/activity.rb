@@ -9,6 +9,7 @@ module Schools
     MEMBERSHIP_TYPE = 'membership'.freeze
     FAMILY_TYPE = 'family'.freeze
     STUDENT_TYPE = 'student'.freeze
+    PROGRAM_TYPE = 'program'.freeze
 
     CREATE_ACTION = 'create'.freeze
 
