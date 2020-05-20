@@ -23,6 +23,14 @@ module Schools
       attributes['photo']
     end
 
+    def self.tasks(options = {})
+      opt = options.dup
+      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = opt.deep_merge(params: { subject_type: 'Student' })
+
+      Schools::Task.find(:all, opt)
+    end
+
     def automations(options = {})
       return attributes['automations'] if options == {} && attributes.key?('automations')
 
