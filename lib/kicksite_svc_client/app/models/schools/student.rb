@@ -78,4 +78,5 @@ module Schools
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
       Schools::Students::Membership.find(:all, opt)
     end
+  end
 end
