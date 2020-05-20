@@ -78,24 +78,4 @@ module Schools
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
       Schools::Students::Membership.find(:all, opt)
     end
-
-    # Tasks associated with student.
-    #
-    # @param options [Hash] Options such as custom params
-    # @return [PaginatedCollection] Collection of tasks associated with student
-    def tasks(options = {})
-      return attributes['tasks'] if options == {} && attributes.key?('tasks')
-
-      tasks!(options)
-    end
-
-    def tasks!(options = {})
-      opt = options.dup
-      opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
-      opt = opt.deep_merge(params: { student_id: id })
-      attributes['tasks'] = Schools::Students::Task.find(:all, opt)
-
-      attributes['tasks']
-    end
-  end
 end
