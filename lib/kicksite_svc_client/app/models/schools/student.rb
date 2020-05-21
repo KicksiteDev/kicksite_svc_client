@@ -6,7 +6,9 @@ module Schools
 
     NEW_FILTER = 'new'.freeze
     ACTIVE_FILTER = 'active'.freeze
+    ACTIVE_WITHOUT_FROZEN = 'active_without_frozen'.freeze
     LOST_FILTER = 'lost'.freeze
+    INACTIVE_FILTER = 'inactive_filter'.freeze
     FROZEN_FILTER = 'frozen'.freeze
     ABSENT_FILTER = 'absent'.freeze
     HAS_BIRTHDAY_FILTER = 'has_birthday'.freeze
