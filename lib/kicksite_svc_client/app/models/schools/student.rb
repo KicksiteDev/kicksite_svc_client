@@ -25,6 +25,14 @@ module Schools
       attributes['photo']
     end
 
+    def self.tasks(options = {})
+      opt = options.dup
+      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = opt.deep_merge(params: { subject_type: 'Student' })
+
+      Schools::Task.find(:all, opt)
+    end
+
     def automations(options = {})
       return attributes['automations'] if options == {} && attributes.key?('automations')
 
@@ -59,18 +67,18 @@ module Schools
       attributes['appointments']
     end
 
-    def self.memberships(options = {})
-      opt = options.dup
-      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
-      Schools::Students::Membership.find(:all, opt)
-    end
-
     def self.appointments(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
       opt = opt.deep_merge(params: { subject_type: 'Student' })
 
       Schools::Appointment.find(:all, opt)
+    end
+
+    def self.memberships(options = {})
+      opt = options.dup
+      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      Schools::Students::Membership.find(:all, opt)
     end
   end
 end
