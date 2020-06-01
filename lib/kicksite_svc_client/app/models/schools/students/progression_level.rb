@@ -6,12 +6,6 @@ module Schools
       self.collection_parser = PaginatedCollection
 
       def initialize(attributes = {}, persisted = false)
-        if persisted
-          APPOINTMENT_DATETIME_KEYS.each do |key|
-            attributes[key] = to_datetime(attributes[key])
-          end
-        end
-
         super(attributes, persisted)
       end
     end
