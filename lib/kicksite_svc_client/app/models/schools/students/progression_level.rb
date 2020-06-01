@@ -10,7 +10,7 @@ module Schools
       end
 
       def image_url # kludge?
-        KicksiteSvcBase.site +
+        KicksiteSvcBase.site.to_s +
         "/schools/#{prefix_options[:school_id]}/students/#{prefix_options[:student_id]}/progression_levels/#{id}.image"
       end
     end
