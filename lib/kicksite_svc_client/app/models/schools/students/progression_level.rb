@@ -9,10 +9,8 @@ module Schools
         super(attributes, persisted)
       end
 
-      def image!(student_id) # kludge?
-        KicksiteSvcBearerAuth.get(
-          "schools/#{prefix_options[:school_id]}/students/#{student_id}/progression_levels/#{id}.image"
-        )
+      def image_url # kludge?
+        "schools/#{prefix_options[:school_id]}/students/#{prefix_options[:student_id]}/progression_levels/#{id}.image"
       end
     end
   end
