@@ -81,19 +81,19 @@ module Schools
       Schools::Students::Membership.find(:all, opt)
     end
 
-    def ranks(options = {})
-      return attributes['ranks'] if options == {} && attributes.key?('ranks')
+    def progression_levels(options = {})
+      return attributes['progression_levels'] if options == {} && attributes.key?('progression_levels')
 
-      ranks!(options)
+      progression_levels!(options)
     end
 
-    def ranks!(options = {})
+    def progression_levels!(options = {})
       opt = options.dup
       opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
       opt = opt.deep_merge(params: { student_id: id })
-      attributes['ranks'] = Schools::Students::Rank.find(:all, opt)
+      attributes['progression_levels'] = Schools::Students::ProgressionLevel.find(:all, opt)
 
-      attributes['rank']
+      attributes['progression_levels']
     end
   end
 end
