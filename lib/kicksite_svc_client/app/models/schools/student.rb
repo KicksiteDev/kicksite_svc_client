@@ -80,5 +80,20 @@ module Schools
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
       Schools::Students::Membership.find(:all, opt)
     end
+
+    def ranks(options = {})
+      return attributes['ranks'] if options == {} && attributes.key?('ranks')
+
+      ranks!(options)
+    end
+
+    def ranks!(options = {})
+      opt = options.dup
+      opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+      opt = opt.deep_merge(params: { student_id: id })
+      attributes['ranks'] = Schools::Students::Rank.find(:all, opt)
+
+      attributes['rank']
+    end
   end
 end
