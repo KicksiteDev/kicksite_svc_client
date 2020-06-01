@@ -10,7 +10,7 @@ module Schools
       end
 
       def image_url # kludge?
-        "schools/#{prefix_options[:school_id]}/students/#{prefix_options[:student_id]}/progression_levels/#{id}.image"
+        self.site + "/schools/#{prefix_options[:school_id]}/students/#{prefix_options[:student_id]}/progression_levels/#{id}.image"
       end
     end
   end
