@@ -9,9 +9,11 @@ module Schools
         super(attributes, persisted)
       end
 
-      def image_url # kludge?
+      def image_url
         KicksiteSvcBase.site.to_s +
-        "/schools/#{prefix_options[:school_id]}/students/#{prefix_options[:student_id]}/progression_levels/#{id}.image"
+          "/schools/#{prefix_options[:school_id]}" \
+          "/students/#{prefix_options[:student_id]}" \
+          "/progression_levels/#{id}.image"
       end
     end
   end
