@@ -5,10 +5,6 @@ module Schools
       self.prefix = '/v1/schools/:school_id/students/:student_id/'
       self.collection_parser = PaginatedCollection
 
-      def initialize(attributes = {}, persisted = false)
-        super(attributes, persisted)
-      end
-
       def image_url
         KicksiteSvcBase.site.to_s +
           "/schools/#{prefix_options[:school_id]}" \
