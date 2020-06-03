@@ -25,6 +25,21 @@ module Schools
       attributes['photo']
     end
 
+    def tasks(options = {})
+      return attributes['tasks'] if options == {} && attributes.key?('tasks')
+
+      tasks!(options)
+    end
+
+    def tasks!(options = {})
+      opt = options.dup
+      opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+      opt = opt.deep_merge(params: { student_id: id })
+      attributes['tasks'] = Schools::Students::Task.find(:all, opt)
+
+      attributes['tasks']
+    end
+
     def self.tasks(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
