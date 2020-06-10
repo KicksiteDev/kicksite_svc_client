@@ -5,19 +5,7 @@ module Kicksite
       self.prefix = '/v1/schools/:school_id/'
       self.collection_parser = Kicksite::PaginatedCollection
 
-      NEW_FILTER = 'new'.freeze
-      ACTIVE_FILTER = 'active'.freeze
-      ACTIVE_WITHOUT_FROZEN = 'active_without_frozen'.freeze
-      LOST_FILTER = 'lost'.freeze
-      INACTIVE_FILTER = 'inactive'.freeze
-      FROZEN_FILTER = 'frozen'.freeze
-      ABSENT_FILTER = 'absent'.freeze
-      HAS_BIRTHDAY_FILTER = 'has_birthday'.freeze
-      HAS_BIRTHDAY_AND_IS_ACTIVE_FILTER = 'has_birthday_and_is_active'.freeze
-
-      CREATED_AT_SORT_BY = 'created_at'.freeze
-      BIRTHDATE_SORT_BY = 'birthdate'.freeze
-      NEXT_BIRTHDAY_SORT_BY = 'next_birthday'.freeze
+      include Kicksite::Schools::Students::Constants
 
       def photo!
         payload = KicksiteSvcBearerAuth.get("schools/#{prefix_options[:school_id]}/people/#{id}/photo")
@@ -104,6 +92,21 @@ module Kicksite
         opt = opt.deep_merge(params: { subject_type: 'Student' })
 
         Kicksite::Schools::Appointment.find(:all, opt)
+      end
+
+      def memberships!(options = {})
+        opt = options.dup
+        opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+        opt = opt.deep_merge(params: { student_id: id })
+        attributes['memberships'] = Kicksite::Schools::Students::Membership.find(:all, opt)
+
+        attributes['memberships']
+      end
+
+      def memberships(options = {})
+        return attributes['memberships'] if options == {} && attributes.key?('memberships')
+
+        memberships!(options)
       end
 
       def self.memberships(options = {})
