@@ -48,6 +48,21 @@ module Schools
       Schools::Task.find(:all, opt)
     end
 
+    def agreements(options = {})
+      return attributes['agreements'] if options == {} && attributes.key?('agreements')
+
+      agreements!(options)
+    end
+
+    def agreements!(options = {})
+      opt = options.dup
+      opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+      opt = opt.deep_merge(params: { student_id: id })
+      attributes['agreements'] = Schools::Students::Agreement.find(:all, opt)
+
+      attributes['agreements']
+    end
+
     def automations(options = {})
       return attributes['automations'] if options == {} && attributes.key?('automations')
 
