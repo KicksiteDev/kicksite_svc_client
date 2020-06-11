@@ -71,7 +71,8 @@ module Kicksite
 
     def activity!(options = {})
       payload = KicksiteSvcBearerAuth.get("schools/#{id}/activity", options)
-      attributes['activity'] = Kicksite::PaginatedCollection.new(payload.map { |event| Kicksite::Schools::Activity.new(event, true) })
+      attributes['activity'] =
+        Kicksite::PaginatedCollection.new(payload.map { |event| Kicksite::Schools::Activity.new(event, true) })
 
       attributes['activity']
     end
@@ -299,7 +300,9 @@ module Kicksite
       opt = opt.deep_merge(query: query)
 
       payload = KicksiteSvcBearerAuth.get("schools/#{id}/search", opt)
-      Kicksite::PaginatedCollection.new(payload.map { |search_result| Kicksite::Schools::SearchResult.new(search_result, true) })
+      Kicksite::PaginatedCollection.new(
+        payload.map { |search_result| Kicksite::Schools::SearchResult.new(search_result, true) }
+      )
     end
 
     # Any type of configuration at the school level.

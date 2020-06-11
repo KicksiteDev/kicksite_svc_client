@@ -20,9 +20,11 @@ module Kicksite
 
         def submissions(options = {})
           payload = get(:submissions, options)
-          Kicksite::PaginatedCollection.new(payload.map do |submission|
-                                    Kicksite::Schools::Bizbuilder::LandingPage::Submission.new(submission, true)
-                                  end)
+          Kicksite::PaginatedCollection.new(
+            payload.map do |submission|
+              Kicksite::Schools::Bizbuilder::LandingPage::Submission.new(submission, true)
+            end
+          )
         end
       end
     end

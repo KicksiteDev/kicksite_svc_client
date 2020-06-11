@@ -51,7 +51,8 @@ module Kicksite
         define_instance_variable(key, Kicksite::NoSvcObject.new(value))
         define_setter(key, Kicksite::NoSvcObject.new(value))
       elsif value.is_a?(Array)
-        define_instance_variable(key, value.map { |item| item.is_a?(Hash) ? Kicksite::NoSvcObject.new(item) : item })
+        define_instance_variable(key,
+                                 value.map { |item| item.is_a?(Hash) ? Kicksite::NoSvcObject.new(item) : item })
         define_setter(key, value.map { |item| item.is_a?(Hash) ? Kicksite::NoSvcObject.new(item) : item })
       else
         define_instance_variable(key, value)
