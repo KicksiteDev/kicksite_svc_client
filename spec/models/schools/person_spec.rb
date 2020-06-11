@@ -21,19 +21,19 @@ RSpec.describe Kicksite::Schools::Person do
   end
 
   it 'successfully returns all people for school' do
-    school = School.find(school_id)
+    school = Kicksite::School.find(school_id)
     people = school.people
     expect(people).to_not be_empty
   end
 
   it 'successfully returns a specific person within school' do
-    school = School.find(school_id)
+    school = Kicksite::School.find(school_id)
     people = school.people
     Kicksite::Schools::Person.find(people.first.id, params: { school_id: school_id })
   end
 
   it 'successfully returns phone numbers for a specific person' do
-    school = School.find(school_id)
+    school = Kicksite::School.find(school_id)
     people = school.people
     people.first.phone_numbers
   end

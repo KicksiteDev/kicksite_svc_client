@@ -21,7 +21,7 @@ RSpec.describe Kicksite::Schools::Membership do
   end
 
   it 'successfully returns all memberships for school' do
-    school = School.find(school_id)
+    school = Kicksite::School.find(school_id)
     memberships = school.memberships
     expect(memberships).to_not be_empty
   end

@@ -21,13 +21,13 @@ RSpec.describe Kicksite::Schools::Invoice do
   end
 
   it 'successfully returns all prospects for school' do
-    school = School.find(school_id)
+    school = Kicksite::School.find(school_id)
     invoices = school.invoices
     expect(invoices).to_not be_empty
   end
 
   it 'successfully returns specific invoice from within school' do
-    school = School.find(school_id)
+    school = Kicksite::School.find(school_id)
     invoices = school.invoices
     Kicksite::Schools::Invoice.find(invoices.first.id, params: { school_id: school_id })
   end

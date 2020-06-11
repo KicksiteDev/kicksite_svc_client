@@ -21,19 +21,19 @@ RSpec.describe Kicksite::Schools::Prospect do
   end
 
   it 'successfully returns all prospects for school' do
-    school = School.find(school_id)
+    school = Kicksite::School.find(school_id)
     prospects = school.prospects
     expect(prospects).to_not be_empty
   end
 
   it 'successfully returns a specific prospect within school' do
-    school = School.find(school_id)
+    school = Kicksite::School.find(school_id)
     prospects = school.prospects
     Kicksite::Schools::Prospect.find(prospects.first.id, params: { school_id: school_id })
   end
 
   it 'successfully returns phone numbers for a specific prospect' do
-    school = School.find(school_id)
+    school = Kicksite::School.find(school_id)
     prospects = school.prospects
     prospects.first.phone_numbers
   end
