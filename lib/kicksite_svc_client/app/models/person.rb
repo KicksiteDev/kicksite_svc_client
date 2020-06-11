@@ -1,17 +1,19 @@
-# REST resources specific to People
-class Person < KicksiteSvcBasicAuth
-  class Photo < NoSvcObject; end
+module Kicksite
+  # REST resources specific to People
+  class Person < KicksiteSvcBasicAuth
+    class Photo < Kicksite::NoSvcObject; end
 
-  def photo
-    return attributes['photo'] if attributes.key?('photo')
+    def photo
+      return attributes['photo'] if attributes.key?('photo')
 
-    photo!
-  end
+      photo!
+    end
 
-  def photo!
-    payload = get(:photo)
-    attributes['photo'] = payload.present? ? Person::Photo.new(payload, true) : nil
+    def photo!
+      payload = get(:photo)
+      attributes['photo'] = payload.present? ? Kicksite::Person::Photo.new(payload, true) : nil
 
-    attributes['photo']
+      attributes['photo']
+    end
   end
 end

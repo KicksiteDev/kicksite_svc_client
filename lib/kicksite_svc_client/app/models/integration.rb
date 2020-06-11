@@ -1,2 +1,4 @@
-class Integration < KicksiteSvcBearerAuth
+module Kicksite
+  class Integration < KicksiteSvcBearerAuth
+  end
 end
