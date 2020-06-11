@@ -1,6 +1,6 @@
 require 'httparty'
 
-RSpec.describe Schools::Prospect do
+RSpec.describe Kicksite::Schools::Prospect do
   let(:school_id) { 119 }
 
   before do
@@ -29,7 +29,7 @@ RSpec.describe Schools::Prospect do
   it 'successfully returns a specific prospect within school' do
     school = School.find(school_id)
     prospects = school.prospects
-    Schools::Prospect.find(prospects.first.id, params: { school_id: school_id })
+    Kicksite::Schools::Prospect.find(prospects.first.id, params: { school_id: school_id })
   end
 
   it 'successfully returns phone numbers for a specific prospect' do

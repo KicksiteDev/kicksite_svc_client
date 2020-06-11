@@ -1,6 +1,6 @@
 require 'httparty'
 
-RSpec.describe Schools::Activity do
+RSpec.describe Kicksite::Schools::Activity do
   let(:school_id) { 119 }
 
   before do

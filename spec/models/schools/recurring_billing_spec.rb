@@ -1,6 +1,6 @@
 require 'httparty'
 
-RSpec.describe Schools::RecurringBilling do
+RSpec.describe Kicksite::Schools::RecurringBilling do
   let(:school_id) { 119 }
 
   before do

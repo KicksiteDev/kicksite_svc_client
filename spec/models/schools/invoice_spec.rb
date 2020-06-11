@@ -1,6 +1,6 @@
 require 'httparty'
 
-RSpec.describe Schools::Invoice do
+RSpec.describe Kicksite::Schools::Invoice do
   let(:school_id) { 119 }
 
   before do
@@ -29,6 +29,6 @@ RSpec.describe Schools::Invoice do
   it 'successfully returns specific invoice from within school' do
     school = School.find(school_id)
     invoices = school.invoices
-    Schools::Invoice.find(invoices.first.id, params: { school_id: school_id })
+    Kicksite::Schools::Invoice.find(invoices.first.id, params: { school_id: school_id })
   end
 end
