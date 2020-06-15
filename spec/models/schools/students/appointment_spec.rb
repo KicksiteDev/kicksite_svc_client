@@ -1,6 +1,6 @@
 require 'httparty'
 
-RSpec.describe Schools::Students::Appointment do
+RSpec.describe Kicksite::Schools::Students::Appointment do
   let(:school_id) { 119 }
 
   before do
@@ -21,7 +21,7 @@ RSpec.describe Schools::Students::Appointment do
   end
 
   it 'successfully returns all appointments for student' do
-    school = School.find(school_id)
+    school = Kicksite::School.find(school_id)
     students = school.students
     appointments = students.first.appointments
     expect(appointments).to_not be_nil

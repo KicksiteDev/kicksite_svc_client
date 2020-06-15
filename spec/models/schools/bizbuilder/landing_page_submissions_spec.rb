@@ -1,6 +1,6 @@
 require 'httparty'
 
-RSpec.describe Schools::Bizbuilder::LandingPage do
+RSpec.describe Kicksite::Schools::Bizbuilder::LandingPage do
   let(:school_id) { 119 }
   let(:landing_page_id) { 1 }
 
@@ -22,7 +22,8 @@ RSpec.describe Schools::Bizbuilder::LandingPage do
   end
 
   it 'successfully returns all landing page submissions for a landing page' do
-    landing_page = Schools::Bizbuilder::LandingPage.find(landing_page_id, params: { school_id: school_id })
+    landing_page =
+      Kicksite::Schools::Bizbuilder::LandingPage.find(landing_page_id, params: { school_id: school_id })
     landing_page.submissions(school_id: school_id, landing_page_id: landing_page_id)
   end
 end

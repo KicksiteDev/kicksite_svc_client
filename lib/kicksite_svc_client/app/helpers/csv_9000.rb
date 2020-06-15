@@ -23,14 +23,16 @@ module ActiveResource
   end
 end
 
-# Allows for retrieval of CSV formatted data out of the CRUD api
-class Csv9000 < KicksiteSvcBearerAuth
-  self.collection_name = ''
-  self.element_name = ''
+module Kicksite
+  # Allows for retrieval of CSV formatted data out of the CRUD api
+  class Csv9000 < KicksiteSvcBearerAuth
+    self.collection_name = ''
+    self.element_name = ''
 
-  class << self
-    def format
-      ActiveResource::Formats::CsvFormat
+    class << self
+      def format
+        ActiveResource::Formats::CsvFormat
+      end
     end
   end
 end

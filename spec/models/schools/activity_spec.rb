@@ -1,6 +1,6 @@
 require 'httparty'
 
-RSpec.describe Schools::Activity do
+RSpec.describe Kicksite::Schools::Activity do
   let(:school_id) { 119 }
 
   before do
@@ -21,7 +21,7 @@ RSpec.describe Schools::Activity do
   end
 
   it 'successfully returns all activity for school' do
-    school = School.find(school_id)
+    school = Kicksite::School.find(school_id)
     activity = school.activity
     expect(activity).to_not be_empty
   end

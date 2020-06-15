@@ -1,6 +1,6 @@
 require 'httparty'
 
-RSpec.describe Schools::RecurringBilling do
+RSpec.describe Kicksite::Schools::RecurringBilling do
   let(:school_id) { 119 }
 
   before do
@@ -21,7 +21,7 @@ RSpec.describe Schools::RecurringBilling do
   end
 
   it 'successfully returns all prospects for school' do
-    school = School.find(school_id)
+    school = Kicksite::School.find(school_id)
     recurring_billings = school.recurring_billings
     expect(recurring_billings).to_not be_empty
   end

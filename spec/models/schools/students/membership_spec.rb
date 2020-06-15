@@ -1,6 +1,6 @@
 require 'httparty'
 
-RSpec.describe Schools::Students::Membership do
+RSpec.describe Kicksite::Schools::Students::Membership do
   let(:school_id) { 119 }
 
   before do
@@ -21,7 +21,7 @@ RSpec.describe Schools::Students::Membership do
   end
 
   it 'successfully returns all memberships for school' do
-    memberships = Schools::Student.memberships(school_id: school_id)
+    memberships = Kicksite::Schools::Student.memberships(school_id: school_id)
     expect(memberships).to_not be_empty
   end
 end

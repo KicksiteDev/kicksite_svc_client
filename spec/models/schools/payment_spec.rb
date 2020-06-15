@@ -1,6 +1,6 @@
 require 'httparty'
 
-RSpec.describe Schools::Payment do
+RSpec.describe Kicksite::Schools::Payment do
   let(:school_id) { 119 }
   let(:payment_id) { 16_996 }
 
@@ -22,6 +22,6 @@ RSpec.describe Schools::Payment do
   end
 
   it 'successfully returns specific payment from within school' do
-    Schools::Payment.find(payment_id, params: { school_id: school_id })
+    Kicksite::Schools::Payment.find(payment_id, params: { school_id: school_id })
   end
 end

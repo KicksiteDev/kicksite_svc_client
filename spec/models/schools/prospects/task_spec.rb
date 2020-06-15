@@ -1,6 +1,6 @@
 require 'httparty'
 
-RSpec.describe Schools::Prospects::Task do
+RSpec.describe Kicksite::Schools::Prospects::Task do
   let(:school_id) { 119 }
 
   before do
@@ -21,7 +21,7 @@ RSpec.describe Schools::Prospects::Task do
   end
 
   it 'successfully returns all tasks for prospect' do
-    school = School.find(school_id)
+    school = Kicksite::School.find(school_id)
     prospects = school.prospects
     tasks = prospects.first.tasks
     expect(tasks).to_not be_nil
