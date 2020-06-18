@@ -3,7 +3,7 @@ module Kicksite
     module Students
       # REST resources specific to Memberships at a given school
       class Membership < KicksiteSvcBearerAuth
-        self.prefix = '/v1/schools/:school_id/students/'
+        self.prefix = '/v1/schools/:school_id/students/:student_id/'
         self.collection_parser = Kicksite::PaginatedCollection
 
         EXPIRED_FILTER = 'expired'.freeze
