@@ -110,9 +110,10 @@ module Kicksite
       end
 
       def self.memberships(options = {})
-        opt = options.dup
-        opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
-        Kicksite::Schools::Students::Membership.find(:all, opt)
+        payload = KicksiteSvcBearerAuth.get("schools/#{options[:school_id]}/students/memberships", options)
+        Kicksite::PaginatedCollection.new(
+          payload.map { |item| Kicksite::Schools::Students::Membership.new(item, true) }
+        )
       end
 
       def progression_levels(options = {})
