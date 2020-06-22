@@ -1,8 +1,7 @@
 require 'httparty'
 
-RSpec.describe Kicksite::Schools::Bizbuilder::LandingPage do
+RSpec.describe Kicksite::Schools::Students::Appointment do
   let(:school_id) { 119 }
-  let(:landing_page_id) { 1 }
 
   before do
     options = {
@@ -21,9 +20,10 @@ RSpec.describe Kicksite::Schools::Bizbuilder::LandingPage do
     KicksiteSvcBearerAuth.connection.bearer_token = token
   end
 
-  it 'successfully returns all landing page submissions for a landing page' do
-    landing_page =
-      Kicksite::Schools::Bizbuilder::LandingPage.find(landing_page_id, params: { school_id: school_id })
-    landing_page.submissions(school_id: school_id, landing_page_id: landing_page_id)
+  it 'successfully returns all appointments for student' do
+    school = Kicksite::School.find(school_id)
+    students = school.students
+    appointments = students.first.appointments
+    expect(appointments).to_not be_nil
   end
 end

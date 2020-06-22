@@ -1,6 +1,6 @@
 require 'httparty'
 
-RSpec.describe Schools::Comment do
+RSpec.describe Kicksite::Schools::Comment do
   let(:school_id) { 119 }
   let(:comment_id) { 25_080 }
 
@@ -22,6 +22,6 @@ RSpec.describe Schools::Comment do
   end
 
   it 'successfully returns specific comment from within school' do
-    Schools::Comment.find(comment_id, params: { school_id: school_id })
+    Kicksite::Schools::Comment.find(comment_id, params: { school_id: school_id })
   end
 end

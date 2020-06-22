@@ -1,12 +1,10 @@
 module Kicksite
   module Schools
-    module Prospects
-      # REST resources specific to Tasks associated with given prospect
+    module Students
+      # REST resources specific to Tasks associated with given student
       class Task < KicksiteSvcBearerAuth
-        self.prefix = '/v1/schools/:school_id/prospects/:prospect_id/'
+        self.prefix = '/v1/schools/:school_id/students/:student_id/'
         self.collection_parser = Kicksite::PaginatedCollection
-
-        class Aggregation < Kicksite::NoSvcObject; end
 
         TASK_DATETIME_KEYS = %w[
           due_at
@@ -27,14 +25,6 @@ module Kicksite
           end
 
           super(attributes, persisted)
-        end
-
-        def self.aggregation(type, options = {})
-          opt = options.dup
-          opt = opt.deep_merge(subject_type: 'Prospect')
-
-          payload = KicksiteSvcBearerAuth.get("schools/#{opt[:school_id]}/task/aggregations/#{type}", opt)
-          payload.map { |item| Kicksite::Schools::Prospects::Task::Aggregation.new(item, true) }
         end
       end
     end

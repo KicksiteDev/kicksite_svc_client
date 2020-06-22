@@ -13,3 +13,7 @@
 .DS_Store
 .byebug_history
 Gemfile.lock
+
+# Ignore vim swap files
+*.swp
+*.swo
