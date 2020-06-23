@@ -127,7 +127,6 @@ module Kicksite
       prospects!(options)
     end
 
-    # rubocop:disable Metrics/CyclomaticComplexity
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/PerceivedComplexity
 
@@ -144,7 +143,6 @@ module Kicksite
       end
     end
 
-    # rubocop:enable Metrics/CyclomaticComplexity
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/PerceivedComplexity
 
@@ -347,7 +345,6 @@ module Kicksite
       lead_capture_forms!(options)
     end
 
-    # rubocop:disable Metrics/CyclomaticComplexity
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/PerceivedComplexity
 
@@ -364,7 +361,6 @@ module Kicksite
       end
     end
 
-    # rubocop:enable Metrics/CyclomaticComplexity
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/PerceivedComplexity
 
@@ -390,7 +386,6 @@ module Kicksite
     end
 
     # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Metrics/CyclomaticComplexity
     # rubocop:disable Metrics/PerceivedComplexity
     def landing_pages!(options = {})
       opt = options.dup
@@ -405,7 +400,6 @@ module Kicksite
       end
     end
     # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Metrics/CyclomaticComplexity
     # rubocop:enable Metrics/PerceivedComplexity
 
     # Phone number for school
