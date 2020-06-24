@@ -23,8 +23,6 @@ Or install it yourself as:
 ```
 export KICKSITE_SVC_URL=http://api.kicksite.test:5000
 export KICKSITE_AUTH_URL=http://auth.kicksite.test:5004
-export ADMIN_USER_NAME=admin
-export ADMIN_PASSWORD=password
 ```
 
 ## Development
