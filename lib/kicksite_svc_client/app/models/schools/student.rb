@@ -110,6 +110,21 @@ module Kicksite
         Kicksite::Schools::People::Programs::Attendance.find(:all, opt)
       end
 
+      def programs(options = {})
+        return attributes['programs'] if options == {} && attributes.key?('programs')
+
+        programs!(options)
+      end
+
+      def programs!(options = {})
+        opt = options.dup
+        opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+        opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+        opt = opt.deep_merge(params: { person_id: id })
+
+        Kicksite::Schools::People::Program.find(:all, opt)
+      end
+
       def memberships!(options = {})
         opt = options.dup
         opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
