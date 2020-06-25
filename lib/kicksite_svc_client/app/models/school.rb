@@ -7,6 +7,7 @@ module Kicksite
     class Configuration < Kicksite::NoSvcObject; end
     class Address < Kicksite::NoSvcObject; end
     class PhoneNumber < Kicksite::NoSvcObject; end
+    class Tag < Kicksite::NoSvcObject; end
 
     SCHOOL_DATETIME_KEYS = %w[
       subscription_plan_status_date
@@ -423,6 +424,19 @@ module Kicksite
       attributes['phone_number'] = payload.present? ? Kicksite::School::PhoneNumber.new(payload, false) : nil
 
       attributes['phone_number']
+    end
+
+    def tags
+      return attributes['tags'] if attributes.key?('tags')
+
+      tags!
+    end
+
+    def tags!
+      payload = KicksiteSvcBearerAuth.get("schools/#{id}/tags")
+      attributes['tags'] = payload.map { |tag| Kicksite::School::Tag.new(tag, true) }
+
+      attributes['tags']
     end
   end
 end
