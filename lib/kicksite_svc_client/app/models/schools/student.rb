@@ -1,7 +1,7 @@
 module Kicksite
   module Schools
     # REST resources specific to Students at a given school
-    class Student < Kicksite::Schools::Person
+    class Student < Kicksite::Schools::Person # rubocop:disable Metrics/ClassLength
       self.prefix = '/v1/schools/:school_id/'
       self.collection_parser = Kicksite::PaginatedCollection
 
@@ -92,6 +92,37 @@ module Kicksite
         opt = opt.deep_merge(params: { subject_type: 'Student' })
 
         Kicksite::Schools::Appointment.find(:all, opt)
+      end
+
+      def attendances(options = {})
+        return attributes['attendances'] if options == {} && attributes.key?('attendances')
+
+        attendances!(options)
+      end
+
+      def attendances!(options = {})
+        opt = options.dup
+        opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+        opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+        opt = opt.deep_merge(params: { subject_id: id })
+        opt = opt.deep_merge(params: { subject_type: 'students' })
+
+        Kicksite::Schools::People::Programs::Attendance.find(:all, opt)
+      end
+
+      def programs(options = {})
+        return attributes['programs'] if options == {} && attributes.key?('programs')
+
+        programs!(options)
+      end
+
+      def programs!(options = {})
+        opt = options.dup
+        opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+        opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+        opt = opt.deep_merge(params: { person_id: id })
+
+        Kicksite::Schools::People::Program.find(:all, opt)
       end
 
       def memberships!(options = {})
