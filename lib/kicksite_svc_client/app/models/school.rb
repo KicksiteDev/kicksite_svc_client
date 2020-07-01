@@ -7,6 +7,7 @@ module Kicksite
     class Configuration < Kicksite::NoSvcObject; end
     class Address < Kicksite::NoSvcObject; end
     class PhoneNumber < Kicksite::NoSvcObject; end
+    class Tag < Kicksite::NoSvcObject; end
 
     SCHOOL_DATETIME_KEYS = %w[
       subscription_plan_status_date
@@ -129,7 +130,6 @@ module Kicksite
 
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/PerceivedComplexity
-
     def prospects!(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
@@ -142,7 +142,6 @@ module Kicksite
         attributes['prospects']
       end
     end
-
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/PerceivedComplexity
 
@@ -347,7 +346,6 @@ module Kicksite
 
     # rubocop:disable Metrics/AbcSize
     # rubocop:disable Metrics/PerceivedComplexity
-
     def lead_capture_forms!(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
@@ -360,7 +358,6 @@ module Kicksite
         attributes['lead_capture_forms']
       end
     end
-
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/PerceivedComplexity
 
@@ -417,6 +414,19 @@ module Kicksite
       attributes['phone_number'] = payload.present? ? Kicksite::School::PhoneNumber.new(payload, false) : nil
 
       attributes['phone_number']
+    end
+
+    def tags
+      return attributes['tags'] if attributes.key?('tags')
+
+      tags!
+    end
+
+    def tags!
+      payload = KicksiteSvcBearerAuth.get("schools/#{id}/tags")
+      attributes['tags'] = payload.map { |tag| Kicksite::School::Tag.new(tag, true) }
+
+      attributes['tags']
     end
   end
 end
