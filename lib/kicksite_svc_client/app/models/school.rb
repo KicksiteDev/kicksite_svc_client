@@ -1,4 +1,4 @@
-module Kicksite
+odule Kicksite
   # REST resources specific to Schools
   class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
     class Logo < Kicksite::NoSvcObject; end
@@ -91,10 +91,14 @@ module Kicksite
     def students!(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
-      opt = opt.deep_merge(params: { school_id: id })
-      attributes['students'] = Kicksite::Schools::Student.find(:all, opt)
+      if opt[:params].present? && opt[:params][:format].present? && opt[:params][:format].casecmp?('csv')
+        Kicksite::Csv9000.get("schools/#{id}/students", opt[:params])
+      else
+        opt = opt.deep_merge(params: { school_id: id })
+        attributes['students'] = Kicksite::Schools::Student.find(:all, opt)
 
-      attributes['students']
+        attributes['students']
+      end
     end
 
     # employees at this particular school.
