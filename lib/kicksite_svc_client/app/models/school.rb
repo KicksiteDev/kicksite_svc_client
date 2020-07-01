@@ -1,4 +1,4 @@
-odule Kicksite
+module Kicksite
   # REST resources specific to Schools
   class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
     class Logo < Kicksite::NoSvcObject; end
