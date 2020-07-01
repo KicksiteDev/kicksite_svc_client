@@ -88,6 +88,8 @@ module Kicksite
       students!(options)
     end
 
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/PerceivedComplexity
     def students!(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
@@ -100,6 +102,8 @@ module Kicksite
         attributes['students']
       end
     end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/PerceivedComplexity
 
     # employees at this particular school.
     #
