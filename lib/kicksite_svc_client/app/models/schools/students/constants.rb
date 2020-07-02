@@ -12,6 +12,7 @@ module Kicksite
         HAS_BIRTHDAY_FILTER = 'has_birthday'.freeze
         HAS_BIRTHDAY_AND_IS_ACTIVE_FILTER = 'has_birthday_and_is_active'.freeze
 
+        AGREEMENTS_SORT_BY    = 'agreements'.freeze
         APPOINTMENTS_SORT_BY  = 'appointments'.freeze
         BIRTHDATE_SORT_BY     = 'birthdate'.freeze
         CREATED_AT_SORT_BY    = 'created_at'.freeze
