@@ -20,6 +20,21 @@ class KicksiteSvcBase < ActiveResource::Base
     super(attributes, persisted)
   end
 
+  def to_hash
+    hash = {}
+    attributes.each do |key, value|
+      hash[key.to_s] = if value.present? && value.respond_to?(:to_hash)
+                         value.to_hash
+                       elsif value.present? && value.respond_to?(:attributes)
+                         value.attributes
+                       else
+                         value
+                       end
+    end
+
+    hash
+  end
+
   protected
 
   def to_datetime(datetime_string)
