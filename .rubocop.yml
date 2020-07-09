@@ -3,6 +3,9 @@
 Layout/LineLength:
   Max: 115
 
+Metrics/MethodLength:
+  Max: 50
+
 Metrics/BlockLength:
   ExcludedMethods: ['resource', 'namespace', 'describe', 'context']
 
