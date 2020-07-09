@@ -21,7 +21,17 @@ module Kicksite
 
     def to_hash
       hash = {}
-      instance_variables.each { |var| hash[var.to_s.delete('@')] = instance_variable_get(var) }
+      instance_variables.each do |var|
+        get_var = instance_variable_get(var)
+        hash[var.to_s.delete('@')] = if get_var.present? && get_var.respond_to?(:to_hash)
+                                       get_var.to_hash
+                                     elsif get_var.present? && get_var.respond_to?(:attributes)
+                                       get_var.attributes
+                                     else
+                                       get_var
+                                     end
+      end
+
       hash
     end
 
@@ -43,10 +53,7 @@ module Kicksite
       end
     end
 
-    # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Metrics/MethodLength
-
-    def recursive_define(key, value)
+    def recursive_define(key, value) # rubocop:disable Metrics/AbcSize
       if value.is_a?(Hash)
         define_instance_variable(key, Kicksite::NoSvcObject.new(value))
         define_setter(key, Kicksite::NoSvcObject.new(value))
@@ -61,9 +68,6 @@ module Kicksite
 
       define_getter(key, value)
     end
-
-    # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Metrics/MethodLength
 
     def define_instance_variable(key, value)
       instance_variable_set("@#{key}", value)
