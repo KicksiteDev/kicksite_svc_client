@@ -123,6 +123,16 @@ module Kicksite
         attributes['photo']
       end
 
+      def history!(options = {})
+        payload = KicksiteSvcBearerAuth.get("schools/#{prefix_options[:school_id]}/people/#{id}/history", options)
+        attributes['history'] =
+          Kicksite::PaginatedCollection.new(payload.map do |event|
+            Kicksite::Schools::Person::History.new(event, true)
+          end)
+
+        attributes['history']
+      end
+
       def self.tasks(options = {})
         opt = options.dup
         opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }

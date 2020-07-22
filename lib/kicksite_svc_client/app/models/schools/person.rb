@@ -6,6 +6,7 @@ module Kicksite
       self.collection_parser = Kicksite::PaginatedCollection
 
       class Photo < Kicksite::NoSvcObject; end
+      class History < Kicksite::Schools::Activity; end
 
       PERSON_DATETIME_KEYS = %w[
         inactivated_on
@@ -68,6 +69,22 @@ module Kicksite
         attributes['email_addresses'] = Kicksite::Schools::People::EmailAddress.find(:all, opt)
 
         attributes['email_addresses']
+      end
+
+      def history(options = {})
+        return attributes['history'] if options == {} && attributes.key?('history')
+
+        history!(options)
+      end
+
+      def history!(options = {})
+        payload = get(:history, options)
+        attributes['history'] =
+          Kicksite::PaginatedCollection.new(payload.map do |event|
+            Kicksite::Schools::Person::History.new(event, true)
+          end)
+
+        attributes['history']
       end
     end
   end

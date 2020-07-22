@@ -10,6 +10,7 @@ Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/schools/invoices/*
   .sort.each { |file| require file }
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/schools/memberships/**/*.rb"]
   .sort.each { |file| require file }
+require 'kicksite_svc_client/app/models/schools/activity.rb'
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/schools/people/**/*.rb"]
   .sort.each { |file| require file }
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/schools/prospects/**/*.rb"]
