@@ -15,6 +15,16 @@ module Kicksite
 
         attributes['photo']
       end
+
+      def history!(options = {})
+        payload = KicksiteSvcBearerAuth.get("schools/#{prefix_options[:school_id]}/people/#{id}/history", options)
+        attributes['history'] =
+          Kicksite::PaginatedCollection.new(payload.map do |event|
+            Kicksite::Schools::Person::History.new(event, true)
+          end)
+
+        attributes['history']
+      end
     end
   end
 end

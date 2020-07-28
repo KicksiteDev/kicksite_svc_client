@@ -13,6 +13,8 @@ module Kicksite
       PROGRAM_TYPE = 'program'.freeze
 
       CREATE_ACTION = 'create'.freeze
+      UPDATE_ACTION = 'update'.freeze
+      DELETE_ACTION = 'delete'.freeze
 
       CREATED_AT_SORT_BY = 'created_at'.freeze
 
