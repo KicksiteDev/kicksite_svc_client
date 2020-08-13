@@ -1,5 +1,5 @@
 module Kicksite
-  # REST resources specific to Schools
+  # REST resources specific to Genders
   class Gender
     VALID_GENDERS = [ # The rest of y'all are also valid, hope we get to fix this someday
       'Prefer not to say',

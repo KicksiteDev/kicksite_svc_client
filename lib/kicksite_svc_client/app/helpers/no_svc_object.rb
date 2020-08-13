@@ -53,11 +53,12 @@ module Kicksite
       end
     end
 
-    def recursive_define(key, value) # rubocop:disable Metrics/AbcSize
-      if value.is_a?(Hash)
+    def recursive_define(key, value)
+      case value
+      when Hash
         define_instance_variable(key, Kicksite::NoSvcObject.new(value))
         define_setter(key, Kicksite::NoSvcObject.new(value))
-      elsif value.is_a?(Array)
+      when Array
         define_instance_variable(key,
                                  value.map { |item| item.is_a?(Hash) ? Kicksite::NoSvcObject.new(item) : item })
         define_setter(key, value.map { |item| item.is_a?(Hash) ? Kicksite::NoSvcObject.new(item) : item })
