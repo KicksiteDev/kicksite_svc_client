@@ -7,7 +7,7 @@ module Kicksite
       'Female'
     ].freeze
 
-    def all
+    def self.all
       VALID_GENDERS
     end
   end
