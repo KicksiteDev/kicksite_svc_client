@@ -89,7 +89,6 @@ module Kicksite
     end
 
     # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Metrics/PerceivedComplexity
     def students!(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
@@ -103,7 +102,6 @@ module Kicksite
       end
     end
     # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Metrics/PerceivedComplexity
 
     # employees at this particular school.
     #
@@ -137,7 +135,6 @@ module Kicksite
     end
 
     # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Metrics/PerceivedComplexity
     def prospects!(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
@@ -151,7 +148,6 @@ module Kicksite
       end
     end
     # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Metrics/PerceivedComplexity
 
     # People at this particular school.
     #
@@ -353,7 +349,6 @@ module Kicksite
     end
 
     # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Metrics/PerceivedComplexity
     def lead_capture_forms!(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
@@ -367,7 +362,6 @@ module Kicksite
       end
     end
     # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Metrics/PerceivedComplexity
 
     def message_flows(options = {})
       return attributes['message_flows'] if options == {} && attributes.key?('message_flows')
@@ -391,7 +385,6 @@ module Kicksite
     end
 
     # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Metrics/PerceivedComplexity
     def landing_pages!(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
@@ -405,7 +398,6 @@ module Kicksite
       end
     end
     # rubocop:enable Metrics/AbcSize
-    # rubocop:enable Metrics/PerceivedComplexity
 
     # Phone number for school
     #

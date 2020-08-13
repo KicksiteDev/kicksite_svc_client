@@ -3,8 +3,7 @@ module Kicksite
   class SaveableObjects
     include Enumerable
 
-    attr_reader :items
-    attr_reader :url
+    attr_reader :items, :url
 
     def initialize(items = [], url = nil)
       @items = items
