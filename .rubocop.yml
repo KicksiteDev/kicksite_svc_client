@@ -1,3 +1,16 @@
+AllCops:
+  Exclude:
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+    - '.git/**/*'
+    - 'db/schema.rb'
+
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle.
+# SupportedStyles: when_needed, always, never
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
 Layout/LineLength:
@@ -7,13 +20,26 @@ Metrics/MethodLength:
   Max: 50
 
 Metrics/BlockLength:
-  ExcludedMethods: ['resource', 'namespace', 'describe', 'context']
+  Max: 65
+  ExcludedMethods: ['resource', 'namespace', 'describe', 'context', 'route_param']
 
-Style/FrozenStringLiteralComment:
+Metrics/AbcSize:
+  Max: 65
+
+Lint/ScriptPermission:
   Enabled: false
 
-Layout/TrailingEmptyLines:
-  Enabled: false
+Metrics/ClassLength:
+  Max: 110
+
+Metrics/CyclomaticComplexity:
+  Max: 8
+
+Metrics/PerceivedComplexity:
+  Max: 8
+
+Lint/SuppressedException:
+  AllowComments: true
 
 Style/HashEachMethods:
   Enabled: true
@@ -52,15 +78,39 @@ Style/RedundantRegexpCharacterClass:
   Enabled: true
 
 Style/RedundantRegexpEscape:
-  Enabled: true
+  Enabled: false
 
 Style/RedundantFetchBlock:
   Enabled: true
 
-Lint/BinaryOperatorWithIdenticalOperands:
+Style/AccessorGrouping:
+  Enabled: true
+
+Style/BisectedAttrAccessor:
+  Enabled: true
+
+Style/RedundantAssignment:
   Enabled: true
 
 Lint/DuplicateElsifCondition:
+   Enabled: true
+
+Style/ArrayCoercion:
+   Enabled: true
+
+Style/CaseLikeIf:
+   Enabled: true
+
+Style/HashAsLastArrayItem:
+   Enabled: true
+
+Style/HashLikeCase:
+   Enabled: true
+
+Style/RedundantFileExtensionInRequire:
+  Enabled: true
+
+Lint/BinaryOperatorWithIdenticalOperands:
   Enabled: true
 
 Lint/DuplicateRescueException:
@@ -87,41 +137,19 @@ Lint/TopLevelReturnWithArgument:
 Lint/UnreachableLoop:
   Enabled: true
 
-Style/AccessorGrouping:
-  Enabled: true
-
-Style/ArrayCoercion:
-  Enabled: true
-
-Style/BisectedAttrAccessor:
-  Enabled: true
-
-Style/CaseLikeIf:
-  Enabled: true
-
 Style/ExplicitBlockArgument:
   Enabled: true
 
 Style/GlobalStdStream:
   Enabled: true
 
-Style/HashAsLastArrayItem:
-  Enabled: true
-
-Style/HashLikeCase:
-  Enabled: true
-
 Style/OptionalBooleanParameter:
-  Enabled: false
-
-Style/RedundantAssignment:
-  Enabled: true
-
-Style/RedundantFileExtensionInRequire:
   Enabled: false
 
 Style/SingleArgumentDig:
   Enabled: true
 
+# NOTE: sure why this wasn't complaining initially.
+# There are spots in here I'm a little afraid to touch without extensive testing.
 Style/StringConcatenation:
-  Enabled: true
+  Enabled: false

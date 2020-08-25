@@ -171,6 +171,12 @@ module Kicksite
 
         attributes['progression_levels']
       end
+
+      def toggle_recurring_billings
+        KicksiteSvcBearerAuth.post(
+          "schools/#{prefix_options[:school_id]}/students/#{id}/toggle_recurring_billings"
+        )
+      end
     end
   end
 end

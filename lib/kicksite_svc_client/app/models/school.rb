@@ -88,7 +88,6 @@ module Kicksite
       students!(options)
     end
 
-    # rubocop:disable Metrics/AbcSize
     def students!(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
@@ -101,7 +100,6 @@ module Kicksite
         attributes['students']
       end
     end
-    # rubocop:enable Metrics/AbcSize
 
     # employees at this particular school.
     #
@@ -134,7 +132,6 @@ module Kicksite
       prospects!(options)
     end
 
-    # rubocop:disable Metrics/AbcSize
     def prospects!(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
@@ -147,7 +144,6 @@ module Kicksite
         attributes['prospects']
       end
     end
-    # rubocop:enable Metrics/AbcSize
 
     # People at this particular school.
     #
@@ -348,7 +344,6 @@ module Kicksite
       lead_capture_forms!(options)
     end
 
-    # rubocop:disable Metrics/AbcSize
     def lead_capture_forms!(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
@@ -361,7 +356,6 @@ module Kicksite
         attributes['lead_capture_forms']
       end
     end
-    # rubocop:enable Metrics/AbcSize
 
     def message_flows(options = {})
       return attributes['message_flows'] if options == {} && attributes.key?('message_flows')
@@ -384,7 +378,6 @@ module Kicksite
       landing_pages!(options)
     end
 
-    # rubocop:disable Metrics/AbcSize
     def landing_pages!(options = {})
       opt = options.dup
       opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
@@ -397,7 +390,6 @@ module Kicksite
         attributes['landing_pages']
       end
     end
-    # rubocop:enable Metrics/AbcSize
 
     # Phone number for school
     #

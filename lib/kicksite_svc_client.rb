@@ -1,6 +1,6 @@
-require 'kicksite_svc_client/version.rb'
-require 'kicksite_svc_client/app/helpers/kicksite_svc_base.rb'
-require 'kicksite_svc_client/app/helpers/kicksite_svc_bearer_auth.rb'
+require 'kicksite_svc_client/version'
+require 'kicksite_svc_client/app/helpers/kicksite_svc_base'
+require 'kicksite_svc_client/app/helpers/kicksite_svc_bearer_auth'
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/helpers/**/*.rb"].sort.each { |file| require file }
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/schools/bizbuilder_forms/**/*.rb"]
   .sort.each { |file| require file }
@@ -10,15 +10,15 @@ Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/schools/invoices/*
   .sort.each { |file| require file }
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/schools/memberships/**/*.rb"]
   .sort.each { |file| require file }
-require 'kicksite_svc_client/app/models/schools/activity.rb'
+require 'kicksite_svc_client/app/models/schools/activity'
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/schools/people/**/*.rb"]
   .sort.each { |file| require file }
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/schools/prospects/**/*.rb"]
   .sort.each { |file| require file }
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/schools/students/**/*.rb"]
   .sort.each { |file| require file }
-require 'kicksite_svc_client/app/models/schools/membership.rb'
-require 'kicksite_svc_client/app/models/schools/person.rb'
+require 'kicksite_svc_client/app/models/schools/membership'
+require 'kicksite_svc_client/app/models/schools/person'
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/schools/**/*.rb"].sort.each { |file| require file }
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/**/*.rb"].sort.each { |file| require file }
 
