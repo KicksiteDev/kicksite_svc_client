@@ -11,6 +11,7 @@ module Kicksite
       FAMILY_TYPE = 'family'.freeze
       STUDENT_TYPE = 'student'.freeze
       PROGRAM_TYPE = 'program'.freeze
+      ATTENDANCE_TYPE = 'attendance'.freeze
 
       CREATE_ACTION = 'create'.freeze
       UPDATE_ACTION = 'update'.freeze
