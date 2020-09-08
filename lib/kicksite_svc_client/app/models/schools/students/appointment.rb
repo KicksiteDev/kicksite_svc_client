@@ -6,8 +6,6 @@ module Kicksite
         self.prefix = '/v1/schools/:school_id/students/:student_id/'
         self.collection_parser = Kicksite::PaginatedCollection
 
-        class Aggregation < Kicksite::NoSvcObject; end
-
         APPOINTMENT_DATETIME_KEYS = %w[
           start_at
           end_at
