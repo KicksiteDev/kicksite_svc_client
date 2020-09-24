@@ -159,7 +159,7 @@ module Kicksite
 
       def progression_levels(options = {})
         return attributes['progression_levels'] if options == {} && attributes.key?('progression_levels')
-
+        byebug
         progression_levels!(options)
       end
 
