@@ -1,7 +1,7 @@
 module Kicksite
   module Schools
     # REST resources specific to Prospects at a given school
-    class Prospect < Kicksite::Schools::Person
+    class Prospect < Kicksite::Schools::Person # rubocop:disable Metrics/ClassLength
       self.prefix = '/v1/schools/:school_id/'
       self.collection_parser = Kicksite::PaginatedCollection
 
@@ -23,6 +23,25 @@ module Kicksite
       OVERDUE_TASK_SORT_BY  = 'overdue_task'.freeze
       NO_SHOW_SORT_BY       = 'noshow'.freeze
       ASSIGNED_TO_SORT_BY   = 'assigned_to'.freeze
+
+      # Agreements associated with prospect.
+      #
+      # @param options [Hash] Options such as custom params
+      # @return [Kicksite::PaginatedCollection] Collection of agreements associated with prospect
+      def agreements(options = {})
+        return attributes['agreements'] if options == {} && attributes.key?('agreements')
+
+        agreements!(options)
+      end
+
+      def agreements!(options = {})
+        opt = options.dup
+        opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+        opt = opt.deep_merge(params: { prospect_id: id })
+        attributes['agreements'] = Kicksite::Schools::Prospects::Agreement.find(:all, opt)
+
+        attributes['agreements']
+      end
 
       # Appointments associated with prospect.
       #
