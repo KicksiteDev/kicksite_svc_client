@@ -5,6 +5,10 @@ module Kicksite
       class Agreement < KicksiteSvcBearerAuth
         self.prefix = '/v1/schools/:school_id/prospects/:prospect_id/'
         self.collection_parser = Kicksite::PaginatedCollection
+
+        CREATED_AT_SORT_BY = 'created_at'.freeze
+        NAME_SORT_BY       = 'name'.freeze
+        STATUS_SORT_BY     = 'status'.freeze
       end
     end
   end
