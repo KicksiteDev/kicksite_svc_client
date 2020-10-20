@@ -281,10 +281,9 @@ module Kicksite
     end
 
     # A school's calendar in iCal format
-    def calendar
-      byebug
+    #def calendar
       #Calendar.get("schools/#{id}/calendar", {})
-    end
+    #end
 
     # Custom statistics.
     #
