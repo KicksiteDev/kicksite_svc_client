@@ -280,11 +280,6 @@ module Kicksite
       attributes['account_details']
     end
 
-    # A school's calendar in iCal format
-    def calendar
-      Calendar.get("schools/#{id}/calendar", {})
-    end
-
     # Custom statistics.
     #
     # @param group [String] Group to calculate statistic about

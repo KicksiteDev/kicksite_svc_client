@@ -1,7 +1,6 @@
 require 'kicksite_svc_client/version.rb'
 require 'kicksite_svc_client/app/helpers/kicksite_svc_base.rb'
 require 'kicksite_svc_client/app/helpers/kicksite_svc_bearer_auth.rb'
-
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/helpers/**/*.rb"].sort.each { |file| require file }
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/schools/bizbuilder_forms/**/*.rb"]
   .sort.each { |file| require file }
@@ -20,7 +19,6 @@ Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/schools/students/*
   .sort.each { |file| require file }
 require 'kicksite_svc_client/app/models/schools/membership.rb'
 require 'kicksite_svc_client/app/models/schools/person.rb'
-require 'kicksite_svc_client/app/models/schools/calendar.rb'
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/schools/**/*.rb"].sort.each { |file| require file }
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/**/*.rb"].sort.each { |file| require file }
 

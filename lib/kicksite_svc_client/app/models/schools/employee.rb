@@ -25,11 +25,6 @@ module Kicksite
 
         attributes['history']
       end
-
-      # An employees's calendar in iCal format
-      def calendar
-        Calendar.get("schools/#{prefix_options[:school_id]}/employee/#{id}/calendar", {})
-      end
     end
   end
 end
