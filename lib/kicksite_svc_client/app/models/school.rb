@@ -282,6 +282,7 @@ module Kicksite
 
     # A school's calendar in iCal format
     def calendar
+      byebug
       Calendar.get("schools/#{id}/calendar", {})
     end
 
