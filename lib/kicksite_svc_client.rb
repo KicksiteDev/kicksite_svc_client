@@ -1,6 +1,7 @@
 require 'kicksite_svc_client/version.rb'
 require 'kicksite_svc_client/app/helpers/kicksite_svc_base.rb'
 require 'kicksite_svc_client/app/helpers/kicksite_svc_bearer_auth.rb'
+require 'kicksite_svc_client/calendar_format.rb'
 
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/helpers/**/*.rb"].sort.each { |file| require file }
 Dir["#{File.dirname(__FILE__)}/kicksite_svc_client/app/models/schools/bizbuilder_forms/**/*.rb"]
