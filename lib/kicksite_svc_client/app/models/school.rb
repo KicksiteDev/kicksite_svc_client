@@ -336,6 +336,10 @@ module Kicksite
       attributes['address']
     end
 
+    def calendar
+      Calendar.get("schools/#{id}/calendar", {})
+    end
+
     # Lead capture forms at this particular school.
     #
     # @param options [Hash] Options such as custom params
