@@ -7,6 +7,21 @@ module Kicksite
 
       include Kicksite::Schools::Students::Constants
 
+      def comments(options = {})
+        return attributes['comments'] if options == {} && attributes.key?('comments')
+
+        comments!(options)
+      end
+
+      def comments!(options = {})
+        opt = options.dup
+        opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+        opt = opt.deep_merge(params: { student_id: id })
+        attributes['comments'] = Kicksite::Schools::People::Comments.find(:all, opt)
+
+        attributes['comments']
+      end
+
       def photo!
         payload = KicksiteSvcBearerAuth.get("schools/#{prefix_options[:school_id]}/people/#{id}/photo")
         attributes['photo'] = payload.present? ? Person::Photo.new(payload, true) : nil
