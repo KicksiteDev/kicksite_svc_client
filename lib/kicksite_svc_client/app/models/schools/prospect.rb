@@ -62,6 +62,21 @@ module Kicksite
         attributes['appointments']
       end
 
+      def comments(options = {})
+        return attributes['comments'] if options == {} && attributes.key?('comments')
+
+        comments!(options)
+      end
+
+      def comments!(options = {})
+        opt = options.dup
+        opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+        opt = opt.deep_merge(params: { student_id: id })
+        attributes['comments'] = Kicksite::Schools::People::Comments.find(:all, opt)
+
+        attributes['comments']
+      end
+
       # Tasks associated with prospect.
       #
       # @param options [Hash] Options such as custom params
