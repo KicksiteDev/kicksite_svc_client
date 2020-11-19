@@ -150,6 +150,21 @@ module Kicksite
         Kicksite::Schools::Students::Event.find(:all, opt)
       end
 
+      def event_registrations(options = {})
+        return attributes['event_registrations'] if options == {} && attributes.key?('event_registrations')
+
+        event_registrations!(options)
+      end
+
+      def event_registrations!(options = {})
+        opt = options.dup
+        opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+        opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+        opt = opt.deep_merge(params: { student_id: id })
+
+        Kicksite::Schools::Students::EventRegistration.find(:all, opt)
+      end
+
       def programs(options = {})
         return attributes['programs'] if options == {} && attributes.key?('programs')
 
