@@ -77,6 +77,21 @@ module Kicksite
         attributes['agreements']
       end
 
+      def documents(options = {})
+        return attributes['documents'] if options == {} && attributes.key?('documents')
+
+        documents!(options)
+      end
+
+      def documents!(options = {})
+        opt = options.dup
+        opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+        opt = opt.deep_merge(params: { student_id: id })
+        attributes['documents'] = Kicksite::Schools::Students::Document.find(:all, opt)
+
+        attributes['documents']
+      end
+
       def automations(options = {})
         return attributes['automations'] if options == {} && attributes.key?('automations')
 
