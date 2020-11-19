@@ -1,5 +1,14 @@
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+    - '.git/**/*'
+    - 'db/schema.rb'
+
 Layout/LineLength:
   Max: 115
 
