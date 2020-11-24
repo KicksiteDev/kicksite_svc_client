@@ -2,11 +2,17 @@ module Kicksite
   # REST resources specific to Schools
   class School < KicksiteSvcBasicAuth # rubocop:disable Metrics/ClassLength
     class Logo < Kicksite::NoSvcObject; end
+
     class Statistic < Kicksite::NoSvcObject; end
+
     class AccountDetails < Kicksite::NoSvcObject; end
+
     class Configuration < Kicksite::NoSvcObject; end
+
     class Address < Kicksite::NoSvcObject; end
+
     class PhoneNumber < Kicksite::NoSvcObject; end
+
     class Tag < Kicksite::NoSvcObject; end
 
     SCHOOL_DATETIME_KEYS = %w[

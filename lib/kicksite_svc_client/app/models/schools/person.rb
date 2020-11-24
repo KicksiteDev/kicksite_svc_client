@@ -6,6 +6,7 @@ module Kicksite
       self.collection_parser = Kicksite::PaginatedCollection
 
       class Photo < Kicksite::NoSvcObject; end
+
       class History < Kicksite::Schools::Activity; end
 
       PERSON_DATETIME_KEYS = %w[
