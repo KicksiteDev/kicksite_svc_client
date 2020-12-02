@@ -232,6 +232,21 @@ module Kicksite
 
         attributes['progression_levels']
       end
+
+      def attendance_awards(options = {})
+        return attributes['attendance_awards'] if options == {} && attributes.key?('attendance_awards')
+
+        attendance_awards!(options)
+      end
+
+      def attendance_awards!(options = {})
+        opt = options.dup
+        opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+        opt = opt.deep_merge(params: { student_id: id })
+        attributes['attendance_awards'] = Kicksite::Schools::Students::AttendanceAward.find(:all, opt)
+
+        attributes['attendance_awards']
+      end
     end
   end
 end
