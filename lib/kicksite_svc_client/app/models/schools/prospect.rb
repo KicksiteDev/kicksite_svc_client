@@ -72,6 +72,7 @@ module Kicksite
         opt = options.dup
         opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
         opt = opt.deep_merge(params: { student_id: id })
+        opt = opt.deep_merge(params: { employee_id: opt[:employee_id] }) if opt.try(:[], :employee_id).present?
         attributes['comments'] = Kicksite::Schools::People::Comments.find(:all, opt)
 
         attributes['comments']
