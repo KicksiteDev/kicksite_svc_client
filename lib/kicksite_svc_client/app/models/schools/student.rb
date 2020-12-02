@@ -243,7 +243,7 @@ module Kicksite
         opt = options.dup
         opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
         opt = opt.deep_merge(params: { student_id: id })
-        attributes['attendance_awards'] = Kicksite::Schools::Students::AttendanceAward.find(:all, opt)
+        attributes['attendance_awards'] = Kicksite::Schools::Students::Programs::AttendanceAward.find(:all, opt)
 
         attributes['attendance_awards']
       end
