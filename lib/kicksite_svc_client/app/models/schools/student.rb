@@ -232,6 +232,21 @@ module Kicksite
 
         attributes['progression_levels']
       end
+
+      def promotions(options = {})
+        return attributes['promotions'] if options == {} && attributes.key?('promotions')
+
+        promotions!(options)
+      end
+
+      def promotions!(options = {})
+        opt = options.dup
+        opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
+        opt = opt.deep_merge(params: { student_id: id })
+        attributes['promotions'] = Kicksite::Schools::Students::Promotion.find(:all, opt)
+
+        attributes['promotions']
+      end
     end
   end
 end
