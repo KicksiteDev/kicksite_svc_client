@@ -15,6 +15,15 @@ module Kicksite
 
     class Tag < Kicksite::NoSvcObject; end
 
+    class AttendanceAwardSettings
+      attr_accessor :attendance_award_bronze, :attendance_award_silver, :attendance_award_gold
+      def initialize(payload = {}, persisted = false)
+        @attendance_award_bronze = payload['attendance_award_bronze']
+        @attendance_award_silver = payload['attendance_award_silver']
+        @attendance_award_gold = payload['attendance_award_gold']
+      end
+    end
+
     SCHOOL_DATETIME_KEYS = %w[
       subscription_plan_status_date
       subscription_plan_selected_at
