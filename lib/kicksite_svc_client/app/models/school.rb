@@ -22,12 +22,6 @@ module Kicksite
         @attendance_award_silver = payload['attendance_award_silver']
         @attendance_award_gold = payload['attendance_award_gold']
       end
-      #class AttendanceAwardBronze < Kicksite::HashObject
-      #end
-      #class AttendanceAwardSilver < Kicksite::HashObject
-      #end
-      #class AttendanceAwardGold < Kicksite::HashObject
-      #end
     end
 
     SCHOOL_DATETIME_KEYS = %w[
