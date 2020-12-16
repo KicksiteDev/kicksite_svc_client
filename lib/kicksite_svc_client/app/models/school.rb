@@ -15,12 +15,12 @@ module Kicksite
 
     class Tag < Kicksite::NoSvcObject; end
 
-    class AttendanceAwardSettings < Kicksite::NoSvcObject
-      class AttendanceAwardBronze
+    class AttendanceAwardSettings < Kicksite::HashObject
+      class AttendanceAwardBronze < Kicksite::HashObject
       end
-      class AttendanceAwardSilver
+      class AttendanceAwardSilver < Kicksite::HashObject
       end
-      class AttendanceAwardGold
+      class AttendanceAwardGold < Kicksite::HashObject
       end
     end
 
