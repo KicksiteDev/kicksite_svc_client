@@ -54,6 +54,7 @@ module Kicksite
     end
 
     def recursive_define(key, value)
+      byebug
       case value
       when Hash
         define_instance_variable(key, Kicksite::NoSvcObject.new(value))
