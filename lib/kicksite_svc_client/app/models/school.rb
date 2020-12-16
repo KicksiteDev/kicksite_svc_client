@@ -15,7 +15,11 @@ module Kicksite
 
     class Tag < Kicksite::NoSvcObject; end
 
-    class AttendanceAwardSettings < Kicksite::HashObject
+    class AttendanceAwardSettings
+      attr_accessor :attendance_award_bronze, :attendance_award_silver, :attendance_award_gold
+      def initialize(payload = {}, persisted = false)
+        byebug
+      end
       class AttendanceAwardBronze < Kicksite::HashObject
       end
       class AttendanceAwardSilver < Kicksite::HashObject
