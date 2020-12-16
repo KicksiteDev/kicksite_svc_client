@@ -18,14 +18,16 @@ module Kicksite
     class AttendanceAwardSettings
       attr_accessor :attendance_award_bronze, :attendance_award_silver, :attendance_award_gold
       def initialize(payload = {}, persisted = false)
-        byebug
+        @attendance_award_bronze = payload['attendance_award_bronze']
+        @attendance_award_silver = payload['attendance_award_silver']
+        @attendance_award_gold = payload['attendance_award_gold']
       end
-      class AttendanceAwardBronze < Kicksite::HashObject
-      end
-      class AttendanceAwardSilver < Kicksite::HashObject
-      end
-      class AttendanceAwardGold < Kicksite::HashObject
-      end
+      #class AttendanceAwardBronze < Kicksite::HashObject
+      #end
+      #class AttendanceAwardSilver < Kicksite::HashObject
+      #end
+      #class AttendanceAwardGold < Kicksite::HashObject
+      #end
     end
 
     SCHOOL_DATETIME_KEYS = %w[
