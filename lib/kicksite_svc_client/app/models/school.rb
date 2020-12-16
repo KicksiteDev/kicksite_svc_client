@@ -15,6 +15,15 @@ module Kicksite
 
     class Tag < Kicksite::NoSvcObject; end
 
+    class AttendanceAwardSettings < Kicksite::NoSvcObject
+      class AttendanceAwardBronze
+      end
+      class AttendanceAwardSilver
+      end
+      class AttendanceAwardGold
+      end
+    end
+
     SCHOOL_DATETIME_KEYS = %w[
       subscription_plan_status_date
       subscription_plan_selected_at
