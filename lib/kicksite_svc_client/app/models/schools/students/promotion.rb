@@ -5,6 +5,10 @@ module Kicksite
       class Promotion < KicksiteSvcBearerAuth
         self.prefix = '/v1/schools/:school_id/students/:student_id/'
         self.collection_parser = Kicksite::PaginatedCollection
+
+        def activate
+          put(:activate)
+        end
       end
     end
   end
