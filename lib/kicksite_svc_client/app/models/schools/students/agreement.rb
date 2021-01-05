@@ -12,15 +12,6 @@ module Kicksite
         DATE_SIGNED_SORT_BY = 'date_signed'.freeze
         NAME_SORT_BY        = 'name'.freeze
         STATUS_SORT_BY      = 'status'.freeze
-
-        class Preview < Kicksite::NoSvcObject; end
-
-        def preview(options = {})
-          KicksiteSvcBearerAuth.get(
-            "schools/#{prefix_options[:school_id]}/prospects/" \
-            "#{options[:prospect_id]}/agreements/#{options[:id]}/preview"
-          )
-        end
       end
     end
   end
