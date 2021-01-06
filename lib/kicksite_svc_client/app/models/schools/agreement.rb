@@ -4,6 +4,10 @@ module Kicksite
     class Agreement < KicksiteSvcBearerAuth
       self.prefix = '/v1/schools/:school_id/'
       self.collection_parser = Kicksite::PaginatedCollection
+
+      def preview(options = {})
+        get(:preview, options)
+      end
     end
   end
 end
