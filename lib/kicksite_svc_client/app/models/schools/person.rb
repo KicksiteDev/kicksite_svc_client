@@ -9,6 +9,8 @@ module Kicksite
 
       class History < Kicksite::Schools::Activity; end
 
+      class Guardian < Kicksite::NoSvcObject; end
+
       PERSON_DATETIME_KEYS = %w[
         inactivated_on
         converted_to_prospect_on
