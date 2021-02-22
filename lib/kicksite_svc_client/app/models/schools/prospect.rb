@@ -7,6 +7,8 @@ module Kicksite
 
       class Source < Kicksite::NoSvcObject; end
 
+      class Guardian < Kicksite::NoSvcObject; end
+
       NOSHOW_STATE = 'noshow'.freeze
       LEAD_STATE = 'lead'.freeze
       APPOINTMENT_STATE = 'appointment'.freeze

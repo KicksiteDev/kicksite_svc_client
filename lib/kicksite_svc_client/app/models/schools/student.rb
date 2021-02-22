@@ -5,6 +5,8 @@ module Kicksite
       self.prefix = '/v1/schools/:school_id/'
       self.collection_parser = Kicksite::PaginatedCollection
 
+      class Guardian < Kicksite::NoSvcObject; end
+
       include Kicksite::Schools::Students::Constants
 
       def comments(options = {})
