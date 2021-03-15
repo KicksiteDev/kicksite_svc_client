@@ -12,6 +12,20 @@ module Kicksite
         DATE_SIGNED_SORT_BY = 'date_signed'.freeze
         NAME_SORT_BY        = 'name'.freeze
         STATUS_SORT_BY      = 'status'.freeze
+
+        def sign(file:)
+          begin
+            sign!(file: file)
+          rescue StandardError
+            return false
+          end
+
+          true
+        end
+
+        def sign!(file:)
+          KicksiteSvcBasicAuth.put("agreements/#{id}/sign", {file: file})
+        end
       end
     end
   end
