@@ -13,6 +13,18 @@ module Kicksite
         NAME_SORT_BY        = 'name'.freeze
         STATUS_SORT_BY      = 'status'.freeze
 
+        def initialize(payload = {}, persisted = false)
+          if persisted
+            BASE_DATETIME_KEYS.each do |key|
+              payload[key] = to_datetime(payload[key]) if payload[key].present?
+            end
+          end
+
+          payload.each do |key, value|
+            recursive_define(key, value)
+          end
+        end
+
         def sign(file:)
           begin
             sign!(file: file)
