@@ -24,7 +24,7 @@ module Kicksite
         end
 
         def sign!(file:)
-          KicksiteSvcBearerAuth.put("agreements/#{id}/sign", {file: file})
+          KicksiteSvcBearerAuth.put("schools/#{school_id}/students/#{student_id}/agreements/#{id}/sign", {file: file})
         end
       end
     end
