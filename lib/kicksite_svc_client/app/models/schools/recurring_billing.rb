@@ -18,6 +18,7 @@ module Kicksite
       ACTIVE_UNPAID_FILTER = 'active-unpaid'.freeze
       INACTIVE_UNPAID_FILTER = 'inactive-unpaid'.freeze
       PAID_THROUGH_SORT_BY = 'paid_through'.freeze
+      COMPLETED_FILTER = 'completed'.freeze
 
       def initialize(attributes = {}, persisted = false)
         if persisted
