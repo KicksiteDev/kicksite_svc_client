@@ -17,14 +17,16 @@ module Kicksite
 
       ACTIVE_FILTER = 'active'.freeze
 
-      CREATED_AT_SORT_BY    = 'created_at'.freeze
-      FIRST_NAME_SORT_BY    = 'first_name'.freeze
-      LAST_NAME_SORT_BY     = 'last_name'.freeze
-      SOURCE_SORT_BY        = 'source'.freeze
-      APPOINTMENTS_SORT_BY  = 'appointments'.freeze
-      OVERDUE_TASK_SORT_BY  = 'overdue_task'.freeze
-      NO_SHOW_SORT_BY       = 'noshow'.freeze
-      ASSIGNED_TO_SORT_BY   = 'assigned_to'.freeze
+      CREATED_AT_SORT_BY              = 'created_at'.freeze
+      FIRST_NAME_SORT_BY              = 'first_name'.freeze
+      LAST_NAME_SORT_BY               = 'last_name'.freeze
+      SOURCE_SORT_BY                  = 'source'.freeze
+      APPOINTMENTS_SORT_BY            = 'appointments'.freeze
+      OVERDUE_TASK_SORT_BY            = 'overdue_task'.freeze
+      NO_SHOW_SORT_BY                 = 'noshow'.freeze
+      ASSIGNED_TO_SORT_BY             = 'assigned_to'.freeze
+      EARLIEST__SORT_BY               = 'assigned_to'.freeze
+      EARLIEST_TRIAL_END_DATE_SORT_BY = 'earliest_trial_end_date'.freeze
 
       # Agreements associated with prospect.
       #
