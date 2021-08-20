@@ -112,7 +112,7 @@ module Kicksite
     # rubocop:disable Metrics/AbcSize
     def students!(options = {})
       opt = options.dup
-      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
       if opt[:params].present? && opt[:params][:format].present? && opt[:params][:format].casecmp?('csv')
         Kicksite::Csv9000.get("schools/#{id}/students", opt[:params])
       else
@@ -136,7 +136,7 @@ module Kicksite
 
     def employees!(options = {})
       opt = options.dup
-      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
       opt = opt.deep_merge(params: { school_id: id })
       attributes['employees'] = Kicksite::Schools::Employee.find(:all, opt)
 
@@ -158,7 +158,7 @@ module Kicksite
     # rubocop:disable Metrics/AbcSize
     def prospects!(options = {})
       opt = options.dup
-      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
       if opt[:params].present? && opt[:params][:format].present? && opt[:params][:format].casecmp?('csv')
         Kicksite::Csv9000.get("schools/#{id}/prospects", opt[:params])
       else
@@ -182,7 +182,7 @@ module Kicksite
 
     def people!(options)
       opt = options.dup
-      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
       opt = opt.deep_merge(params: { school_id: id })
       attributes['people'] = Kicksite::Schools::Person.find(:all, opt)
 
@@ -201,7 +201,7 @@ module Kicksite
 
     def invoices!(options = {})
       opt = options.dup
-      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
       opt = opt.deep_merge(params: { school_id: id })
       attributes['invoices'] = Kicksite::Schools::Invoice.find(:all, opt)
 
@@ -220,7 +220,7 @@ module Kicksite
 
     def recurring_billings!(options = {})
       opt = options.dup
-      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
       opt = opt.deep_merge(params: { school_id: id })
       attributes['recurring_billings'] = Kicksite::Schools::RecurringBilling.find(:all, opt)
 
@@ -239,7 +239,7 @@ module Kicksite
 
     def memberships!(options = {})
       opt = options.dup
-      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
       opt = opt.deep_merge(params: { school_id: id })
       attributes['memberships'] = Kicksite::Schools::Membership.find(:all, opt)
 
@@ -258,7 +258,7 @@ module Kicksite
 
     def inventory!(options = {})
       opt = options.dup
-      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
       opt = opt.deep_merge(params: { school_id: id })
       attributes['inventory'] = Kicksite::Schools::Inventory.find(:all, opt)
 
@@ -277,7 +277,7 @@ module Kicksite
 
     def agreements!(options = {})
       opt = options.dup
-      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
       opt = opt.deep_merge(params: { school_id: id })
       attributes['agreements'] = Kicksite::Schools::Agreement.find(:all, opt)
 
@@ -376,7 +376,7 @@ module Kicksite
     # rubocop:disable Metrics/AbcSize
     def lead_capture_forms!(options = {})
       opt = options.dup
-      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
       if opt[:params].present? && opt[:params][:format].present? && opt[:params][:format].casecmp?('csv')
         Kicksite::Csv9000.get("schools/#{id}/bizbuilder/forms", opt[:params])
       else
@@ -396,7 +396,7 @@ module Kicksite
 
     def message_flows!(options = {})
       opt = options.dup
-      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
       opt = opt.deep_merge(params: { school_id: id })
       attributes['message_flows'] = Kicksite::Schools::MessageFlow.find(:all, opt)
 
@@ -412,7 +412,7 @@ module Kicksite
     # rubocop:disable Metrics/AbcSize
     def landing_pages!(options = {})
       opt = options.dup
-      opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+      opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
       if opt[:params].present? && opt[:params][:format].present? && opt[:params][:format].casecmp?('csv')
         Kicksite::Csv9000.get("schools/#{id}/bizbuilder/landing_pages", opt[:params])
       else

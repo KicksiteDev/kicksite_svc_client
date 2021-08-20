@@ -59,7 +59,7 @@ module Kicksite
 
       def self.tasks(options = {})
         opt = options.dup
-        opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+        opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
         opt = opt.deep_merge(params: { subject_type: 'Student' })
 
         Kicksite::Schools::Task.find(:all, opt)
@@ -131,7 +131,7 @@ module Kicksite
 
       def self.appointments(options = {})
         opt = options.dup
-        opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+        opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
         opt = opt.deep_merge(params: { subject_type: 'Student' })
 
         Kicksite::Schools::Appointment.find(:all, opt)
@@ -145,7 +145,7 @@ module Kicksite
 
       def attendances!(options = {})
         opt = options.dup
-        opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+        opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
         opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
         opt = opt.deep_merge(params: { subject_id: id })
         opt = opt.deep_merge(params: { subject_type: 'students' })
@@ -161,7 +161,7 @@ module Kicksite
 
       def events!(options = {})
         opt = options.dup
-        opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+        opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
         opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
         opt = opt.deep_merge(params: { student_id: id })
 
@@ -176,7 +176,7 @@ module Kicksite
 
       def event_registrations!(options = {})
         opt = options.dup
-        opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+        opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
         opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
         opt = opt.deep_merge(params: { student_id: id })
 
@@ -191,7 +191,7 @@ module Kicksite
 
       def programs!(options = {})
         opt = options.dup
-        opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+        opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
         opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
         opt = opt.deep_merge(params: { person_id: id })
 
