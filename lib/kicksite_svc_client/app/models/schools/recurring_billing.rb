@@ -16,9 +16,11 @@ module Kicksite
       ACTIVE_FILTER = 'active'.freeze
       ACTIVE_NOVAULT_FILTER = 'active-novault'.freeze
       ACTIVE_UNPAID_FILTER = 'active-unpaid'.freeze
-      INACTIVE_UNPAID_FILTER = 'inactive-unpaid'.freeze
-      PAID_THROUGH_SORT_BY = 'paid_through'.freeze
       COMPLETED_FILTER = 'completed'.freeze
+      INACTIVE_UNPAID_FILTER = 'inactive-unpaid'.freeze
+
+      NAME_SORT_BY = 'name'.freeze
+      PAID_THROUGH_SORT_BY = 'paid_through'.freeze
 
       def initialize(attributes = {}, persisted = false)
         if persisted
