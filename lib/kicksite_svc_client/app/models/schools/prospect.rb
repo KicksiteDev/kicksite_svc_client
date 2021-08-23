@@ -174,7 +174,7 @@ module Kicksite
 
       def self.tasks(options = {})
         opt = options.dup
-        opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
+        opt = { params: opt } if opt.keys.count != 1 && !opt.key?('params') && !opt.key?(:params)
         opt = opt.deep_merge(params: { subject_type: 'Prospect' })
 
         Kicksite::Schools::Task.find(:all, opt)
@@ -182,7 +182,7 @@ module Kicksite
 
       def self.appointments(options = {})
         opt = options.dup
-        opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
+        opt = { params: opt } if opt.keys.count != 1 && !opt.key?('params') && !opt.key?(:params)
         opt = opt.deep_merge(params: { subject_type: 'Prospect' })
 
         Kicksite::Schools::Appointment.find(:all, opt)
