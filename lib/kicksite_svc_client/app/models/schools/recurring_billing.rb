@@ -21,6 +21,7 @@ module Kicksite
 
       NAME_SORT_BY = 'name'.freeze
       PAID_THROUGH_SORT_BY = 'paid_through'.freeze
+      START_DATE_SORT_BY = 'start_date'.freeze
 
       def initialize(attributes = {}, persisted = false)
         if persisted
