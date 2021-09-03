@@ -113,7 +113,7 @@ module Kicksite
         opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
         opt = opt.deep_merge(params: { student_id: id })
 
-        Kicksite::Schools::Students::EventRegistration.find(:all, opt)
+        Kicksite::Schools::Prospects::EventRegistration.find(:all, opt)
       end
 
       # Memberships associated with prospect.
