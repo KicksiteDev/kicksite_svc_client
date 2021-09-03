@@ -111,7 +111,7 @@ module Kicksite
         opt = options.dup
         opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
         opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
-        opt = opt.deep_merge(params: { student_id: id })
+        opt = opt.deep_merge(params: { prospect_id: id })
 
         Kicksite::Schools::Prospects::EventRegistration.find(:all, opt)
       end
