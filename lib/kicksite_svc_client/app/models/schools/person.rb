@@ -50,7 +50,7 @@ module Kicksite
 
       def phone_numbers!(options = {})
         opt = options.dup
-        opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+        opt = { params: opt } if opt.keys.count != 1 && !opt.key?('params') && !opt.key?(:params)
         opt = opt.deep_merge(params: { school_id: prefix_options[:school_id], person_id: id })
         attributes['phone_numbers'] = Kicksite::Schools::People::PhoneNumber.find(:all, opt)
 
@@ -65,7 +65,7 @@ module Kicksite
 
       def email_addresses!(options = {})
         opt = options.dup
-        opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
+        opt = { params: opt } if opt.keys.count != 1 && !opt.key?('params') && !opt.key?(:params)
         opt = opt.deep_merge(params: { school_id: prefix_options[:school_id], person_id: id })
         attributes['email_addresses'] = Kicksite::Schools::People::EmailAddress.find(:all, opt)
 

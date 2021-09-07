@@ -16,7 +16,7 @@ Metrics/MethodLength:
   Max: 50
 
 Metrics/BlockLength:
-  ExcludedMethods: ['resource', 'namespace', 'describe', 'context']
+  IgnoredMethods: ['resource', 'namespace', 'describe', 'context']
 
 Style/FrozenStringLiteralComment:
   Enabled: false
