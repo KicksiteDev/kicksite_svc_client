@@ -22,6 +22,7 @@ module Kicksite
       LAST_NAME_SORT_BY               = 'last_name'.freeze
       SOURCE_SORT_BY                  = 'source'.freeze
       APPOINTMENTS_SORT_BY            = 'appointments'.freeze
+      TASK_SORT_BY                    = 'task'.freeze
       OVERDUE_TASK_SORT_BY            = 'overdue_task'.freeze
       NO_SHOW_SORT_BY                 = 'noshow'.freeze
       ASSIGNED_TO_SORT_BY             = 'assigned_to'.freeze
