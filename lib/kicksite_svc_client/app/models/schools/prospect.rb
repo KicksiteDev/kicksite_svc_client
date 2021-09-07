@@ -23,7 +23,6 @@ module Kicksite
       SOURCE_SORT_BY                  = 'source'.freeze
       APPOINTMENTS_SORT_BY            = 'appointments'.freeze
       OVERDUE_TASK_SORT_BY            = 'overdue_task'.freeze
-      TASK_SORT_BY                    = 'task'.freeze
       NO_SHOW_SORT_BY                 = 'noshow'.freeze
       ASSIGNED_TO_SORT_BY             = 'assigned_to'.freeze
       EARLIEST__SORT_BY               = 'assigned_to'.freeze
@@ -110,7 +109,7 @@ module Kicksite
 
       def event_registrations!(options = {})
         opt = options.dup
-        opt = { params: opt } if opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params))
+        opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
         opt = opt.deep_merge(params: { school_id: prefix_options[:school_id] })
         opt = opt.deep_merge(params: { prospect_id: id })
 
@@ -190,7 +189,7 @@ module Kicksite
 
       def self.tasks(options = {})
         opt = options.dup
-        opt = { params: opt } if opt.keys.count != 1 && !opt.key?('params') && !opt.key?(:params)
+        opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
         opt = opt.deep_merge(params: { subject_type: 'Prospect' })
 
         Kicksite::Schools::Task.find(:all, opt)
@@ -198,7 +197,7 @@ module Kicksite
 
       def self.appointments(options = {})
         opt = options.dup
-        opt = { params: opt } if opt.keys.count != 1 && !opt.key?('params') && !opt.key?(:params)
+        opt = opt.keys.count == 1 && (opt.key?('params') || opt.key?(:params)) ? opt : { params: opt }
         opt = opt.deep_merge(params: { subject_type: 'Prospect' })
 
         Kicksite::Schools::Appointment.find(:all, opt)
