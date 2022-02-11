@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/kicksite_svc_client
     docker:
-      - image: circleci/ruby:2.5
+      - image: cimg/ruby:2.5.9
         environment:
           RAILS_ENV: test
           KICKSITE_SVC_URL: https://api.kicksite-staging.net
