@@ -20,7 +20,7 @@ module Kicksite
           headers = {}
         end
 
-        Kaminari::PaginatableArray.new(elements, options_from_headers(headers))
+        Kaminari::PaginatableArray.new(elements, **options_from_headers(headers))
       end
     end
 
@@ -33,7 +33,7 @@ module Kicksite
     # Delegate missing methods to our `paginatable_array` first,
     # Kaminari might know how to respond to them
     # E.g. current_page, total_count, etc.
-    def method_missing(method, *args, &block)
+    def method_missing(method, *args, **_, &block)
       if paginatable_array.respond_to?(method)
         paginatable_array.send(method)
       else
