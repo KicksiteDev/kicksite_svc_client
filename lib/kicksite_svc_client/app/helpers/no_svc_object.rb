@@ -42,7 +42,7 @@ module Kicksite
     private
 
     # Allows setting of new methods onto the object. Thanks ActiveResource.
-    def method_missing(method, *args, &block)
+    def method_missing(method, *args, **_, &block)
       if method.to_s.end_with?('=') && args.count == 1
         key = method.to_s.sub('=', '')
         value = args.first
